@@ -119,7 +119,7 @@ export default function FacultyHome() {
                 </div> */}
               </div>
               {/* <div className='mx-auto'></div> */}
-              <FlexPage />
+              {/* <FlexPage /> */}
               <br />
               <br />
 

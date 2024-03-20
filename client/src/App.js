@@ -77,9 +77,13 @@ function App() {
         <Route path='/facultyLogin'>
           <Route index element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar />
-              <FacultyHome />
+            <div className='flex h-full'>
+              <div className='h-full'>
+                <SideBar />
+              </div>
+              <div style={{ flex: 1, width: '100%' }}>
+                <FacultyHome />
+              </div>
             </div>
             <Footer />
           </>} />
