@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { removeAppToken, setAppToken, getUserToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
-import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
 const data = [];
 const settlementData = [];
+
 export default function FacultyApplication() {
-
     const navigate = useNavigate();
-
     const [isLoading, setIsLoading] = useState(true);
     const [apps, setApps] = useState(data);
     const [appsSettlement, setAppsSettlement] = useState(settlementData);
@@ -23,24 +21,21 @@ export default function FacultyApplication() {
         { label: 'Entry No.', content: 'Applications are being displayed based on Entry No of the conference.' },
         { label: 'Name', content: 'Applications are being displayed based on Name of the conference.' },
     ];
+
     function handleTabClick(index) {
         setActiveTabIndex(index);
         if (index === 0) {
             apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
-        }
-        else if (index === 1) {
+        } else if (index === 1) {
             apps.sort((a, b) => a.email.localeCompare(b.email));
-        }
-        else if (index === 2) {
+        } else if (index === 2) {
             apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
         }
-        console.log(apps)
     }
 
-    const getAppInfo = async (req, res) => {
+    const getAppInfo = async () => {
         try {
             const token = getUserToken();
-            console.log("Getting App info");
             const resp = await fetch(`${BASE_URL}/viewFacultyApplications`, {
                 method: "POST",
                 headers: {
@@ -54,10 +49,9 @@ export default function FacultyApplication() {
         }
     }
 
-    const getAppInfoSettlement = async (req, res) => {
+    const getAppInfoSettlement = async () => {
         try {
             const token = getUserToken();
-            console.log("Getting App info");
             const resp = await fetch(`${BASE_URL}/viewFacultyApplicationsSettlement`, {
                 method: "POST",
                 headers: {
@@ -72,71 +66,50 @@ export default function FacultyApplication() {
     }
 
     useEffect(() => {
-        getAppInfo().then((resp) => {
-            setApps(resp.data);
+        async function fetchData() {
+            const appData = await getAppInfo();
+            setApps(appData.data);
             setIsLoading(false);
-
-            getAppInfoSettlement().then((resp) => {
-                setAppsSettlement(resp.data);
-                console.log(resp.data);
-                setIsLoading(false);
-
-            }).catch((e) => {
-                console.log(e)
-            });
-
-        }).catch((e) => {
-            console.log(e)
-        });
+            const settlementAppData = await getAppInfoSettlement();
+            setAppsSettlement(settlementAppData.data);
+            setIsLoading(false);
+        }
+        fetchData();
     }, []);
 
-
-    // useEffect(() => {
-    //     getAppInfoSettlement().then((resp) => {
-    //         setAppsSettlement(resp.data);
-    //         setIsLoading(false);
-
-    //     }).catch((e) => {
-    //         console.log(e)
-    //     });
-    // }, []);
-
-
     const getStatus = (code) => {
-        if (code === "0")
-            return "Pending Faculty Approval";
-        else if (code === "1")
-            return "Pending Hod Section Approval";
-        else if (code === "2")
-            return "Pending Research Section Approval";
-        else if (code === "3")
-            return "Pending Account Section Approval";
-        else if (code === "4")
-            return "Pending Dean Approval";
-        else
-            return "Application Approved";
+        switch (code) {
+            case "0":
+                return "Pending Faculty Approval";
+            case "1":
+                return "Pending Hod Section Approval";
+            case "2":
+                return "Pending Research Section Approval";
+            case "3":
+                return "Pending Account Section Approval";
+            case "4":
+                return "Pending Dean Approval";
+            default:
+                return "Application Approved";
+        }
     }
 
     const getDays = (subDate) => {
         const today = new Date();
         const submitDate = new Date(subDate);
-
         const days = Math.floor((today - submitDate) / (1000 * 3600 * 24));
-
         if (days < 1)
             return "Submitted Recently";
         else if (days === 1)
-            return ("1 Day Ago");
+            return "1 Day Ago";
         else
-            return (days + " Days ago");
-
+            return `${days} Days ago`;
     }
 
     const getFinances = (finance) => {
-        var totalAmount = 0;
-
+        let totalAmount = 0;
         finance.forEach(element => {
-            totalAmount = totalAmount + Number(element.amount);
+            totalAmount += Number(element.amount);
         });
         return totalAmount;
     }
@@ -154,103 +127,67 @@ export default function FacultyApplication() {
             const data = await resp.json();
             const appToken = data.appToken;
             setAppToken(appToken);
-
         } catch (error) {
             console.log(error);
         }
     }
 
-    const viewSpecficApplication = async (e) => {
+    const viewSpecificApplication = async (e) => {
         e.preventDefault();
         const { name } = e.target;
         removeAppToken();
         try {
             await createAppToken(name);
             navigate('/facultyLogin/studentApplication');
-
         } catch (error) {
             console.log(error);
         }
-
     }
 
     const renderApps = apps.map((item, index) =>
-        <>
-            <div key={index}>
-                <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-                    <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getStatus(item.status)}
-                    </div>
-                    <div className="p-4">
-                        <h5
-                            className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                            {item.nameOfConference}
-                        </h5>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Amount Needed: {getFinances(item.finances)} Rs
-                        </p>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Submitted By: {item.email}
-                        </p>
-                    </div>
-                    <button
-                        name={item._id}
-                        onClick={viewSpecficApplication}
-                        className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        View Full Application
-                    </button>
-                    <div
-                        className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getDays(item.createdAt)}
-                        ({item.type === 0 ? "National" : "International"})
-                    </div>
-                </div>
-
+        <div key={index} className="rounded-lg bg-white text-center shadow-md p-4 mb-4">
+            <div className="border-b-2 border-gray-200 px-6 py-3">
+                {getStatus(item.status)}
             </div>
-
-            <br />
-        </>
+            <div className="p-4">
+                <h5 className="mb-2 text-xl font-medium text-gray-800">{item.nameOfConference}</h5>
+                <p className="mb-1 text-base text-gray-600">Amount Needed: {getFinances(item.finances)} Rs</p>
+                <p className="mb-1 text-base text-gray-600">Submitted By: {item.email}</p>
+            </div>
+            <button
+                name={item._id}
+                onClick={viewSpecificApplication}
+                className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+            >
+                View Full Application
+            </button>
+            <div className="border-t-2 border-gray-200 px-6 py-3">
+                {getDays(item.createdAt)} ({item.type === 0 ? "National" : "International"})
+            </div>
+        </div>
     );
 
-
     const renderSettlementApps = appsSettlement.map((item, index) =>
-        <>
-            <div key={index}>
-                <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-                    <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getStatus(item.status)}
-                    </div>
-                    <div className="p-4">
-                        <h5
-                            className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                            {item.nameOfConference}
-                        </h5>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Amounttt Needed: {getFinances(item.finances)} Rs
-                        </p>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Submitted By: {item.email}
-                        </p>
-                    </div>
-                    <button
-                        name={item._id}
-                        onClick={viewSpecficApplication}
-                        className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        View Full Application
-                    </button>
-                    <div
-                        className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getDays(item.createdAt)}
-                        ({item.type === 0 ? "National" : "International"})
-                    </div>
-                </div>
-
+        <div key={index} className="rounded-lg bg-white text-center shadow-md p-4 mb-4">
+            <div className="border-b-2 border-gray-200 px-6 py-3">
+                {getStatus(item.status)}
             </div>
-
-            <br />
-        </>
+            <div className="p-4">
+                <h5 className="mb-2 text-xl font-medium text-gray-800">{item.nameOfConference}</h5>
+                <p className="mb-1 text-base text-gray-600">Amount Needed: {getFinances(item.finances)} Rs</p>
+                <p className="mb-1 text-base text-gray-600">Submitted By: {item.email}</p>
+            </div>
+            <button
+                name={item._id}
+                onClick={viewSpecificApplication}
+                className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+            >
+                View Full Application
+            </button>
+            <div className="border-t-2 border-gray-200 px-6 py-3">
+                {getDays(item.createdAt)} ({item.type === 0 ? "National" : "International"})
+            </div>
+        </div>
     );
 
     return (
@@ -285,7 +222,7 @@ export default function FacultyApplication() {
             <div className="p-2">
             </div>
                     {/* </div> */}
-                    <div className="my-3 flex flex-wrap justify-center gap-4">
+                    <div className="my-3 flex flex-wrap justify-center gap-4">     
                         {apps && renderApps}
                         {appsSettlement && renderSettlementApps}
                     </div>
@@ -294,4 +231,3 @@ export default function FacultyApplication() {
         </>
     )
 }
-

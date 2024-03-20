@@ -77,9 +77,13 @@ function App() {
         <Route path='/facultyLogin'>
           <Route index element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar />
-              <FacultyHome />
+            <div className='flex h-full'>
+              <div className='bg-dark-purple'>
+                <SideBar />
+              </div>
+              <div style={{ flex: 1, width: '100%' }}>
+                <FacultyHome />
+              </div>
             </div>
             <Footer />
           </>} />
@@ -102,9 +106,13 @@ function App() {
         <Route path='/hodLogin'>
           <Route index element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar />
+            <div className='flex h-full'>
+              <div className=' bg-dark-purple'>
+                <SideBar />
+              </div>
+              <div style={{ flex: 1, width: '100%' }}>
               <HodHome />
+              </div>
             </div>
             <Footer />
           </>} />
