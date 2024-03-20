@@ -78,7 +78,7 @@ function App() {
           <Route index element={<>
             <UpperNav />
             <div className='flex h-full'>
-              <div className='h-full'>
+              <div className='bg-dark-purple'>
                 <SideBar />
               </div>
               <div style={{ flex: 1, width: '100%' }}>
@@ -107,7 +107,7 @@ function App() {
           <Route index element={<>
             <UpperNav />
             <div className='flex h-full'>
-              <div className='h-full'>
+              <div className=' bg-dark-purple'>
                 <SideBar />
               </div>
               <div style={{ flex: 1, width: '100%' }}>
