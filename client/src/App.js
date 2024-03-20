@@ -106,9 +106,13 @@ function App() {
         <Route path='/hodLogin'>
           <Route index element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar />
+            <div className='flex h-full'>
+              <div className='h-full'>
+                <SideBar />
+              </div>
+              <div style={{ flex: 1, width: '100%' }}>
               <HodHome />
+              </div>
             </div>
             <Footer />
           </>} />
