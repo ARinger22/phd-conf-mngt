@@ -137,10 +137,18 @@ function App() {
           <Route index element={
             <>
               <UpperNav />
-              <div className='flex'>
+              {/* <div className='flex'>
                 <SideBar />
-                <ResearchHome />
+                
+              </div> */}
+              <div className='flex h-full'>
+              <div className='bg-dark-purple'>
+                <SideBar />
               </div>
+              <div style={{ flex: 1, width: '100%' }}>
+              <ResearchHome />
+              </div>
+            </div>
               <Footer />
             </>} />
           <Route path="application" element={
@@ -182,10 +190,14 @@ function App() {
           <Route index element={
             <>
               <UpperNav />
-              <div className='flex'>
+              <div className='flex h-full'>
+              <div className='bg-dark-purple'>
                 <SideBar />
-                <AccountHome />
               </div>
+              <div style={{ flex: 1, width: '100%' }}>
+              <AccountHome />
+              </div>
+            </div>
               <Footer />
             </>} />
           <Route path="application" element={
@@ -209,9 +221,13 @@ function App() {
         <Route path='/deanLogin'>
           <Route index element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar />
+            <div className='flex h-full'>
+              <div className='bg-dark-purple'>
+                <SideBar />
+              </div>
+              <div style={{ flex: 1, width: '100%' }}>
               <DeanHome />
+              </div>
             </div>
             <Footer />
           </>} />

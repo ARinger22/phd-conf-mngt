@@ -10,7 +10,7 @@ import Research3 from './assets/Research3.png';
 const FlexPage = () => {
     return (
         <div>
-            <section className="bg-white dark:bg-gray-900">
+            {/* <section className="bg-white dark:bg-gray-900">
                 <div className="container px-6 py-10 mx-auto">
                     <p className="underline mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
                         <b>Research AT IIT Ropar:</b>
@@ -77,8 +77,8 @@ const FlexPage = () => {
                             </a>
                         </div>
                     </div>
-                </div>
-            </section>
+                </div> 
+            </section> */}
             {/* <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
                     <img
