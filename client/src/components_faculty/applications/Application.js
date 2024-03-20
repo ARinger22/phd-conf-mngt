@@ -198,34 +198,31 @@ export default function FacultyApplication() {
                     <LoaderCard />
                 </Container>
                 :
-                <Container className='bg-gray-100 dark:bg-gray-900'>
-                    <div className="my-5  rounded-lg shadow-md overflow-hidden mt-5">
-                        <div className="flex items-center justify-between bg-gray-100 px-4 rounded-md mt-3">
-                            <span className='text-lg font-medium flex items-center text-gray-800'>
-                                <FaSort className="mr-2 text-gray-600" />
-                                <span className="text-gray-600">Sort Applications:</span>
-                            </span>
+                <Container>
 
-                            <div className="flex space-x-4">
-                                {tabs.map((tab, index) => (
-                                    <button
-                                        key={tab.label}
-                                        className={`py-1 px-4 text-sm font-medium rounded-md transition-colors duration-300 ${index === activeTabIndex ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                                        onClick={() => handleTabClick(index)}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-
-
-                        <div className="p-2">
-                            {/* <p className="text-gray-700">{tabs[activeTabIndex].content}</p> */}
-                        </div>
-                    </div>
-                    <div className="my-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
+                    <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
+                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+              </span>
+              <div className="flex">
+                {tabs.map((tab, index) => (
+                  <button
+                    key={tab.label}
+                    className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                      }`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="p-2">
+            </div>
+                    {/* </div> */}
+                    <div className="my-3 flex flex-wrap justify-center gap-4">     
                         {apps && renderApps}
                         {appsSettlement && renderSettlementApps}
                     </div>
