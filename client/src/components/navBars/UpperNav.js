@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BASE_URL } from '../requests/URL';
 import { getUserToken } from '../../components_login/Tokens';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import userPng from './assets/User.png'
 
 function UpperNav() {
@@ -42,7 +42,8 @@ function UpperNav() {
                                     <img src={userPng}
                                         className=" w-full h-full" alt="avatar" />
                                 </div>
-                                <Link to="/studentLogin/Profile" className="mx-2 text-white dark:text-gray-200">{userData?.name} ({userData?.email})</Link>
+                                <h3 className="mx-2 text-white dark:text-gray-200 ">{userData?.name} ({userData?.email})</h3>
+                                {/* <Link to="/studentLogin/Profile" className="mx-2 text-white dark:text-gray-200">{userData?.name} ({userData?.email})</Link> */}
                             </div>
                         }
                     </div>

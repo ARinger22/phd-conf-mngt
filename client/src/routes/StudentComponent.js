@@ -16,8 +16,8 @@ import FormSettlementData from '../components_student/forms/settlement/FormSettl
 export const StudentHomePage =
     <>
         <UpperNav />
-        <div className='flex h-full'>
-            <div className='h-full'>
+        <div className='flex'>
+            <div className='bg-dark-purple'>
             <SideBar />
             </div>
 
