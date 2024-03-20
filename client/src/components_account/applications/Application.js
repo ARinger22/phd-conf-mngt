@@ -183,30 +183,28 @@ function ResearchApplication() {
                 </Container>
                 :
                 <Container>
-                    <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
-                        <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
-                            <span style={{ display: 'flex', alignItems: 'center' }}>
-                                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
-                                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
-                            </span>
-                            {/* <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1> */}
-                            <div className="flex">
-                                {tabs.map((tab, index) => (
-                                    <button
-                                        key={tab.label}
-                                        className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-gray-400 text-white' : 'bg-gray-200 text-gray-600'
-                                            }`}
-                                        onClick={() => handleTabClick(index)}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="p-2">
-                            {/* <p className="text-gray-700">{tabs[activeTabIndex].content}</p> */}
-                        </div>
-                    </div>
+                    {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
+            <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
+                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+              </span>
+              <div className="flex">
+                {tabs.map((tab, index) => (
+                  <button
+                    key={tab.label}
+                    className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                      }`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="p-2">
+            </div>
+          {/* </div> */}
                     <div className="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps}
                     </div>

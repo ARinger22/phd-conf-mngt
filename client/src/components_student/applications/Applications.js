@@ -252,8 +252,8 @@ function Application() {
         </Container>
         :
         <Container>
-          <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
+          {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
+            <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
               <span style={{ display: 'flex', alignItems: 'center' }}>
                 <FaSort color="red" style={{ marginRight: '0.5rem' }} />
                 <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
@@ -262,7 +262,7 @@ function Application() {
                 {tabs.map((tab, index) => (
                   <button
                     key={tab.label}
-                    className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-gray-400 text-white' : 'bg-gray-200 text-gray-600'
+                    className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
                       }`}
                     onClick={() => handleTabClick(index)}
                   >
@@ -273,7 +273,7 @@ function Application() {
             </div>
             <div className="p-2">
             </div>
-          </div>
+          {/* </div> */}
           <div className="my-3 flex flex-wrap justify-center gap-4">
             {apps && renderApps1}
 
