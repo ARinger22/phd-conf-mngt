@@ -65,8 +65,8 @@ const App = () => {
   return (
     <div className="flex">
       <div
-        className={` ${open ? "w-72" : "w-20 "
-          } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+        className={` ${open ? "w-70" : "w-20 "
+          } bg-dark-purple p-5 pt-8 relative duration-300`}
       >
         <img
           src={arrow}
@@ -94,7 +94,7 @@ const App = () => {
             <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} `}
+              ${Menu.gap ? "mt-10" : "mt-10"} `}
               onClick={(e) => {
                 e.preventDefault();
                 handleClick(Menu.link);
