@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BASE_URL } from '../requests/URL';
 import { getUserToken } from '../../components_login/Tokens';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import userPng from './assets/User.png'
 
 function UpperNav() {
@@ -30,7 +30,7 @@ function UpperNav() {
     return (
         <>
             <header>
-                <nav className="bg-black border-gray-200  px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+                <nav className="bg-dark-purple border-gray-200  px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div className="flex">
 
                         <div style={{ "color": "white", "fontSize": "24px" }} className="flex-1 flex-wrap justify-between items-center py-1 mx-auto max-w-screen-xl">
@@ -42,7 +42,8 @@ function UpperNav() {
                                     <img src={userPng}
                                         className=" w-full h-full" alt="avatar" />
                                 </div>
-                                <Link to="/studentLogin/Profile" className="mx-2 text-white dark:text-gray-200">{userData?.name} ({userData?.email})</Link>
+                                <h3 className="mx-2 text-white dark:text-gray-200 ">{userData?.name} ({userData?.email})</h3>
+                                {/* <Link to="/studentLogin/Profile" className="mx-2 text-white dark:text-gray-200">{userData?.name} ({userData?.email})</Link> */}
                             </div>
                         }
                     </div>

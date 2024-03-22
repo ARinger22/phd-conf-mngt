@@ -90,12 +90,13 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                         className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
                         placeholder="Enter your entry number"
                     />
-                    <label htmlFor="email" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Email</label>
+                    <label htmlFor="email" className="text-gray-800 text-sm font-bold leading-tight tracking-normal ">Email</label>
                     <input
                         id="email"
+                        readOnly
                         defaultValue={profileInfo?.email}
                         onChange={(e) => setNewEmail(e.target.value)}
-                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border bg-blue-200"
                         placeholder="Enter your email"
                     />
                     <label htmlFor="dept" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Department</label>
@@ -106,13 +107,14 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                         className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
                         placeholder="Enter your department"
                     />
-                    <label htmlFor="date of joining" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Date of Joining</label>
+                    <label htmlFor="date of joining" className="text-gray-800 text-sm font-bold leading-tight tracking-normal ">Date of Joining</label>
                     <input
                         id="date of joining"
-                        type='date'
+                        // type='date'
                         defaultValue={profileInfo?.dateOfJoining}
+                        readOnly
                         onChange={(e) => setNewDateOfJoining(e.target.value)}
-                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border bg-blue-200"
                         placeholder="Enter your date of joining"
                     />
                     <label htmlFor="fellowship category" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fellowship Category</label>
