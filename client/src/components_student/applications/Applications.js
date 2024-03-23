@@ -38,6 +38,7 @@ function Application() {
     setActiveTabIndex(index);
     if (index === 0) {
       apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
+      // apps2.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
     }
     else if (index === 1) {
       apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
@@ -61,7 +62,7 @@ function Application() {
     console.log(apps);
   }
 
-  const getBasicInfo = async (req, res) => {
+  const getBasicInfo = async () => {
     try {
       const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
@@ -72,23 +73,19 @@ function Application() {
         },
       });
       const data = await resp.json();
-      return data;
+      console.log("data", data);
+      const { data: data1, data2 } = data;
+      setApps(data1);
+      setApps2(data2);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    getBasicInfo().then((resp) => {
-      setApps(resp);
-      setApps2(resp);
+    getBasicInfo().then(() => {
       apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-
-
       setIsLoading(false);
-
-
-
     }).catch((e) => {
       console.log(e.message)
     });
@@ -214,13 +211,13 @@ function Application() {
           <div className="p-4">
             <h5
               className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-              {item.nameOfConference}
+              Settlement form
             </h5>
             <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
               Amount Needed: {getFinances(item.finances)} Rs
             </p>
             <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Venue: {item.venueOfConference}
+              Department: {item.department}
             </p>
           </div>
           <button
@@ -274,9 +271,13 @@ function Application() {
             <div className="p-2">
             </div>
           {/* </div> */}
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
           <div className="my-3 flex flex-wrap justify-center gap-4">
             {apps && renderApps1}
-
+          </div>
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Settlement Forms</div>
+          <div className="my-3 flex flex-wrap justify-center gap-4">
+            {apps2 && renderApps2}
           </div>
         </Container>
       }

@@ -266,9 +266,6 @@ function ApplicationsHome() {
                 </Container>
                 :
                 <Container>
-                        {/* {newApps} */}
-                        {console.log(apps)}
-                        {console.log(apps2)}
                     <div className="my-3 flex flex-wrap justify-center gap-4">
                         {(apps2.map((item, index) =>
                             <>

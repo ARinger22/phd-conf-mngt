@@ -65,7 +65,7 @@ const App = () => {
   return (
     <div className="flex">
       <div
-        className={` ${open ? "w-70" : "w-20 "
+        className={` ${open ? "w-92" : "w-20 "
           } bg-dark-purple p-5 pt-8 relative duration-300`}
       >
         <img

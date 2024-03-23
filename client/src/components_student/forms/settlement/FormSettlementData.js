@@ -199,7 +199,6 @@ export default function FormSettlementData() {
 
     const submitSettlement = async (e) => {
         e.preventDefault();
-        console.log(generalInfo);
         // alert("Settlement Form Submitted");
 
         // save all data
@@ -240,11 +239,8 @@ export default function FormSettlementData() {
         formData.append("bankAccNo", bankAccNo);
         formData.append("status", status);
         formData.append("type", 3);
-        
         formData.append("finances", JSON.stringify(finances));
         formData.append("travels", JSON.stringify(travels));
-
-        console.log("Sumitting");
 
         const res = await fetch(`${BASE_URL}/studentSettlementSubmit`, {
             method: "POST",
@@ -261,60 +257,6 @@ export default function FormSettlementData() {
             // setMessage("Application Submitted Successfully!");
             console.log("Application Submitted Successfully!");
         }
-        // setFreezeButton(false);
-        // setShowModal(true);
-
-
-        // console.log(email);
-        // const status = "0";
-        // const mobileNo = generalInfo.mobileNo;
-        // const bankAccountNo = generalInfo.bankAccNo;
-        // const nameOfConference = conferenceInfo.nameOfConference;
-        // const venueOfConference = conferenceInfo.venueOfConference;
-        // const paperInConference = conferenceInfo.paperInConference;
-        // const conferenceStarts = dayjs(dateStarts).format('DD/MM/YYYY')
-        // const conferenceEnds = dayjs(dateEnds).format('DD/MM/YYYY')
-
-        // const studentLeaveStarts = dayjs(leaveStarts).format('DD/MM/YYYY')
-        // const studentLeaveEnds = dayjs(leaveEnds).format('DD/MM/YYYY')
-
-        // const financialSupport = conferenceInfo.financialSupport;
-        // const advances = advance;
-        // const finances = [...tableData];
-        // finances.push({
-        //     "particular": "travel",
-        //     "amount": travel
-        // });
-        // finances.push({
-        //     "particular": "food",
-        //     "amount": food
-        // });
-        // finances.push({
-        //     "particular": "stay",
-        //     "amount": stay
-        // });
-
-        // const formData = new FormData();
-        // formData.append("name", generalInfo.name);
-        // formData.append("status", status);
-        // formData.append("mobileNo", mobileNo);
-        // formData.append("bankAccountNo", bankAccountNo);
-        // formData.append("nameOfConference", nameOfConference);
-        // formData.append("venueOfConference", venueOfConference);
-        // formData.append("paperInConference", paperInConference);
-        // formData.append("conferenceStarts", conferenceStarts);
-        // formData.append("conferenceEnds", conferenceEnds);
-        // formData.append("studentLeaveStarts", studentLeaveStarts);
-        // formData.append("studentLeaveEnds", studentLeaveEnds);
-        // formData.append("financialSupport", financialSupport);
-        // formData.append("advances", advances);
-
-
-        // if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
-        //     return;
-        // }
-
-
     }
 
     const getBasicInfo = async (req, res) => {
