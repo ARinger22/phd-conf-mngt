@@ -180,29 +180,40 @@ router.post('/viewFacultyApplications', async (req, res) => {
 
     // verfiy the token
     try {
-        console.log("Token: " + bearerToken);
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
         // //setting email and role from decode
         const facultyEmail = decode.email;
-        console.log(facultyEmail);
         const appData = await AppData.find().sort({ "updatedAt": -1 });
 
-        var filteredData = new Array();
+        var data = new Array();
         const user = await User.find();
         for (let i = 0; i < user.length; i++) {
             if (user[i].role === "0") {
                 if (facultyEmail === user[i].emailOfSupervisor) {
                     const appData = await AppData.find({ email: user[i].email });
-
-                    // bug was here 
                     appData.forEach(element => {
-                        filteredData.push(element);
+                        data.push(element);
                     });
                 }
             }
         }
-        return res.status(200).json({ data: filteredData });
+
+        const appData2 = await AppDataSett.find().sort({ "updatedAt": -1 });
+        const data2 = new Array();
+        const user2 = await User.find();
+        for (let i = 0; i < user2.length; i++) {
+            if (user2[i].role === "0") {
+                if (facultyEmail === user[i].emailOfSupervisor) {
+                    const appData = await AppDataSett.find({ email: user[i].email });
+                    appData.forEach(element => {
+                        data2.push(element);
+                    });
+                }
+            }
+        }
+        const data3 = {data : data, data2 : data2};
+        return res.status(200).json(data3);
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

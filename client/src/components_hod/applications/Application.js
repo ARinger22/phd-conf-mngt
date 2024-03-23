@@ -15,6 +15,7 @@ export default function HodApplication() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [apps, setApps] = useState(data);
+  const [apps2, setApps2] = useState(data);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const tabs = [
@@ -45,6 +46,9 @@ export default function HodApplication() {
         },
       });
       const data = await resp.json();
+      const { data: data1, data2 } = data;
+      setApps(data1);
+      setApps2(data2);
       return data;
     } catch (error) {
       console.log(error);
@@ -53,8 +57,6 @@ export default function HodApplication() {
 
   useEffect(() => {
     getAppInfo().then((resp) => {
-      setApps(resp.data);
-
       delay(100).then(() => {
         //good
         setIsLoading(false);
@@ -133,7 +135,8 @@ export default function HodApplication() {
     }
 
   }
-  const renderApps = apps.map((item, index) =>
+
+  const renderApps1 = apps && apps.map((item, index) =>
     <>
       <div key={index}>
         <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
@@ -162,6 +165,44 @@ export default function HodApplication() {
           <div
             className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
             {getDays(item.createdAt)}  ({item.type === 0 ? "National" : "International"})
+          </div>
+        </div>
+
+      </div>
+
+      <br />
+    </>
+  );
+
+  const renderApps2 = apps2 && apps2.map((item, index) =>
+    <>
+      <div key={index}>
+        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
+          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
+            {getStatus(item.status)}
+          </div>
+          <div className="p-4">
+            <h5
+              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+              Settlement form
+            </h5>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Amount Needed: {getFinances(item.finances)} Rs
+            </p>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Department: {item.department}
+            </p>
+          </div>
+          <button
+            name={item._id}
+            onClick={viewSpecficApplication}
+            className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Vew Full Application
+          </button>
+          <div
+            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+            {getDays(item.createdAt)}
           </div>
         </div>
 
@@ -202,8 +243,13 @@ export default function HodApplication() {
             <div className="p-2">
             </div>
           {/* </div> */}
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
           <div className="my-3 flex flex-wrap justify-center gap-4">
-            {apps && renderApps}
+            {apps && renderApps1}
+          </div>
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Settlement Forms</div>
+          <div className="my-3 flex flex-wrap justify-center gap-4">
+            {apps2 && renderApps2}
           </div>
         </Container>
       }
