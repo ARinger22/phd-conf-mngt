@@ -179,10 +179,10 @@ router.post('/studentInfoAdmin', async (req, res) => {
 router.get('/viewAllApplication', async (req, res) => {
 
     try {
-        // sorting using last updated 
-        // recently updated somes first --
         const data = await AppData.find().sort({ "updatedAt": -1 });
-        return res.status(200).json({ data: data });
+        const data2 = await AppDataSett.find().sort({ "updatedAt": -1 });
+        const data3 = {data: data, data2: data2}
+        return res.status(200).json(data3);
 
     } catch (error) {
         return res.status(422).json({ error: error })

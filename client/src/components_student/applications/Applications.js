@@ -7,13 +7,12 @@ import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
-const data = [];
 
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const [apps, setApps] = useState(data);
-  const [apps2, setApps2] = useState(data);
+  const [apps, setApps] = useState([]);
+  const [apps2, setApps2] = useState([]);
   const [st, setSt] = useState(1);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -73,7 +72,8 @@ function Application() {
         },
       });
       const data = await resp.json();
-      console.log("data", data);
+      console.log("data");
+      console.log(data);
       const { data: data1, data2 } = data;
       setApps(data1);
       setApps2(data2);
@@ -84,7 +84,7 @@ function Application() {
 
   useEffect(() => {
     getBasicInfo().then(() => {
-      apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+      apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
       setIsLoading(false);
     }).catch((e) => {
       console.log(e.message)
@@ -162,7 +162,7 @@ function Application() {
 
   }
 
-  const renderApps1 = apps.map((item, index) =>
+  const renderApps1 = apps && apps.map((item, index) =>
     <>
       <div key={index}>
         <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
@@ -201,7 +201,7 @@ function Application() {
       <br />
     </>
   );
-  const renderApps2 = apps2.map((item, index) =>
+  const renderApps2 = apps2 && apps2.map((item, index) =>
     <>
       <div key={index}>
         <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
