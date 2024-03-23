@@ -100,22 +100,6 @@ router.post('/updateInfo', async (req, res) => {
 
 
 router.post('/studentSettlementSubmit', async (req, res) => {
-
-    // const mobileNo = generalInfo.mobile;
-    //     const empCode = generalInfo.empCode;
-    //     const department = generalInfo.department;
-    //     const designation = generalInfo.designation;
-    //     const Bpay = generalInfo.Bpay;
-    //     const budgetHead = generalInfo.budgetHead;
-    //     const advanceDrawn = generalInfo.advanceDrawn;
-    //     const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
-    //     const bankAccNo = generalInfo.bankAccNo;
-
-    //     const status = "0";
-
-    //     const finances = [...tableData];
-    //     const travels = [...tableDataTravel];
-
     var {
         mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
         finances, travels, parentId, type
@@ -472,21 +456,15 @@ module.exports = router;
 
 // apps view
 router.post('/studentApplicationView', async (req, res) => {
-
     // bearer header 'Bearer token'
     const bearerHeader = await req.headers["authorization"];
-
     if (!bearerHeader) {
         return res.status(422).json({ error: "No Header" });
     }
     var bearerToken = bearerHeader.split(" ")[1];
-
-    // console.log( "Student Side Token: " + bearerToken);
-
     if (!bearerToken) {
         return res.status(422).json({ error: "No Token" });
     }
-
     // verfiy the token
     var decode
     try {
@@ -495,18 +473,16 @@ router.post('/studentApplicationView', async (req, res) => {
         console.log(error);
         return res.status(422).json({ error: error });
     }
-
-
     //setting email from decode
     const email = decode.email;
     const status = "0";
     try {
         // const data = await AppData.find({ email: email, status: status});
         // sorting acc to latest updated.. 
-        const data = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
-
-        // console.log(data);
-        return res.status(200).json(data);
+        const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
+        const data2 = await AppDataSett.find({ email: email }).sort({ "updatedAt": -1 });
+        const data3 = { data: data1, data2: data2 };
+        return res.status(200).json(data3);
 
     } catch (error) {
         console.log(error);
@@ -526,8 +502,4 @@ router.post('/createApplicationToken', async (req, res) => {
     // return res.status(200).json({id: id});
 })
 
-
-
-
 module.exports = router;
-
