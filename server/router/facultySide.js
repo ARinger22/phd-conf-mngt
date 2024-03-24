@@ -199,18 +199,10 @@ router.post('/viewFacultyApplications', async (req, res) => {
             }
         }
 
-        const appData2 = await AppDataSett.find().sort({ "updatedAt": -1 });
-        const data2 = new Array();
-        const user2 = await User.find();
-        for (let i = 0; i < user2.length; i++) {
-            if (user2[i].role === "0") {
-                if (facultyEmail === user[i].emailOfSupervisor) {
-                    const appData = await AppDataSett.find({ email: user[i].email });
-                    appData.forEach(element => {
-                        data2.push(element);
-                    });
-                }
-            }
+        const data2 = [];
+        for (let i = 0; i < appData.length; i++) {
+            const facultyAppDataSett = await AppDataSett.find({ parentId: data[i]._id }).sort({ "updatedAt": -1 });
+            data2.push(...facultyAppDataSett);
         }
         const data3 = {data : data, data2 : data2};
         return res.status(200).json(data3);

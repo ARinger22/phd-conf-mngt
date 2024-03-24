@@ -208,6 +208,7 @@ function FormInput() {
             !checkLeaveTime(leaveStarts, leaveEnds) ||
             !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)
             || !checkEnclosures(enclosures)) {
+                setFreezeButton(false);
             return;
         }
 

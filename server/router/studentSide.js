@@ -475,12 +475,26 @@ router.post('/studentApplicationView', async (req, res) => {
     }
     //setting email from decode
     const email = decode.email;
+    console.log(email)
     const status = "0";
     try {
         // const data = await AppData.find({ email: email, status: status});
         // sorting acc to latest updated.. 
         const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
-        const data2 = await AppDataSett.find({ email: email }).sort({ "updatedAt": -1 });
+        const parentIds = data1.map(entry => entry._id.toString());
+
+        const data2 = await AppDataSett.aggregate([
+            {
+                $match: { parentId: { $in: parentIds } } 
+            },
+            {
+                $sort: { "updatedAt": -1 } 
+            }
+        ]).exec();
+        // console.log("data1")
+        // console.log(data1)
+        console.log("data2")
+        console.log(data2)
         const data3 = { data: data1, data2: data2 };
         return res.status(200).json(data3);
 

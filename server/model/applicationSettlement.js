@@ -1,140 +1,135 @@
 // const mobileNo = generalInfo.mobile;
-    //     const empCode = generalInfo.empCode;
-    //     const department = generalInfo.department;
-    //     const designation = generalInfo.designation;
-    //     const Bpay = generalInfo.Bpay;
-    //     const budgetHead = generalInfo.budgetHead;
-    //     const advanceDrawn = generalInfo.advanceDrawn;
-    //     const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
-    //     const bankAccNo = generalInfo.bankAccNo;
+//     const empCode = generalInfo.empCode;
+//     const department = generalInfo.department;
+//     const designation = generalInfo.designation;
+//     const Bpay = generalInfo.Bpay;
+//     const budgetHead = generalInfo.budgetHead;
+//     const advanceDrawn = generalInfo.advanceDrawn;
+//     const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
+//     const bankAccNo = generalInfo.bankAccNo;
 
-    //     const status = "0";
+//     const status = "0";
 
-    //     const finances = [...tableData];
-    //     const travels = [...tableDataTravel];
+//     const finances = [...tableData];
+//     const travels = [...tableDataTravel];
 
 // import mongoose
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // applicationData Schema
-const applicationData = new mongoose.Schema({
-
+const applicationData = new mongoose.Schema(
+  {
     mobileNo: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     empCode: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     department: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     designation: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     Bpay: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     budgetHead: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     advanceDrawn: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     Date: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     bankAccNo: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     status: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     parentId: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     type: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     finances: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true,
     },
     travels: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true,
     },
-
-
-
-
 
     facultySignLink: {
-        type: String,
+      type: String,
     },
-
 
     hodSignLink: {
-        type: String,
+      type: String,
     },
-
 
     grantEligibility: {
-        type: String
+      type: String,
     },
     remarksResearch: {
-        type: String
+      type: String,
     },
     researchSignLink: {
-        type: String
+      type: String,
     },
-
 
     balanceAvailable: {
-        type: String
+      type: String,
     },
     grantUtilized: {
-        type: String
+      type: String,
     },
     passedForPayment: {
-        type: String
+      type: String,
     },
     remarksAccounts: {
-        type: String
+      type: String,
     },
     accountSignLink: {
-        type: String
+      type: String,
     },
-
 
     deanSignLink: {
-        type: String
+      type: String,
     },
-
 
     lastModified: {
-        type: String,
+      type: String,
     },
     image: {
-        type: String,
-    }
-},
-    {
-        timestamps: true
-    });
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-
-const AppDataSett = mongoose.model('APPDATASETT', applicationData, 'appdatasett');
+const AppDataSett = mongoose.model(
+  "APPDATASETT",
+  applicationData,
+  "appdatasett"
+);
 
 module.exports = AppDataSett;
