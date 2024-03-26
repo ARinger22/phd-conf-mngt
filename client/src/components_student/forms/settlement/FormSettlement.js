@@ -33,7 +33,7 @@ export default function InputData(props) {
         },
       });
       const data = await resp.json();
-      return data;
+      return data.data;
     } catch (error) {
       console.log(error);
     }
@@ -44,8 +44,6 @@ export default function InputData(props) {
 
       // console.log(resp);
       setApps(resp.map(resp => ({ nameOfConference: resp.nameOfConference, _id: resp._id })));
-
-      console.log("APPS", apps);
       // console.log(resp.nameOfConference);
       // console.log(resp.map(resp => resp.nameOfConference))
       // options = apps.map(apps => apps.nameOfConference);
@@ -108,7 +106,6 @@ export default function InputData(props) {
           </label>
           <br />
           <select id="applicationID" name="applicationID" className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' value={selectedOption} onChange={(event) => { props.getGeneralInfo(event); handleChange(event); }}>
-            {console.log(apps)}
             <option value="" disabled selected>Select the application for Settlement</option>
             {apps.map((item) => (
               <option key={item._id} value={item._id} id={item._id}>
@@ -119,8 +116,8 @@ export default function InputData(props) {
           {/* <h2 className="text-base font-semibold leading-7 text-gray-900">Select the application for Settlement</h2> */}
 
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
-            <div className="sm:col-span-3">
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-6 md:grid-cols-6">
+            <div className="sm:col-span-2">
               <label htmlFor="mobile" name='phone' className="block text-sm font-medium leading-6 text-gray-900">
                 Mobile Number
               </label>
@@ -135,7 +132,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="empCode" className="block text-sm font-medium leading-6 text-gray-900">
                 Emp. Code
               </label>
@@ -150,7 +147,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
                 Department
               </label>
@@ -165,7 +162,22 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
+              <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
+                Entry Number
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="department"
+                  id="department"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2">
               <label htmlFor="designation" className="block text-sm font-medium leading-6 text-gray-900">
                 Designation
               </label>
@@ -180,7 +192,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="Bpay" className="block text-sm font-medium leading-6 text-gray-900">
                 Basic Pay with Grade Pay
               </label>
@@ -195,7 +207,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="budgetHead" className="block text-sm font-medium leading-6 text-gray-900">
                 Budget Head
               </label>
@@ -210,7 +222,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
                 Advance drawn Rs.
               </label>
@@ -225,7 +237,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="Date" className="block text-sm font-medium leading-6 text-gray-900">
                 Date
               </label>
@@ -240,7 +252,7 @@ export default function InputData(props) {
               </div>
             </div>
 
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
                 Bank Account No.
               </label>
@@ -439,27 +451,27 @@ made.</li>
                 <Enclosures
                   title="Signature"
                   onChangeFunction={props.fileFunction}
-                  name="copyOfApprovedTour"
+                  name="signature"
                   type="file"
                   acceptType="application/pdf"
                 />
                 <Enclosures
                   title="Enclosure 1"
                   onChangeFunction={props.fileFunction}
-                  name="copyOfConferenceBrochure"
+                  name="enclosure1"
                   type="file"
                   acceptType="application/pdf"
                 />
                 <Enclosures
                   title="Enclosure 2"
-                  name="copyOfAbstract"
+                  name="enclosure2"
                   onChangeFunction={props.fileFunction}
                   type="file"
                   acceptType="application/pdf"
                 />
                 <Enclosures
                   title="Enclosure 3"
-                  name="yoursignature"
+                  name="enclosure3"
                   onChangeFunction={props.fileFunction}
                   type="file"
                   acceptType="application/pdf"

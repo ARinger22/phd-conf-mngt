@@ -16,6 +16,7 @@ require('dotenv').config();
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
 const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
+const AppDataSett = require('../model/applicationSettlement');
 
 router.post('/viewHodApplications', async (req, res) => {
 
@@ -31,29 +32,35 @@ router.post('/viewHodApplications', async (req, res) => {
         return res.status(422).json({ error: "No Token" });
     }
 
-    // verfiy the token
+    // // verfiy the token
     try {
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
         // //setting email and role from decode
-        const facultyEmail = decode.email;
-        const appData = await AppData.find().sort({ "updatedAt": -1 });
+        // const facultyEmail = decode.email;
+        console.log("decode: " + decode.name)
+        const hodDepartment = decode.department;
+        console.log("HOD Department: " + hodDepartment)
 
-        var filteredData = new Array();
+        const appData = await AppDataSett.find().sort({ "updatedAt": -1 });
+        var data1 = new Array();
         const user = await User.find();
         for (let i = 0; i < user.length; i++) {
-            if (user[i].role === "1") {
-                if (facultyEmail === user[i].emailOfSupervisor) {
-                    const appData = await AppData.find({ email: user[i].email });
-
-                    // bug was here 
-                    appData.forEach(element => {
-                        filteredData.push(element);
-                    });
-                }
+            if (hodDepartment === user[i].department ) {
+                const appData = await AppDataSett.find({ email: user[i].email });
+                appData.forEach(element => {
+                    data1.push(element);
+                });
             }
         }
-        return res.status(200).json({ data: filteredData });
+        const data2 = [];
+        for (let i = 0; i < appData.length; i++) {
+            const facultyAppDataSett = await AppData.find({ _id: data1[i].parentId }).sort({ "updatedAt": -1 });
+            data2.push(...facultyAppDataSett);
+        }
+        const data3 = {data : data2, data2 : data1};
+        return res.status(200).json(data3);
+        return res.status(200).json({ data: data1 });
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

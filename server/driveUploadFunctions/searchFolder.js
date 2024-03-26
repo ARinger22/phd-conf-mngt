@@ -12,7 +12,7 @@ async function searchDriveFolder(folderName) {
             spaces: 'drive'
         });
 
-        // console.log(res.data.files[0]);
+        console.log(res.data.files[0]);
         return res.data.files[0].id;
     } catch (error) {
     

@@ -39,10 +39,12 @@ export default function HodApplication() {
 
   const getAppInfo = async (req, res) => {
     try {
+      const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/viewAllApplication`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       });
       const data = await resp.json();
