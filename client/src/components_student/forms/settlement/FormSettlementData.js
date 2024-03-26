@@ -197,50 +197,62 @@ export default function FormSettlementData() {
         // return true;
     }
 
+    const [enclosures, setEnclosures] = useState({
+        "signature": null,
+        "enclosure1": null,
+        "enclosure2": null,
+        "enclosure3": null,
+    })
+
+    const fileFunction = (e) => {
+        e.preventDefault();
+
+        const { name } = e.target;
+        setEnclosures(prevState => ({
+            ...prevState,
+            [name]: e.target.files[0]
+        }));
+    }
+
     const submitSettlement = async (e) => {
         e.preventDefault();
-        // alert("Settlement Form Submitted");
-
-        // save all data
-
         const applicationID = generalInfo.applicationID;
         console.log("ApplicationID:", applicationID);
-        if (applicationID == "")
-        {
-            console.log("NOPE");
-            return;
+        if (applicationID == ""){
+            console.log("NOPE");    return;
         }
-        const mobileNo = generalInfo.mobile;
-        const empCode = generalInfo.empCode;
-        const department = generalInfo.department;
-        const designation = generalInfo.designation;
-        const Bpay = generalInfo.Bpay;
-        const budgetHead = generalInfo.budgetHead;
-        const advanceDrawn = generalInfo.advanceDrawn;
         const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
-        const bankAccNo = generalInfo.bankAccNo;
-
-        const status = "0";
-
         const finances = [...tableData];
         const travels = [...tableDataTravel];
 
         const formData = new FormData();
 
         formData.append("parentId", applicationID);
-        formData.append("mobileNo", mobileNo);
-        formData.append("empCode", empCode);
-        formData.append("department", department);
-        formData.append("designation", designation);
-        formData.append("Bpay", Bpay);
-        formData.append("budgetHead", budgetHead);
-        formData.append("advanceDrawn", advanceDrawn);
+        formData.append("mobileNo", generalInfo.mobile);
+        formData.append("empCode", generalInfo.empCode);
+        formData.append("department", generalInfo.department);
+        formData.append("entryNo", generalInfo.entryNo);
+        formData.append("designation", generalInfo.designation);
+        formData.append("Bpay", generalInfo.Bpay);
+        formData.append("budgetHead", generalInfo.budgetHead);
+        formData.append("advanceDrawn", generalInfo.advanceDrawn);
         formData.append("Date", Date);
-        formData.append("bankAccNo", bankAccNo);
-        formData.append("status", status);
+        formData.append("bankAccNo", generalInfo.bankAccNo);
+        formData.append("status", "0");
         formData.append("type", 3);
         formData.append("finances", JSON.stringify(finances));
         formData.append("travels", JSON.stringify(travels));
+
+        formData.append("deptdate", tableDataTravel.deptdate);
+        formData.append("depttime", tableDataTravel.depttime);
+        formData.append("arrivaldate", tableDataTravel.arrivaldate);
+        formData.append("arrivaltime", tableDataTravel.arrivaltime);
+        
+        console.log(enclosures);
+        formData.append("signature", enclosures.signature);
+        formData.append("enclosure1", enclosures.enclosure1);
+        formData.append("enclosure2", enclosures.enclosure2);
+        formData.append("enclosure3", enclosures.enclosure3);
 
         const res = await fetch(`${BASE_URL}/studentSettlementSubmit`, {
             method: "POST",
@@ -322,9 +334,13 @@ export default function FormSettlementData() {
                 leaveStarts={leaveStarts} setLeaveStarts={setLeaveStarts}
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
-                addRowDataTravel={addRowDataTravel} tableDataTravel={tableDataTravel} getRowDataTravel={getRowDataTravel} rowDataTravel={rowDataTravel}
+                addRowDataTravel={addRowDataTravel} 
+                tableDataTravel={tableDataTravel} 
+                getRowDataTravel={getRowDataTravel} 
+                rowDataTravel={rowDataTravel}
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
+                fileFunction={fileFunction}
                 submitSettlement={submitSettlement}
             />
         </>
