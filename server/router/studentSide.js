@@ -107,6 +107,7 @@ router.post('/studentSettlementSubmit', async (req, res) => {
 
     var { signature, enclosure1, enclosure2, enclosure3 } = req.files;
 
+    console.log("deptdate : ", deptdate, "depttime : " , depttime, arrivaldate, arrivaltime)
     finances = JSON.parse(finances);
     travels = JSON.parse(travels);
 

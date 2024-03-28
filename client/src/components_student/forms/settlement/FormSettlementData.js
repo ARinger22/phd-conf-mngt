@@ -122,7 +122,6 @@ export default function FormSettlementData() {
     const getConferenceInfo = ((e) => {
 
         const { name, value } = e.target;
-        // console.log(name + " " + value);
         setConferenceInfo(prevState => ({
             ...prevState,
             [name]: value
@@ -160,7 +159,6 @@ export default function FormSettlementData() {
 
     const getRowData = (e) => {
         const { name, value } = e.target;
-        // console.log(name + " " + value);
         setRowData(prevState => ({
             ...prevState,
             [name]: value
@@ -169,7 +167,6 @@ export default function FormSettlementData() {
 
     const getRowDataTravel = (e) => {
         const { name, value } = e.target;
-        // console.log(name + " " + value);
         setRowDataTravel(prevState => ({
             ...prevState,
             [name]: value
