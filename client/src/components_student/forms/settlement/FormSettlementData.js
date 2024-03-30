@@ -71,7 +71,8 @@ export default function FormSettlementData() {
 
     const [rowData, setRowData] = useState({
         particular: "",
-        amount: ""
+        amount: "",
+        bill: ""
     });
 
     const [rowDataTravel, setRowDataTravel] = useState({

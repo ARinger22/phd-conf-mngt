@@ -9,7 +9,7 @@ import { Switch } from '@headlessui/react'
 import { AiOutlineEllipsis } from 'react-icons/ai';
 import { getUserToken, setAppToken } from '../../../components_login/Tokens';
 import { BASE_URL } from '../../../components/requests/URL';
-import Particulars from '../inputFields/Particulars';
+import Particulars from '../inputFields/ParticularsSettlement';
 import Enclosures from '../inputFields/Enclosures';
 import ParticularsTravel from '../inputFields/ParticularsTravel';
 
