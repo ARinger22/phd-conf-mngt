@@ -107,7 +107,6 @@ router.post('/studentSettlementSubmit', async (req, res) => {
 
     var { signature, enclosure1, enclosure2, enclosure3 } = req.files;
 
-    console.log("deptdate : ", deptdate, "depttime : " , depttime, arrivaldate, arrivaltime)
     finances = JSON.parse(finances);
     travels = JSON.parse(travels);
 
@@ -116,24 +115,24 @@ router.post('/studentSettlementSubmit', async (req, res) => {
             searchDriveFolder(entryNo).then((parentID) => {
                 console.log("Parent Id: " + parentID);
                 // creating application folder inside student folder
-                var applicationFolderName = deptdate + "-" + depttime + "__" + arrivaldate + "-" + arrivaltime; 
+                var applicationFolderName = travels[0].deptdate + "-" + travels[0].depttime + "__" + travels[0].arrivaldate + "-" + travels[0].arrivaltime; 
                 const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
                     console.log("Application Folder Id: " + result);
 
-                    uploadPdf("signature.pdf", signature.tempFilePath, applicationFolderId).then((abstractFileId) => {
+                    uploadPdf("signature.pdf", signature.tempFilePath, result).then((abstractFileId) => {
                         console.log("signature File Id: " + abstractFileId);
 
 
-                        uploadPdf("enclosure1.pdf", enclosure1.tempFilePath, applicationFolderId)
+                        uploadPdf("enclosure1.pdf", enclosure1.tempFilePath, result)
                             .then((brochureFileId) => {
                                 console.log("enclosure1 File Id: " + brochureFileId);
 
 
-                                uploadPdf("enclosure2.pdf", enclosure2.tempFilePath, applicationFolderId)
+                                uploadPdf("enclosure2.pdf", enclosure2.tempFilePath, result)
                                     .then((acceptanceFileId) => {
                                         console.log("enclosure2 File Id: " + acceptanceFileId);
                                         
-                                        uploadPdf("enclosure3.pdf", enclosure3.tempFilePath, applicationFolderId)
+                                        uploadPdf("enclosure3.pdf", enclosure3.tempFilePath, result)
                                             .then((acceptanceFileId) => {
                                                 console.log("enclosure3 File Id: " + acceptanceFileId);
 
@@ -215,16 +214,16 @@ router.post('/studentApplicationSubmit', async (req, res) => {
             const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
                 console.log("Application Folder Id: " + result);
 
-                uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId).then((abstractFileId) => {
+                uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, result).then((abstractFileId) => {
                     console.log("Abstract File Id: " + abstractFileId);
 
 
-                    uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId)
+                    uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, result)
                         .then((brochureFileId) => {
                             console.log("Brochure File Id: " + brochureFileId);
 
 
-                            uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId)
+                            uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, result)
                                 .then((acceptanceFileId) => {
                                     console.log("Acceptance File Id: " + acceptanceFileId);
 
@@ -326,23 +325,23 @@ router.post('/studentApplicationSubmitAbroad', async (req, res) => {
             const applicationFolderId = createDriveFolder(applicationFolderName, parentId).then((result) => {
                 console.log("Application Folder Id: " + result);
 
-                uploadPdf("invitationLetterAdditional.pdf", invitationLetterAdditional.tempFilePath, applicationFolderId)
+                uploadPdf("invitationLetterAdditional.pdf", invitationLetterAdditional.tempFilePath, result)
                     .then((invitationLetterAdditionalFileId) => {
                         console.log("Invitation Letter Additional File Id: " + invitationLetterAdditionalFileId);
 
-                        uploadPdf("letterOfInvitation.pdf", letterOfInvitation.tempFilePath, applicationFolderId)
+                        uploadPdf("letterOfInvitation.pdf", letterOfInvitation.tempFilePath, result)
                             .then((letterOfInvitationFileId) => {
                                 console.log("Letter Of Invitation File Id: " + letterOfInvitationFileId);
-                                uploadPdf("conferenceBrochure.pdf", conferenceBrochure.tempFilePath, applicationFolderId)
+                                uploadPdf("conferenceBrochure.pdf", conferenceBrochure.tempFilePath, result)
                                     .then((conferenceBrochureFileId) => {
                                         console.log("Conference Brochure File Id: " + conferenceBrochureFileId);
-                                        uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId)
+                                        uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, result)
                                             .then((copyOfAbstractFileId) => {
                                                 console.log("Copy Of Abstract File Id: " + copyOfAbstractFileId);
-                                                uploadPdf("accomodationCost.pdf", accomodationCost.tempFilePath, applicationFolderId)
+                                                uploadPdf("accomodationCost.pdf", accomodationCost.tempFilePath, result)
                                                     .then((accomodationCostFileId) => {
                                                         console.log("Accomodation Cost File Id: " + accomodationCostFileId);
-                                                        uploadPdf("acceptanceOfPaper.pdf", acceptanceOfPaper.tempFilePath, applicationFolderId)
+                                                        uploadPdf("acceptanceOfPaper.pdf", acceptanceOfPaper.tempFilePath, result)
                                                             .then((acceptanceOfPaperFileId) => {
                                                                 console.log("Acceptance Of Paper File Id: " + acceptanceOfPaperFileId);
 
