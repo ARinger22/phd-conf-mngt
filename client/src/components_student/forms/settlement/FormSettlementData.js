@@ -9,9 +9,10 @@ import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
 import { generateUtilityClass } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormSettlementData() {
-
+    const navigate = useNavigate();
 
     const [generalInfo, setGeneralInfo] = useState({
         name: "",
@@ -266,7 +267,12 @@ export default function FormSettlementData() {
             // setFormSuccess(true);
             // setMessage("Application Submitted Successfully!");
             console.log("Application Submitted Successfully!");
+            exitForm(e);
         }
+    }
+    function exitForm(e) {
+        e.preventDefault();
+        navigate('/studentLogin/application');
     }
 
     const getBasicInfo = async (req, res) => {

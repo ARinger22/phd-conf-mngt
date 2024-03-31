@@ -2,8 +2,10 @@ import React, {useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
 import { BASE_URL } from '../../requests/URL.js';
 import Upload from '../uploadSign/Upload.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function FacultyAction({ user, data }) {
+    const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
     const [action, setAction] = useState("Take Action");
@@ -44,8 +46,6 @@ export default function FacultyAction({ user, data }) {
         formData.append("status", status);
         formData.append("image", image);
 
-        console.log("Form Data hehe: ");
-
         const res = await fetch(`${BASE_URL}/facultyApproveOrDisapprove`, {
             method: "POST",
             headers: {
@@ -55,6 +55,7 @@ export default function FacultyAction({ user, data }) {
         })
         if (res.status === 200) {
             console.log("Successfull..")
+            navigate('/studentLogin/application');
         }
         else {
             window.alert("Error Occurred! Try Again..")
