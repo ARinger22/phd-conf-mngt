@@ -121,7 +121,7 @@ export default function InputData(props) {
               id="advance"
               checked={props.advance}
               onChange={props.getAdvance}
-              className={`${props.advance ? 'bg-blue-600' : 'bg-gray-200'
+              className={`${props.advance ? 'bg-dark-purple' : 'bg-gray-200'
                 } relative inline-flex h-6 w-11 items-center rounded-full`}
             >
               <span className="sr-only">Advance Section</span>
@@ -217,7 +217,7 @@ export default function InputData(props) {
 
           <button
             onClick={props.requestGrant}
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-dark-purple px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue  hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
           >
            {props.freezeButton === true ? "Submitting" : "Request Grant"}
           </button>

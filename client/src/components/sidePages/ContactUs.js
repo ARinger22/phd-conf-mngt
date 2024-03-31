@@ -34,7 +34,7 @@ function ContactUs() {
             <nav className="bg-gray-800 text-white">
                 <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
                     <div className="flex justify-between items-center">
-                        <Link to="/" className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</Link>
+                        <Link to="/" className="text-xl font-bold">PhD CGM :: PhD Conference Grant Management Portal</Link>
                         <button className="md:hidden" onClick={toggleNavbar}>
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -78,13 +78,13 @@ function ContactUs() {
                             <label htmlFor="message" className="mb-2 text-sm font-medium text-gray-800 dark:text-gray-200">Your Message</label>
                             <textarea id="message" rows="6" className="input-field" placeholder="Please provide details..." required></textarea>
                         </div>
-                        <button type="submit" className="w-full py-3 text-sm font-medium text-white rounded-lg bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Send Message</button>
+                        <button type="submit" className="w-full py-3 text-sm font-medium text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-dark-purple bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue">Send Message</button>
                     </form>
                 </div>
             </section>
             <Footer />
         </>
-            )
+    )
 }
 
-            export default ContactUs
+export default ContactUs

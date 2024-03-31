@@ -6,6 +6,7 @@ module.exports = {
         "custom-purple": "#4f46e5",
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.17)",
+        "button-hover-blue": "#0B1C2C",
       },
       fontFamily: {
         montserrat: ["Montserrat"],

@@ -57,7 +57,7 @@ export default function HodHome() {
             <div className="container px-10 py-10 mx-5">
               <span style={{ display: 'flex', alignItems: 'center' }}>
                 <FaChartLine size={32} style={{ marginRight: '1rem' }} />
-                <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"> <span className="underline decoration-blue-500">Welcome to HOD Portal</span></h1>
+                <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"> <span className="underline decoration-dark-purple">Welcome to HOD Portal</span></h1>
               </span>
             </div>
             <div className='px-2 w-full'>
@@ -66,7 +66,7 @@ export default function HodHome() {
                   <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                       <span style={{ display: 'flex', alignItems: 'center' }}>
-                        <FaSort color="red" size={32} style={{ marginRight: '0.5rem' }} />
+                        <FaSort color="dark-purple" size={32} style={{ marginRight: '0.5rem' }} />
                         <span className='text-lg font-medium'>Recently Submitted applications:</span>
                       </span>
                       <div className="flex">
@@ -75,8 +75,8 @@ export default function HodHome() {
                     </div>
                     <div className="p-2">
                     </div>
+                    <ApplicationsHome />
                   </div>
-                  <ApplicationsHome />
                 </div>
                 {/* <div className="max-w-sm mx-auto">
                   <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">

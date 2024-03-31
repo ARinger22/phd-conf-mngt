@@ -425,9 +425,9 @@ export default function InputData(props) {
           <br />
 
           <li>All claims mentioned in this form correspond to actual expenditure incurred by me for which no reimbursement/claims have been
-made from any other source (Govt./Private/Others)</li>
+            made from any other source (Govt./Private/Others)</li>
           <li>I was not provided with any free boarding/lodging/conveyance/registration fee waiver/travel coupons for which claim has been
-made.</li>
+            made.</li>
           <br />
           <br />
           {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Your Signature</label>
@@ -440,7 +440,7 @@ made.</li>
             </div>
           </div> */}
 
-<div className="mt-10 space-y-10">
+          <div className="mt-10 space-y-10">
             <fieldset>
               <legend className="text-sm flex font-semibold leading-6 text-gray-900">
                 Enclosures Attached
@@ -488,7 +488,7 @@ made.</li>
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             onClick={props.submitSettlement}
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-dark-purple hover:text-teal-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
           >
             Submit Form
           </button>

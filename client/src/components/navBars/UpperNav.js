@@ -33,8 +33,8 @@ function UpperNav() {
                 <nav className="bg-dark-purple border-gray-200  px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                     <div className="flex">
 
-                        <div style={{ "color": "white", "fontSize": "24px" }} className="flex-1 flex-wrap justify-between items-center py-1 mx-auto max-w-screen-xl">
-                            PhdCGM : PhD Conference Grant Management Portal
+                        <div style={{ "color": "white", "fontSize": "40px" }} className="flex-1 flex-wrap justify-between items-center py-1 mx-auto max-w-screen-xl">
+                            Phd CGM : PhD Conference Grant Management Portal
                         </div>
                         {userData && userData?.name && userData?.email &&
                             <div className="flex items-center">

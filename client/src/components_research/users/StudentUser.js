@@ -78,9 +78,9 @@ function StudentUser({ users }) {
                                     previousLabel={<span className="w-4 h-4 flex items-center justify-center bg-lightGray rounded-md mr-4"><BsChevronLeft />   </span>}
                                     onPageChange={paginate}
                                     pageCount={Math.ceil(users.length / userPerPage)}
-                                    pageLinkClassName="flex items-center hidden px-2  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
-                                    previousLinkClassName="flex items-center px-4  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
-                                    nextLinkClassName="flex items-center px-4  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
+                                    pageLinkClassName="flex items-center hidden px-2  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-dark-purple dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
+                                    previousLinkClassName="flex items-center px-4  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-dark-purple dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
+                                    nextLinkClassName="flex items-center px-4  mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-dark-purple dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
                                     containerClassName="flex items-center justify-center mt-8 mb-4"
                                     pageClassName="block border- border-solid border-lightGray hover:bg-lightGray w-10 h-10 flex items-center justify-center rounded-md mr-4"
                                     activeClassName="bg-purple text-white"

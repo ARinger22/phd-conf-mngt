@@ -121,7 +121,7 @@ export default function ResearchStudent() {
                             <div className="mx-auto mt-3 max-w-screen-sm text-center ">
                                 <button
                                     onClick={uploadFile}
-                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    className="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue">
                                     Upload Student Data
                                 </button>
                             </div>

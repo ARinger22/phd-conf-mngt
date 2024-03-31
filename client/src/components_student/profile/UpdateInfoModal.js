@@ -2,18 +2,18 @@ import React, { useState } from 'react'
 import { BASE_URL } from '../../components/requests/URL';
 import { getUserToken } from '../../components_login/Tokens';
 
-export default function UpdateInfoModal({ setModalClass, profileInfo , setProfileInfo }) {
+export default function UpdateInfoModal({ setModalClass, profileInfo, setProfileInfo }) {
 
-    const [newMobile, setNewMobile] = useState(profileInfo?.mobileNo ||'');
-    const [newName, setNewName] = useState(profileInfo?.name||'');
-    const [newEntryNumber, setNewEntryNumber] = useState(profileInfo?.entryNo||'');
-    const [newEmail, setNewEmail] = useState(profileInfo?.email||'');
-    const [newDepartment, setNewDepartment] = useState(profileInfo?.department||'');
-    const [newDateOfJoining, setNewDateOfJoining] = useState(profileInfo?.dateOfJoining||'');
-    const [newFellowshipCategory, setNewFellowshipCategory] = useState(profileInfo?.fellowshipCategory||'');
-    const [newSpecialization, setNewSpecialization] = useState(profileInfo?.areaOfSpecialisation||'');
-    const [newSupervisor, setNewSupervisor] = useState(profileInfo?.nameOfSupervisor||'');
-    const [newSupervisorEmail , setNewSupervisorEmail] =useState(profileInfo?.emailOfSupervisor||'');
+    const [newMobile, setNewMobile] = useState(profileInfo?.mobileNo || '');
+    const [newName, setNewName] = useState(profileInfo?.name || '');
+    const [newEntryNumber, setNewEntryNumber] = useState(profileInfo?.entryNo || '');
+    const [newEmail, setNewEmail] = useState(profileInfo?.email || '');
+    const [newDepartment, setNewDepartment] = useState(profileInfo?.department || '');
+    const [newDateOfJoining, setNewDateOfJoining] = useState(profileInfo?.dateOfJoining || '');
+    const [newFellowshipCategory, setNewFellowshipCategory] = useState(profileInfo?.fellowshipCategory || '');
+    const [newSpecialization, setNewSpecialization] = useState(profileInfo?.areaOfSpecialisation || '');
+    const [newSupervisor, setNewSupervisor] = useState(profileInfo?.nameOfSupervisor || '');
+    const [newSupervisorEmail, setNewSupervisorEmail] = useState(profileInfo?.emailOfSupervisor || '');
 
     async function updateInfo(e) {
         e.preventDefault();
@@ -34,7 +34,7 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                 fellowshipCategory: newFellowshipCategory,
                 specialization: newSpecialization,
                 supervisor: newSupervisor,
-                supervisorEmail : newSupervisorEmail,
+                supervisorEmail: newSupervisorEmail,
                 aisehi: "aisehi"
             })
         })
@@ -165,7 +165,7 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                     <div className="flex items-center justify-start w-full">
                         <button
                             onClick={updateInfo}
-                            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                            className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-dark-purple transition duration-150 ease-in-out hover:bg-button-hover-blue hover:text-teal-400 bg-dark-purple rounded text-white px-8 py-2 text-sm"
                         >
                             Update
                         </button>
@@ -174,7 +174,7 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                                 e.preventDefault();
                                 setModalClass("hidden");
                             }}
-                            className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                            className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:text-gray-950 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
                         >
                             Cancel
                         </button>

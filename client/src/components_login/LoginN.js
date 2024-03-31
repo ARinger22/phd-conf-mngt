@@ -136,7 +136,7 @@ function Login() {
             <nav className="bg-gray-800 text-white">
                 <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
                     <div className="flex justify-between items-center">
-                        <Link to="/" className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</Link>
+                        <Link to="/" className="text-xl font-bold">PhD CGM :: PhD Conference Grant Management Portal</Link>
                         <button className="md:hidden" onClick={toggleNavbar}>
                             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -165,8 +165,8 @@ function Login() {
             <section className="bg-gray-50 min-h-screen flex items-center justify-center">
                 <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
                     <div className="md:w-1/2 px-8 md:px-16">
-                        <h2 className="font-bold text-2xl text-[#002D74]">Login with PhDCGM credentials</h2>
-                        <p className="text-xs mt-4 text-[#002D74]">Please enter your email and OTP to Log In</p>
+                        <h2 className="font-bold text-2xl text-dark-purple">Login with PhD CGM credentials</h2>
+                        <p className="text-xs mt-4 text-dark-purple">Please enter your email and OTP to Log In</p>
 
                         <form action="" className="flex flex-col gap-4">
                             <input className="p-2 mt-8 rounded-xl border" type="email" name="email" placeholder="Email" onChange={getEmailId} />
@@ -174,13 +174,13 @@ function Login() {
                                 ?
                                 <Alert mssg={otpMssg} type={alertType} />
                                 :
-                                <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300 " onClick={requestOtp}>{optButtonMssg}</button>
+                                <button className="bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue rounded-xl text-white py-2 hover:scale-105 duration-300 " onClick={requestOtp}>{optButtonMssg}</button>
                             }
 
                             <div className="relative">
                                 <input className="p-2 rounded-xl border w-full" name="password" placeholder="OTP" onChange={getOtp} />
                             </div>
-                            <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" onClick={requestLogIn}>{loginButtonMssg}</button>
+                            <button className="bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue rounded-xl text-white py-2 hover:scale-105 duration-300" onClick={requestLogIn}>{loginButtonMssg}</button>
                         </form>
 
                         {/* <div className="mt-6 grid grid-cols-3 items-center text-gray-400">

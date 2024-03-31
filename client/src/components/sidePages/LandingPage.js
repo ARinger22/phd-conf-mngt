@@ -49,7 +49,7 @@ export default function LandingPage() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 to="/login"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue"
               >
                 Log In
               </Link>

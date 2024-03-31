@@ -186,7 +186,7 @@ function Application() {
           <button
             name={item._id}
             onClick={viewSpecficApplication}
-            className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-dark-purple px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
           >
             View Full Application
           </button>
@@ -223,7 +223,7 @@ function Application() {
           <button
             name={item._id}
             onClick={viewSpecficApplication}
-            className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-dark-purple px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
           >
             Vew Full Application
           </button>
@@ -250,26 +250,26 @@ function Application() {
         :
         <Container>
           {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
-            <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
-              <span style={{ display: 'flex', alignItems: 'center' }}>
-                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
-                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
-              </span>
-              <div className="flex">
-                {tabs.map((tab, index) => (
-                  <button
-                    key={tab.label}
-                    className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                      }`}
-                    onClick={() => handleTabClick(index)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
+          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
+              <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+            </span>
+            <div className="flex">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.label}
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                    }`}
+                  onClick={() => handleTabClick(index)}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
-            <div className="p-2">
-            </div>
+          </div>
+          <div className="p-2">
+          </div>
           {/* </div> */}
           <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
           <div className="my-3 flex flex-wrap justify-center gap-4">

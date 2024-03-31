@@ -14,7 +14,7 @@ const UserGuide = () => {
       <nav className="bg-gray-800 text-white">
         <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
           <div className="flex justify-between items-center">
-            <Link to="/" className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</Link>
+            <Link to="/" className="text-xl font-bold">PhD CGM :: PhD Conference Grant Management Portal</Link>
             <button className="md:hidden" onClick={toggleNavbar}>
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -47,10 +47,10 @@ const UserGuide = () => {
             <h1 className="text-4xl font-extrabold mb-4 text-gray-800 dark:text-white">PhD Grant Management Portal</h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">Welcome to the PhD Conference Grant Management Portal. This portal simplifies the process of managing conference grant applications.</p>
             <div className="flex space-x-3">
-              <a href="#" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white rounded-lg bg-blue-500 hover:bg-blue-600 transition duration-300">
+              <a href="#" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white rounded-lg bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue transition duration-300">
                 Get Started
               </a>
-              <a href="#" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-50 transition duration-300">
+              <a href="#" className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-dark-purple border border-dark-purple rounded-lg hover:bg-blue-50 transition duration-300">
                 Watch Video
               </a>
             </div>

@@ -13,7 +13,7 @@ const data = [];
 
 function ApplicationsHome() {
     const [isLoading, setIsLoading] = useState(true);
-    const [initializedMaps,setInitializedMaps] = useState(false);
+    const [initializedMaps, setInitializedMaps] = useState(false);
     const navigate = useNavigate();
     const [apps, setApps] = useState(data);
     const [apps2, setApps2] = useState(data);
@@ -216,7 +216,7 @@ function ApplicationsHome() {
                                                     Edit
                                                 </button>
                                                 <button type="button" name={item._id}
-                                                    onClick={viewSpecficApplication} className="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                                    onClick={viewSpecficApplication} className="inline-flex items-center text-white bg-dark-purple hover:bg-button-hover-blue hover:text-teal-400 focus:ring-4 focus:outline-none focus:ring-button-hover-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-button-hover-blue dark:hover:bg-button-hover-blue dark:focus:ring-button-hover-blue">
                                                     <FaPaperPlane style={{ marginRight: '0.5rem' }} />
                                                     View Full Application
                                                 </button>

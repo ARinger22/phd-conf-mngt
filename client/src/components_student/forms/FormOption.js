@@ -7,20 +7,20 @@ import { FaDollarSign } from 'react-icons/fa';
 const formOptions = [
     {
         id: 1,
-        title: 'Wanna attend in abroad?',
+        title: 'Attend Conference Abroad',
         href: '#',
         description:
-            "If you want to attend the conference in abroad, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
+            "Fill form for attending Conference Abroad.You can also refer the UserGuide in case of any confusion.",
         category: { title: 'Application', href: '' },
         function: "goAbroad"
 
     },
     {
         id: 2,
-        title: 'Wanna Attend within India?',
+        title: 'Attend Conference in India',
         href: '#',
         description:
-            "If you want to attend the conference within india, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
+            "Fill form for attending Conference in India .You can also refer the UserGuide in case of any confusion. ",
         category: { title: 'Application', href: '#' },
         function: "goIndia"
         // <IoMdFlag color="#FF9933" size={32} />
@@ -41,10 +41,10 @@ const formOptions = [
 ]
 const settlement = {
     id: 1,
-    title: 'Fill Settlement Form?',
+    title: 'Settlement Form',
     href: '#',
     description:
-        "If you want to fill the settlment form, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
+        "Fill settlement form. You can also refer the UserGuide in case of any confusion. ",
     category: { title: 'Application', href: '#' },
     function: "goSettlement"
 }

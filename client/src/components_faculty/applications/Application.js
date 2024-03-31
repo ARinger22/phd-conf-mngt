@@ -166,7 +166,7 @@ export default function FacultyApplication() {
       <button
         name={item._id}
         onClick={viewSpecificApplication}
-        className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        className="rounded-md bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-dark-purple"
       >
         View Full Application
       </button>
@@ -200,7 +200,7 @@ export default function FacultyApplication() {
             <button
               name={item._id}
               onClick={viewSpecificApplication}
-              className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-dark-purple hover:text-teal-400 hober:bg-button-hover-blue px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
             >
               Vew Full Application
             </button>
@@ -226,7 +226,7 @@ export default function FacultyApplication() {
           {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
           <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
             <span style={{ display: "flex", alignItems: "center" }}>
-              <FaSort color="red" style={{ marginRight: "0.5rem" }} />
+              <FaSort color="dark-purple" style={{ marginRight: "0.5rem" }} />
               <span className="text-lg font-medium">
                 Sort Applications on the basis of:{" "}
               </span>
@@ -235,11 +235,10 @@ export default function FacultyApplication() {
               {tabs.map((tab, index) => (
                 <button
                   key={tab.label}
-                  className={`mx-2 py-1 px-4 rounded-lg font-medium e ${
-                    index === activeTabIndex
-                      ? "bg-indigo-600 text-white"
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex
+                      ? "bg-dark-purple text-white hover:text-teal-400 hover:bg-button-hover-blue"
                       : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-                  }`}
+                    }`}
                   onClick={() => handleTabClick(index)}
                 >
                   {tab.label}
