@@ -14,6 +14,7 @@ const AppData = require('../model/applicationData');
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
 const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
+const AppDataSett = require('../model/applicationSettlement');
 
 // credentials import
 require('dotenv').config();
@@ -40,30 +41,49 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
+        const appDataSett = await AppDataSett.findById(id);
 
-        if (appData.status !== "2")
-            return res.status(422).json("Can't Approve Or Disapprove..");
+        if (appData && appData.status === "2"){
+            const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+            const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
 
+            if (researchSignId === null) {
+                console.log("Error Occurred no sign id try again....");
+                return res.status(422).json("Error Occurred..");
+            }
 
-        const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
-        const applicationFolderId = await searchDriveFolder(applicationFolderName);
-        const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
-
-        if (researchSignId === null) {
-            conso
-            return res.status(422).json("Error Occurred..");
+            const researchSignLink = await createPublicUrl(researchSignId);
+            console.log(researchSignLink);
+            await AppData.findByIdAndUpdate(id, {
+                status: status,
+                grantEligibility: grantEligibility,
+                remarksResearch: remarksResearch,
+                researchSignLink: researchSignLink,
+                lastModified: userEmail,
+            });
+            return res.status(200).json("Updated..");
         }
+        else if(appDataSett.status === "2"){
+            const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
+            const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
+            if (researchSignId === null) {
+                return res.status(422).json("Error Occurred..");
+            }
+            
+            const researchSignLink = await createPublicUrl(researchSignId);
+            console.log(facultySignLink);
+            await AppDataSett.findByIdAndUpdate(id, {
+                lastModified: userEmail,
+                researchSignLink: researchSignLink,
+                status: status,
+            });
+            
+            return res.status(200).json("Updated..");
+        }
+        else return res.status(422).json("Can't Approve Or Disapprove..");
 
-        const researchSignLink = await createPublicUrl(researchSignId);
-        // console.log(researchSignLink);
-        await AppData.findByIdAndUpdate(id, {
-            status: status,
-            grantEligibility: grantEligibility,
-            remarksResearch: remarksResearch,
-            researchSignLink: researchSignLink,
-            lastModified: userEmail,
-        });
-        return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

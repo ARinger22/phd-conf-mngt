@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
 import { BASE_URL } from '../../requests/URL.js';
 import Upload from '../uploadSign/Upload.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function ResearchAction({ data }) {
+  const navigate = useNavigate();
 
   const [grant, setGrant] = useState();
   const [remarks, setRemarks] = useState();
@@ -80,6 +82,7 @@ export default function ResearchAction({ data }) {
 
     if (res.status === 200) {
       console.log("Successfull..")
+      navigate('/researchLogin/studentApplication');
     }
     else {
       window.alert("Error Occurred! Try Again..")

@@ -55,7 +55,7 @@ export default function FacultyAction({ user, data }) {
         })
         if (res.status === 200) {
             console.log("Successfull..")
-            navigate('/studentLogin/application');
+            navigate('/facultyLogin/studentApplication');
         }
         else {
             window.alert("Error Occurred! Try Again..")

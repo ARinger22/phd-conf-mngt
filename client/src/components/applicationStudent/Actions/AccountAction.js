@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
 import { BASE_URL } from '../../requests/URL.js';
 import Upload from '../uploadSign/Upload.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountAction({ user, data }) {
+    const navigate = useNavigate();
 
     const [grant, setGrant] = useState();
     const [payment, setPayment] = useState();
@@ -87,6 +89,7 @@ export default function AccountAction({ user, data }) {
 
         if (res.status === 200) {
             console.log("Successfull..")
+            navigate('/accountLogin/studentApplication');
         }
         else {
             window.alert("Error Occurred! Try Again..")

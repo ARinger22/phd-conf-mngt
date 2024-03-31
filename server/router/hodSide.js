@@ -89,29 +89,49 @@ router.post('/hodApproveOrDisapprove', async (req, res) => {
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
+        const appDataSett = await AppDataSett.findById(id);
 
-        if (appData.status !== "1")
-            return res.status(422).json("Can't Approve Or Disapprove..");
-
-
-        const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
-        const applicationFolderId = await searchDriveFolder(applicationFolderName);
-        const hodSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "hodSign.jpg");
-
-        if (hodSignId === null) {
-            console.log("Error");
-            return res.status(422).json("Error Occurred..");
+        if (appData && appData.status === "1"){
+            const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+            const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            const hodSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "hodSign.jpg");
+    
+            if (hodSignId === null) {
+                console.log("Error");
+                return res.status(422).json("Error Occurred..");
+            }
+    
+            const hodSignLink = await createPublicUrl(hodSignId);
+            console.log(hodSignLink);
+            await AppData.findByIdAndUpdate(id, {
+                lastModified: userEmail,
+                hodSignLink: hodSignLink,
+                status: status,
+            });
+            return res.status(200).json("Updated..");
         }
+        else if(appDataSett.status === "1"){
+            const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
+            const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            const hodSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "hodSign.jpg");
+            if (hodSignId === null) {
+                return res.status(422).json("Error Occurred..");
+            }
+            
+            const hodSignLink = await createPublicUrl(hodSignId);
+            console.log(hodSignLink);
+            await AppDataSett.findByIdAndUpdate(id, {
+                lastModified: userEmail,
+                hodSignLink: hodSignLink,
+                status: status,
+            });
+            
+            return res.status(200).json("Updated..");
+        }
+        else return res.status(422).json("Can't Approve Or Disapprove..");
+        
 
-        const hodSignLink = await createPublicUrl(hodSignId);
-        console.log(hodSignLink);
-        await AppData.findByIdAndUpdate(id, {
-            lastModified: userEmail,
-            hodSignLink: hodSignLink,
-            status: status,
-        });
 
-        return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });
