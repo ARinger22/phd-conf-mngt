@@ -90,6 +90,9 @@ export const StudentApplicationsPage =
 export const StudentSpecficApplication =
     <>
         <UpperNav />
-        <ViewApplication />
+        <div className='flex'>
+            <SideBar />
+            <ViewApplication />
+        </div>
         <Footer />
     </>

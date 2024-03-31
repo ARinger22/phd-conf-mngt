@@ -75,8 +75,8 @@ function App() {
           <Route path="formIndia" element={<StudentRoute Component={StudentFormIndia} />} />
           <Route path="formAbroad" element={<StudentRoute Component={StudentFormAbroad} />} />
           <Route path="profile" element={<StudentRoute Component={StudentProfile} />} />
-          <Route path="application" element={<StudentRoute Component={StudentApplicationsPage} />} />
-          <Route path="viewApplication" element={<StudentRoute Component={StudentSpecficApplication} />} />
+          <Route path="application" element={ <StudentRoute Component={StudentApplicationsPage} />} />
+          <Route path="viewApplication" element={ <StudentRoute Component={StudentSpecficApplication} />} />
           <Route path="formSettlement" element={<StudentRoute Component={StudentFormSettlement} />} />
 
         </Route>
@@ -106,7 +106,10 @@ function App() {
 
           <Route path='studentApplication' element={<>
             <UpperNav />
-            <ViewApplicationFaculty />
+            <div className='flex'>
+              <SideBar />
+              <ViewApplicationFaculty />
+            </div>
             <Footer />
           </>} />
         </Route>
@@ -135,7 +138,10 @@ function App() {
 
           <Route path='studentApplication' element={<>
             <UpperNav />
-            <ViewApplicationHod />
+            <div className='flex'>
+              <SideBar />
+              <ViewApplicationHod />
+            </div>
             <Footer />
           </>} />
         </Route>
@@ -187,7 +193,10 @@ function App() {
           <Route path="studentApplication" element={
             <div className="min-h-screen w-full relative">
               <UpperNav />
-              <ViewApplicationResearch />
+              <div className='flex'>
+                <SideBar />
+                <ViewApplicationResearch />
+              </div>
               <Footer />
             </div>} />
         </Route>
@@ -220,7 +229,10 @@ function App() {
           <Route path="studentApplication" element={
             <div className="min-h-screen w-full relative">
               <UpperNav />
-              <ViewApplicationAccount />
+              <div className='flex'>
+                <SideBar />
+                <ViewApplicationAccount />
+              </div>
               <Footer />
             </div>} />
         </Route>
@@ -250,7 +262,10 @@ function App() {
 
           <Route path='studentApplication' element={<>
             <UpperNav />
-            <ViewApplicationDean />
+            <div className='flex'>
+              <SideBar />
+              <ViewApplicationDean />
+            </div>
             <Footer />
           </>} />
         </Route>
