@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 // importing Components
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
@@ -73,7 +74,30 @@ function FormInput() {
             [name]: value
         }));
     });
-
+    const showErrorToast = (message) => {
+        toast.error(message, {
+            // position: toast.POSITION.TOP_CENTER
+        });
+    };
+    function isValidEmail(email) {
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    function isValidDateRange(startDate, endDate) {
+        // Convert string dates to Date objects
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+    
+        // Perform date comparison
+        return start <= end;
+    }
+    // Function to check if file type is valid
+    function isValidFile(file) {
+        // Define allowed file types
+        const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        return allowedFileTypes.includes(file.type);
+    }
     const getConferenceInfo = ((e) => {
 
         const { name, value } = e.target;
@@ -91,7 +115,7 @@ function FormInput() {
     const addRowData = (e) => {
         e.preventDefault();
         if (!rowData.particular || !rowData.amount) {
-            window.alert("Fill all the fields!");
+            showErrorToast("Fill all the fields!");
             return;
         }
         const newTableData = [...tableData]
@@ -111,12 +135,15 @@ function FormInput() {
 
     const checkData = () => {
         if (!checkConfDetails(conferenceInfo)) {
-            window.alert('Please fill conference Details properly.');
+            showErrorToast('Please fill conference Details properly.');
             return false;
         }
         const fin = checkFinances(travel, food, stay, tableData);
+        console.log("((((((((((((((((");
+        console.log(fin);
         if (fin === "0") {
-            window.alert("Your Expenses Sum is zero. please review the form.");
+            
+            showErrorToast("Your Expenses Sum is zero. please review the form.");
             return false;
         }
         return true;
@@ -154,6 +181,74 @@ function FormInput() {
 
         return finances;
     }
+    function checknData(finances) {
+        if (!isValidEmail(generalInfo.email)) {
+            showErrorToast('Please enter a valid email');
+            return false;
+        }
+    
+        if (!generalInfo.entryNo) {
+            showErrorToast('Please enter an entry number');
+            return false;
+        }
+    
+        const mobileRegex = /^[0-9]{10}$/;
+        if (!generalInfo.mobileNo || !mobileRegex.test(generalInfo.mobileNo)) {
+            showErrorToast('Please enter a valid 10-digit mobile number');
+            return false;
+        }
+    
+        const ifscRegex = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
+        if (!generalInfo.ifsc || !ifscRegex.test(generalInfo.ifsc)) {
+            showErrorToast('Please enter a valid IFSC code');
+            return false;
+        }
+    
+        const accountNoRegex = /^[0-9]{9,18}$/;
+        if (!generalInfo.accountNo || !accountNoRegex.test(generalInfo.accountNo)) {
+            showErrorToast('Please enter a valid bank account number (9-18 digits)');
+            return false;
+        }
+        if (finances.every(item => item.amount === 0)) {
+            showErrorToast('Please enter some amount');
+            return false;
+        }
+        return true;
+    }
+
+    function checkEnclosures(enclosures) {
+        const fileChecks = [
+            { file: enclosures.copyOfAcceptance, fieldName: 'copyOfAcceptance' },
+            { file: enclosures.copyOfAbstract, fieldName: 'copyOfAbstract' },
+            { file: enclosures.copyOfConferenceBrochure, fieldName: 'copyOfConferenceBrochure' }
+        ];
+    
+        for (const { file, fieldName } of fileChecks) {
+            if (!file) {
+                showErrorToast(`Please include ${fieldName}`);
+                return false;
+            } else if (!isValidFile(file)) {
+                showErrorToast(`Invalid file type for ${fieldName}`);
+                return false;
+            }
+        }
+    
+        return true;
+    }
+    function checkConfAndLeaveTime(start, end, leaveStart, leaveEnd) {
+        if (!isValidDateRange(start, end)) {
+            showErrorToast('Conference start date should be before or same as the end date');
+            return false;
+        }
+    
+        if (!isValidDateRange(leaveStart, leaveEnd)) {
+            showErrorToast('Student leave start date should be before or same as the end date');
+            return false;
+        }
+    
+        return true;
+    }
+
 
     const requestGrant = async (e) => {
         e.preventDefault();
@@ -161,8 +256,16 @@ function FormInput() {
         if (freezeButton === true)
             return;
 
+        const finances = finalFinances();
         setFreezeButton(true);
-
+        if (!checkData() || !checknData(finances) ||
+            !checkConferenceTime(dateStarts, dateEnds) ||
+            !checkLeaveTime(leaveStarts, leaveEnds) ||
+            !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds) ||
+            !checkEnclosures(enclosures)) {
+            setFreezeButton(false);
+            return;
+        }
         // save all data
         const formData = new FormData();
 
@@ -188,9 +291,9 @@ function FormInput() {
         formData.append("advances", advance);
         formData.append("numberOfDays", conferenceInfo.numberOfDays);
 
-        const finances = finalFinances();
+        
         formData.append("finances", JSON.stringify(finances));
-
+        
         formData.append("coaa", enclosures.copyOfAcceptance !== null && enclosures.copyOfAcceptance !== undefined);
         formData.append("coaba", enclosures.copyOfAbstract !== null && enclosures.copyOfAbstract !== undefined);
         formData.append("cocba", enclosures.copyOfConferenceBrochure !== null && enclosures.copyOfConferenceBrochure !== undefined);
@@ -202,16 +305,7 @@ function FormInput() {
 
         // console.log(enclosures);
 
-        // checking all data entered
-        if (!checkData() ||
-            !checkConferenceTime(dateStarts, dateEnds) ||
-            !checkLeaveTime(leaveStarts, leaveEnds) ||
-            !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)
-            || !checkEnclosures(enclosures)) {
-                setFreezeButton(false);
-            return;
-        }
-
+        
         // request to server to save application data
         const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
             method: "POST",

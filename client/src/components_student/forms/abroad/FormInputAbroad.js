@@ -294,6 +294,93 @@ export default function FormInputAbroad() {
             setFreezeButton(false);
             return;
         }
+        if (enclosures.letterOfInvitation) {
+            if (isValidFile(enclosures.letterOfInvitation)) {
+            } else {
+                showErrorToast('Invalid file type for letterOfInvitation.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        
+        if (enclosures.copyOfAbstract) {
+            if (isValidFile(enclosures.copyOfAbstract)) {
+            } else {
+                showErrorToast('Invalid file type for copyOfAbstract.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        if (enclosures.conferenceBrochure) {
+            if (isValidFile(enclosures.conferenceBrochure)) {
+            } else {
+                showErrorToast('Invalid file type for conferenceBrochure.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        if (enclosures.acceptanceOfPaper) {
+            if (isValidFile(enclosures.acceptanceOfPaper)) {
+            } else {
+                showErrorToast('Invalid file type for acceptanceOfPaper.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        if (enclosures.accomodationCost) {
+            if (isValidFile(enclosures.accomodationCost)) {
+            } else {
+                showErrorToast('Invalid file type for accomodationCost.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        if (enclosures.invitationLetter) {
+            if (isValidFile(enclosures.invitationLetter)) {
+            } else {
+                showErrorToast('Invalid file type for invitationLetter.');
+                setFreezeButton(false);
+                return;
+            }
+        }
+        else{
+            showErrorToast('Please include all files');
+            setFreezeButton(false);
+            return;
+        }
+        function isValidFile(file) {
+            const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+            return (file instanceof File && isValidFileType(file.type, allowedFileTypes));
+        }
+        
+        function isValidFileType(fileType, allowedFileTypes) {
+            return allowedFileTypes.includes(fileType);
+        }
         const formData = new FormData();
 
         formData.append("email", generalInfo.email);
