@@ -53,10 +53,17 @@ import {
 } from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
 import ResearchHere from './components/sidePages/ResearchHere';
+
+import { ToastContainer } from 'react-toastify';
+
 function App() {
 
   return (
     <>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+      />
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginN />} />
@@ -111,7 +118,7 @@ function App() {
                 <SideBar />
               </div>
               <div style={{ flex: 1, width: '100%' }}>
-              <HodHome />
+                <HodHome />
               </div>
             </div>
             <Footer />
@@ -142,13 +149,13 @@ function App() {
                 
               </div> */}
               <div className='flex h-full'>
-              <div className='bg-dark-purple'>
-                <SideBar />
+                <div className='bg-dark-purple'>
+                  <SideBar />
+                </div>
+                <div style={{ flex: 1, width: '100%' }}>
+                  <ResearchHome />
+                </div>
               </div>
-              <div style={{ flex: 1, width: '100%' }}>
-              <ResearchHome />
-              </div>
-            </div>
               <Footer />
             </>} />
           <Route path="application" element={
@@ -191,13 +198,13 @@ function App() {
             <>
               <UpperNav />
               <div className='flex h-full'>
-              <div className='bg-dark-purple'>
-                <SideBar />
+                <div className='bg-dark-purple'>
+                  <SideBar />
+                </div>
+                <div style={{ flex: 1, width: '100%' }}>
+                  <AccountHome />
+                </div>
               </div>
-              <div style={{ flex: 1, width: '100%' }}>
-              <AccountHome />
-              </div>
-            </div>
               <Footer />
             </>} />
           <Route path="application" element={
@@ -226,7 +233,7 @@ function App() {
                 <SideBar />
               </div>
               <div style={{ flex: 1, width: '100%' }}>
-              <DeanHome />
+                <DeanHome />
               </div>
             </div>
             <Footer />
