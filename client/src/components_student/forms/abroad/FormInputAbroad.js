@@ -8,9 +8,10 @@ import { toast } from 'react-toastify';
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormInputAbroad() {
-
+    const navigate = useNavigate();
 
     const [freezeButton, setFreezeButton] = useState(false);
 
@@ -179,12 +180,14 @@ export default function FormInputAbroad() {
 
         if (!generalInfo.email || !generalInfo.email.includes('@') || !generalInfo.email.includes('.')) {
             showErrorToast('Please enter a valid email');
+            setFreezeButton(false);
             return;
         }
 
 
         if (!generalInfo.entryNo) {
             showErrorToast('Please enter an entry number');
+            setFreezeButton(false);
             return;
         }
 
@@ -192,6 +195,7 @@ export default function FormInputAbroad() {
         const mobileRegex = /^[0-9]{10}$/;
         if (!generalInfo.mobileNo || !mobileRegex.test(generalInfo.mobileNo)) {
             showErrorToast('Please enter a valid 10-digit mobile number');
+            setFreezeButton(false);
             return;
         }
 
@@ -199,79 +203,95 @@ export default function FormInputAbroad() {
         const ifscRegex = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
         if (!generalInfo.ifsc || !ifscRegex.test(generalInfo.ifsc)) {
             showErrorToast('Please enter a valid IFSC code');
+            setFreezeButton(false);
             return;
         }
+        console.log("Requesting Grant : ", generalInfo);
 
 
         const accountNoRegex = /^[0-9]{9,18}$/;
         if (!generalInfo.accountNo || !accountNoRegex.test(generalInfo.accountNo)) {
             showErrorToast('Please enter a valid bank account number (9-18 digits)');
+            setFreezeButton(false);
             return;
         }
 
 
         if (!conferenceInfo.nameOfConference) {
             showErrorToast('Please enter the name of the conference');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.venueOfConference) {
             showErrorToast('Please enter the venue of the conference');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.nameOfSociety) {
             showErrorToast('Please enter the name of the society');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.societyRecognized) {
             showErrorToast('Please specify if the society is recognized');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.reasonToAttend) {
             showErrorToast('Please provide a reason to attend the conference');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.paperInConference) {
             showErrorToast('Please specify if you have a paper in the conference');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.fundingSources) {
             showErrorToast('Please specify your funding sources');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.purposeOfVisit) {
             showErrorToast('Please specify the purpose of your visit');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.justification) {
             showErrorToast('Please provide justification');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.sponsorship) {
             showErrorToast('Please specify if you have sponsorship');
+            setFreezeButton(false);
             return;
         }
 
         if (!conferenceInfo.financialSupport) {
             showErrorToast('Please specify if you have financial support');
+            setFreezeButton(false);
             return;
         }
 
         if (dayjs(dateStarts).isAfter(dayjs(dateEnds))) {
             showErrorToast('Conference start date should be before or same as the end date');
+            setFreezeButton(false);
             return;
         }
 
         if (dayjs(leaveStarts).isAfter(dayjs(leaveEnds))) {
             showErrorToast('Student leave start date should be before or same as the end date');
+            setFreezeButton(false);
             return;
         }
         const formData = new FormData();
@@ -331,9 +351,18 @@ export default function FormInputAbroad() {
         if (resp.status === 200) {
             console.log("Success");
             setFreezeButton(false);
+            exitForm(e);
         }
         else {
             window.alert("Error");
+        }
+
+    }
+
+    function exitForm(e) {
+        e.preventDefault();
+        if (!freezeButton) {
+            navigate('/studentLogin/application');
         }
 
     }
