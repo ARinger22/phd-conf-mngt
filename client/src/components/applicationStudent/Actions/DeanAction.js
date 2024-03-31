@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
 import { BASE_URL } from '../../requests/URL.js';
 import Upload from '../uploadSign/Upload.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function DeanAction({ user, data }) {
+    const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
     const [action, setAction] = useState("Take Action");
@@ -55,6 +57,7 @@ export default function DeanAction({ user, data }) {
         })
         if (res.status === 200) {
             console.log("Successfull..")
+            navigate('/deanLogin/studentApplication');
         }
         else {
             window.alert("Error Occurred! Try Again..")

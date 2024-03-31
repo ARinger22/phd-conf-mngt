@@ -169,6 +169,8 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
                 facultySignLink: facultySignLink,
                 status: status,
             });
+            
+            return res.status(200).json("Updated..");
         }
         else return res.status(422).json("Can't Approve Or Disapprove..");
 
