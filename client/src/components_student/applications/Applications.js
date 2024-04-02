@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { getUserToken, setAppToken } from '../../components_login/Tokens';
-import { Container } from '@mui/material';
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderCard from '../../components/loading/LoaderCard';
-import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
-
 
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,13 +15,6 @@ function Application() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // const filteredData = Object.keys(data1).reduce((acc, key) => {
-  //   if (data1[key].name.toLowerCase().includes(searchQuery.toLowerCase())) {
-  //     acc[key] = data1[key];
-  //   }
-  //   return acc;
-  // }, {});
-
   function handleSearchInputChange(event) {
     setSearchQuery(event.target.value);
   }
@@ -33,6 +24,7 @@ function Application() {
     { label: 'Name', content: 'Applications are being displayed based on Name of the conference.' },
     { label: 'Place', content: 'Applications are being displayed based on Place of the conference.' },
   ];
+
   function handleTabClick(index) {
     setActiveTabIndex(index);
     if (index === 0) {
@@ -47,19 +39,19 @@ function Application() {
     }
   }
   // unsorted
-  const handleChange = () => {
-    console.log("clicked")
-    if (st === 1) {
-      // sorted
-      setSt(2);
-    }
-    else {
-      setSt(1);
-    }
-    console.log(apps);
-    apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-    console.log(apps);
-  }
+  // const handleChange = () => {
+  //   console.log("clicked")
+  //   if (st === 1) {
+  //     // sorted
+  //     setSt(2);
+  //   }
+  //   else {
+  //     setSt(1);
+  //   }
+  //   console.log(apps);
+  //   apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+  //   console.log(apps);
+  // }
 
   const getBasicInfo = async () => {
     try {
@@ -72,24 +64,24 @@ function Application() {
         },
       });
       const data = await resp.json();
-      console.log("data");
-      console.log(data);
-      const { data: data1, data2 } = data;
-      setApps(data1);
-      setApps2(data2);
+      setApps(data.data);
+      setApps2(data.data2);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    getBasicInfo().then(() => {
-      apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-      setIsLoading(false);
-    }).catch((e) => {
-      console.log(e.message)
-    });
+    getBasicInfo();
   }, []);
+  //   getBasicInfo().then(() => {
+  //     apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+  //     setIsLoading(false);
+  //   }).catch((e) => {
+  //     console.log(e.message)
+  //   });
+  // }, []);
 
   const getStatus = (code) => {
     if (code === "0")
@@ -161,86 +153,44 @@ function Application() {
     }
 
   }
+  // const renderApplications = (applications) => {
+  //   return (
+  //     <table>
+  //       <thead>
+  //         <tr>
+  //           <th>Status</th>
+  //           <th>Conference Name</th>
+  //           <th>Amount Needed</th>
+  //           <th>Venue</th>
+  //           <th>Action</th>
+  //           <th>Submission Date</th>
+  //         </tr>
+  //       </thead>
+  //       <tbody>
+  //         {applications.map((item, index) => (
+  //           <tr key={index}>
+  //             <td>{getStatus(item.status)}</td>
+  //             <td>{item.nameOfConference}</td>
+  //             <td>{getFinances(item.finances)} Rs</td>
+  //             <td>{item.venueOfConference}</td>
+  //             <td>
+  //               <button
+  //                 name={item._id}
+  //                 onClick={viewSpecficApplication}
+  //               >
+  //                 View Full Application
+  //               </button>
+  //             </td>
+  //             <td>{getDays(item.createdAt)}</td>
+  //           </tr>
+  //         ))}
+  //       </tbody>
+  //     </table>
+  //   );
+  // }
 
-  const renderApps1 = apps && apps.map((item, index) =>
-    <>
-      <div key={index}>
-        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
-            {getStatus(item.status)}
-          </div>
-          <div className="p-4">
-            <h5
-              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-              {item.nameOfConference}
-            </h5>
-
-
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Amount Needed: {getFinances(item.finances)} Rs
-            </p>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Venue: {item.venueOfConference}
-            </p>
-          </div>
-          <button
-            name={item._id}
-            onClick={viewSpecficApplication}
-            className="rounded-md bg-dark-purple px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
-          >
-            View Full Application
-          </button>
-          <div
-            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getDays(item.createdAt)} ({item.type === 0 ? "National" : "International"})
-          </div>
-        </div>
-
-      </div>
-
-      <br />
-    </>
-  );
-  const renderApps2 = apps2 && apps2.map((item, index) =>
-    <>
-      <div key={index}>
-        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
-            {getStatus(item.status)}
-          </div>
-          <div className="p-4">
-            <h5
-              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-              Settlement form
-            </h5>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Amount Needed: {getFinances(item.finances)} Rs
-            </p>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Department: {item.department}
-            </p>
-          </div>
-          <button
-            name={item._id}
-            onClick={viewSpecficApplication}
-            className="rounded-md bg-dark-purple px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple"
-          >
-            Vew Full Application
-          </button>
-          <div
-            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getDays(item.createdAt)}
-          </div>
-        </div>
-
-      </div>
-
-      <br />
-    </>
-  );
 
   return (
-
     <>
       <br />
       {isLoading ?
@@ -249,7 +199,6 @@ function Application() {
         </Container>
         :
         <Container>
-          {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
           <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
@@ -259,7 +208,7 @@ function Application() {
               {tabs.map((tab, index) => (
                 <button
                   key={tab.label}
-                  className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
                     }`}
                   onClick={() => handleTabClick(index)}
                 >
@@ -268,23 +217,81 @@ function Application() {
               ))}
             </div>
           </div>
-          <div className="p-2">
-          </div>
-          {/* </div> */}
+          <div className="p-2"></div>
           <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
-          <div className="my-3 flex flex-wrap justify-center gap-4">
-            {apps && renderApps1}
-          </div>
+          <TableContainer component={Paper} className="my-3">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Amount Needed</TableCell>
+                  <TableCell>Venue</TableCell>
+                  <TableCell>Action</TableCell>
+                  <TableCell>Submission Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {apps.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{getStatus(item.status)}</TableCell>
+                    <TableCell>{item.nameOfConference}</TableCell>
+                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                    <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={viewSpecficApplication}
+                        name={item._id}
+                      >
+                        View Full Application
+                      </Button>
+                    </TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
           <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Settlement Forms</div>
-          <div className="my-3 flex flex-wrap justify-center gap-4">
-            {apps2 && renderApps2}
-          </div>
+          <TableContainer component={Paper} className="my-3">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Amount Needed</TableCell>
+                  <TableCell>Venue</TableCell>
+                  <TableCell>Action</TableCell>
+                  <TableCell>Submission Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {apps2.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{getStatus(item.status)}</TableCell>
+                    <TableCell>{item.nameOfConference}</TableCell>
+                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                    <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={viewSpecficApplication}
+                        name={item._id}
+                      >
+                        View Full Application
+                      </Button>
+                    </TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Container>
       }
-
-
     </>
   )
 }
 
-export default Application
+export default Application;
