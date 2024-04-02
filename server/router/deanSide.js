@@ -19,7 +19,7 @@ const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 router.post('/deanApproveOrDisapprove', async (req, res) => {
-    var { id, status, image } = req.body;
+    var { id, status, image, approve_date, approve_time} = req.body;
 
     try {
 
@@ -59,6 +59,8 @@ router.post('/deanApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 deanSignLink: deanSignLink,
                 status: status,
+                dean_approve_date: approve_date,
+                dean_approve_time : approve_time,
             });
 
             return res.status(200).json("Updated..");
@@ -77,6 +79,8 @@ router.post('/deanApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 deanSignLink: deanSignLink,
                 status: status,
+                dean_approve_date: approve_date,
+                dean_approve_time : approve_time,
             });
             
             return res.status(200).json("Updated..");
