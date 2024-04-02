@@ -54,6 +54,7 @@ function Application() {
   // }
 
   const getBasicInfo = async () => {
+    const status = 2;
     try {
       const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
@@ -62,6 +63,7 @@ function Application() {
           "Content-Type": "application/json",
           "authorization": `Bearer ${token}`
         },
+        body: JSON.stringify({ status: status })
       });
       const data = await resp.json();
       setApps(data.data);
