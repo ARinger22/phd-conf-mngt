@@ -261,9 +261,9 @@ function Application() {
               <TableHead>
                 <TableRow>
                   <TableCell>Status</TableCell>
-                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Department</TableCell>
                   <TableCell>Amount Needed</TableCell>
-                  <TableCell>Venue</TableCell>
+                  <TableCell>Mobile Number</TableCell>
                   <TableCell>Action</TableCell>
                   <TableCell>Submission Date</TableCell>
                 </TableRow>
@@ -272,9 +272,9 @@ function Application() {
                 {apps2.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell>{getStatus(item.status)}</TableCell>
-                    <TableCell>{item.nameOfConference}</TableCell>
+                    <TableCell>{item.department}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
-                    <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>{item.mobileNo}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"

@@ -171,6 +171,7 @@ function App() {
                 <SideBar />
                 <ResearchApplication />
               </div>
+              <Footer />
             </>} />
           <Route path="student" element={
             <>
