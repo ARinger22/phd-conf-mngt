@@ -272,9 +272,9 @@ function Application() {
                 {apps2.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell>{getStatus(item.status)}</TableCell>
-                    <TableCell>{item.nameOfConference}</TableCell>
+                    <TableCell>{item.department}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
-                    <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>{item.mobileNo}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
