@@ -113,7 +113,7 @@ router.post('/studentInfoFaculty', async (req, res) => {
 
 // Approve or Disapprove Logic
 router.post('/facultyApproveOrDisapprove', async (req, res) => {
-    var { id, status, image } = req.body;
+    var { id, status, image, approve_date, approve_time} = req.body;
 
     try {
 
@@ -137,9 +137,11 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
         const appDataSett = await AppDataSett.findById(id);
         if (appData && appData.status === "0"){
             const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+            console.log(applicationFolderName)
             const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            console.log(applicationFolderId)
             const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
-            
+            console.log("facultysignid", facultySignId)
             if (facultySignId === null) {
                 return res.status(422).json("Error Occurred..");
             }
@@ -150,6 +152,8 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 facultySignLink: facultySignLink,
                 status: status,
+                faculty_approve_date: approve_date,
+                faculty_approve_time : approve_time,
             });
             
             return res.status(200).json("Updated..");
@@ -168,6 +172,8 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 facultySignLink: facultySignLink,
                 status: status,
+                faculty_approve_date: approve_date,
+                faculty_approve_time : approve_time,
             });
             
             return res.status(200).json("Updated..");
