@@ -148,7 +148,7 @@ function Application() {
     const { name } = e.target;
     try {
       await createAppToken(name);
-      navigate('/studentLogin/viewApplication');
+      navigate('/hodLogin/studentApplication');
 
     } catch (error) {
       console.log(error);
