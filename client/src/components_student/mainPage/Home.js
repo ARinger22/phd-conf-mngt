@@ -55,10 +55,11 @@ function Home(props) {
 
                                     </div>
                                 </div>
-                                <ApplicationsHome />
+
                                 <div className="p-2">
                                 </div>
                             </div>
+                            <ApplicationsHome />
                         </div>
                         <div className="max-w-sm mx-auto">
                             <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">

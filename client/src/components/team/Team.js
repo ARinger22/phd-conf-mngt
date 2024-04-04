@@ -92,6 +92,79 @@ function Team() {
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                 src={adish}
+                alt="Simran Kaur"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Simran Kaur</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={yadwinder}
+                alt="Vanshika Dhamija"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Vanshika Dhamija</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={tanuj}
+                alt="Arpit Kumar Gautam"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Arpit Kumar Gautam</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={vinay}
+                alt="Arnav Kharbanda"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Arnav Kharbanda</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+            </div>
+          </div>
+          <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={adish}
                 alt="Adish Lodha"
                 loading="lazy"
                 width="640"
