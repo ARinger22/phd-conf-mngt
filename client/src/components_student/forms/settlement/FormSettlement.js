@@ -23,6 +23,7 @@ export default function InputData(props) {
   const [options, setOptions] = useState([]);
 
   const getBasicInfo = async (req, res) => {
+    const status = -1;
     try {
       const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
@@ -31,6 +32,7 @@ export default function InputData(props) {
           "Content-Type": "application/json",
           "authorization": `Bearer ${token}`
         },
+        body: JSON.stringify({ status: status })
       });
       const data = await resp.json();
       return data.data;

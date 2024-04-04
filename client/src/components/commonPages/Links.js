@@ -10,12 +10,12 @@ import img4 from './assets/img4.png';
 const images = [
   {
     url: img2,
-    title: 'Upcomming Conferences in India',
+    title: 'Upcoming Conferences in India',
     width: '40%',
   },
   {
     url: img3,
-    title: 'Upcomming Conferences Outside India',
+    title: 'Upcoming Conferences Outside India',
     width: '30%',
   },
   {

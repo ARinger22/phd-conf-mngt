@@ -436,24 +436,32 @@ router.post('/studentApplicationView', async (req, res) => {
     }
     //setting email from decode
     const email = decode.email;
-    console.log(email)
-    const status = "0";
+    const status = req.body.status;
     try {
         // const data = await AppData.find({ email: email, status: status});
-        // sorting acc to latest updated.. 
-        const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
-        const parentIds = data1.map(entry => entry._id.toString());
-
-        const data2 = await AppDataSett.aggregate([
-            {
-                $match: { parentId: { $in: parentIds } } 
-            },
-            {
-                $sort: { "updatedAt": -1 } 
-            }
-        ]).exec();
-        const data3 = { data: data1, data2: data2 };
-        return res.status(200).json(data3);
+        // sorting acc to latest updated..
+        if(status >= 0){ 
+            const data1 = await AppData.find({ status: status }).sort({ "updatedAt": -1 });
+            const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
+            return res.status(200).json(data3);
+        }
+        else if(status == -1){
+            const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
+            const parentIds = data1.map(entry => entry._id.toString());
+            const data2 = await AppDataSett.aggregate([
+                {
+                    $match: { parentId: { $in: parentIds } } 
+                },
+                {
+                    $sort: { "updatedAt": -1 } 
+                }
+            ]).exec();
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
+            return res.status(200).json(data3);
+        }
 
     } catch (error) {
         console.log(error);

@@ -1,74 +1,81 @@
 import React, { useState, useEffect } from 'react';
+import { getUserToken, setAppToken } from '../../components_login/Tokens';
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { removeAppToken, setAppToken, getUserToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
-import { Container } from '@mui/material';
-import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
-const data = [];
-
-export default function HodApplication() {
-
-  const navigate = useNavigate();
-
+function Application() {
   const [isLoading, setIsLoading] = useState(true);
-  const [apps, setApps] = useState(data);
-  const [apps2, setApps2] = useState(data);
+  const navigate = useNavigate();
+  const [apps, setApps] = useState([]);
+  const [apps2, setApps2] = useState([]);
+  const [st, setSt] = useState(1);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabIndex2, setActiveTabIndex2] = useState(0);
+  const [allData1, setAllData1] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  function handleSearchInputChange(event) {
+    setSearchQuery(event.target.value);
+  }
 
   const tabs = [
     { label: 'Time', content: 'Applications are being displayed based on Time of the conference.' },
-    { label: 'Entry No.', content: 'Applications are being displayed based on Entry No of the conference.' },
     { label: 'Name', content: 'Applications are being displayed based on Name of the conference.' },
+    { label: 'Place', content: 'Applications are being displayed based on Place of the conference.' },
   ];
+
   function handleTabClick(index) {
     setActiveTabIndex(index);
     if (index === 0) {
       apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
     }
     else if (index === 1) {
-      apps.sort((a, b) => a.email.localeCompare(b.email));
+      apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
     }
     else if (index === 2) {
       apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
     }
-    console.log(apps)
+  }
+  function handleTabClick2(index){
+    setActiveTabIndex2(index);
+    if (index === 0) {
+      apps2.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    }
+    else if (index === 1) {
+      apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+    }
+    else if (index === 2) {
+      apps2.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
+    }
   }
 
-  const getAppInfo = async (req, res) => {
+  const getBasicInfo = async () => {
+    const status = 1;
     try {
       const token = getUserToken();
-      const resp = await fetch(`${BASE_URL}/viewAllApplication`, {
-        method: "GET",
+      const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          "authorization": `Bearer ${token}`
         },
+        body: JSON.stringify({ status: status })
       });
       const data = await resp.json();
-      const { data: data1, data2 } = data;
-      setApps(data1);
-      setApps2(data2);
-      return data;
+      setApps(data.data);
+      setApps2(data.data2);
+      setAllData1(data.allData);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    getAppInfo().then((resp) => {
-      delay(100).then(() => {
-        //good
-        setIsLoading(false);
-      }).catch((error) => {
-        console.log(error);
-      })
-
-    }).catch((e) => {
-      console.log(e.message)
-    });
+    getBasicInfo();
   }, []);
 
   const getStatus = (code) => {
@@ -80,9 +87,12 @@ export default function HodApplication() {
       return "Pending Research Section Approval";
     else if (code === "3")
       return "Pending Account Section Approval";
+    else if (code === "4")
+      return "Pending Dean Approval";
     else
       return "Application Approved";
   }
+
   const getDays = (subDate) => {
     const today = new Date();
     const submitDate = new Date(subDate);
@@ -97,6 +107,7 @@ export default function HodApplication() {
       return (days + " Days ago");
 
   }
+
   const getFinances = (finance) => {
     var totalAmount = 0;
 
@@ -105,6 +116,7 @@ export default function HodApplication() {
     });
     return totalAmount;
   }
+
   const createAppToken = async (id) => {
     try {
       const aisehi = "abcd";
@@ -127,7 +139,6 @@ export default function HodApplication() {
   const viewSpecficApplication = async (e) => {
     e.preventDefault();
     const { name } = e.target;
-    removeAppToken();
     try {
       await createAppToken(name);
       navigate('/hodLogin/studentApplication');
@@ -138,82 +149,19 @@ export default function HodApplication() {
 
   }
 
-  const renderApps1 = apps && apps.map((item, index) =>
-    <>
-      <div key={index}>
-        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getStatus(item.status)}
-          </div>
-          <div className="p-4">
-            <h5
-              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-              {item.nameOfConference}
-            </h5>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Amount Needed: {getFinances(item.finances)} Rs
-            </p>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Submitted By: {item.email}
-            </p>
-          </div>
-          <button
-            name={item._id}
-            onClick={viewSpecficApplication}
-            className="rounded-md  px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue"
-          >
-            View Full Application
-          </button>
-          <div
-            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getDays(item.createdAt)}  ({item.type === 0 ? "National" : "International"})
-          </div>
-        </div>
+  const getVanue = (item)=> {
+    if(!allData1) return null;
+    const value = allData1.find(first => first._id === item.parentId);
+    if(value && value.venueOfConference) item.venueOfConference = value.venueOfConference;
+    return value ? value.venueOfConference : null;
+  };
 
-      </div>
-
-      <br />
-    </>
-  );
-
-  const renderApps2 = apps2 && apps2.map((item, index) =>
-    <>
-      <div key={index}>
-        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
-            {getStatus(item.status)}
-          </div>
-          <div className="p-4">
-            <h5
-              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-              Settlement form
-            </h5>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Amount Needed: {getFinances(item.finances)} Rs
-            </p>
-            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-              Department: {item.department}
-            </p>
-          </div>
-          <button
-            name={item._id}
-            onClick={viewSpecficApplication}
-            className="rounded-md  px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue"
-          >
-            Vew Full Application
-          </button>
-          <div
-            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getDays(item.createdAt)}
-          </div>
-        </div>
-
-      </div>
-
-      <br />
-    </>
-  );
-
+  const getName = (item)=> {
+    if(!allData1) return null;
+    const value = allData1.find(first => first._id === item.parentId);
+    if(value && value.nameOfConference) item.nameOfConference = value.nameOfConference;
+    return value ? value.nameOfConference : null;
+  };
   return (
     <>
       <br />
@@ -223,8 +171,7 @@ export default function HodApplication() {
         </Container>
         :
         <Container>
-          {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden"> */}
-          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
+          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-5">
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
               <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
@@ -233,7 +180,7 @@ export default function HodApplication() {
               {tabs.map((tab, index) => (
                 <button
                   key={tab.label}
-                  className={`mx-2 py-1 px-4 rounded-lg font-medium e ${index === activeTabIndex ? 'bg-dark-purple hover:text-teal-400 hover: bg-button-hover-blue text-white' : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
                     }`}
                   onClick={() => handleTabClick(index)}
                 >
@@ -242,20 +189,99 @@ export default function HodApplication() {
               ))}
             </div>
           </div>
-          <div className="p-2">
-          </div>
-          {/* </div> */}
+          <div className="p-2"></div>
           <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
-          <div className="my-3 flex flex-wrap justify-center gap-4">
-            {apps && renderApps1}
+          <TableContainer component={Paper} className="my-3">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Amount Needed</TableCell>
+                  <TableCell>Venue</TableCell>
+                  <TableCell>Action</TableCell>
+                  <TableCell>Submission Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {apps.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{getStatus(item.status)}</TableCell>
+                    <TableCell>{item.nameOfConference}</TableCell>
+                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                    <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={viewSpecficApplication}
+                        name={item._id}
+                      >
+                        View Full Application
+                      </Button>
+                    </TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-10">
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
+              <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+            </span>
+            <div className="flex">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.label}
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex2 ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                }`}
+                onClick={() => handleTabClick2(index)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Settlement Forms</div>
-          <div className="my-3 flex flex-wrap justify-center gap-4">
-            {apps2 && renderApps2}
-          </div>
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center mt-5'>Settlement Forms</div>
+          <TableContainer component={Paper} className="my-3">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Amount Needed</TableCell>
+                  <TableCell>Vanue</TableCell>
+                  <TableCell>Action</TableCell>
+                  <TableCell>Submission Date</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {apps2.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{getStatus(item.status)}</TableCell>
+                    <TableCell>{getName(item)}</TableCell>
+                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                    <TableCell>{getVanue(item)}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={viewSpecficApplication}
+                        name={item._id}
+                      >
+                        View Full Application
+                      </Button>
+                    </TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Container>
       }
     </>
   )
 }
 
+export default Application;

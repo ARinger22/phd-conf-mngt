@@ -3,6 +3,10 @@ import { getUserToken } from '../../../components_login/Tokens.js';
 import { BASE_URL } from '../../requests/URL.js';
 import Upload from '../uploadSign/Upload.js';
 import { useNavigate } from 'react-router-dom';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 export default function ResearchAction({ data }) {
   const navigate = useNavigate();
@@ -11,7 +15,8 @@ export default function ResearchAction({ data }) {
   const [remarks, setRemarks] = useState();
   const [disable, setDisable] = useState(false);
   const [action, setAction] = useState("Take Action");
-
+  const [dateTimeStarts, setDateTimeStarts] = useState(null);
+  const [approveTime, setApproveTime] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -58,6 +63,14 @@ export default function ResearchAction({ data }) {
 
     if (image === null || image === undefined) {
       window.alert("Please upload your signature");
+      setDisable(false)
+      setAction("Take Action");
+      return;
+    }
+
+    if (dateTimeStarts === null || approveTime === null) {
+      window.alert("Please set the date and time of approval");
+      setDisable(false)
       setAction("Take Action");
       return;
     }
@@ -69,7 +82,8 @@ export default function ResearchAction({ data }) {
     formData.append("grantEligibility", grant);
     formData.append("remarksResearch", remarks);
     formData.append("image", image);
-
+    formData.append("approve_date", dateTimeStarts);
+    formData.append("approve_time", approveTime)
     
     const res = await fetch(`${BASE_URL}/researchApproveOrDisapprove`, {
       method: "POST",
@@ -90,6 +104,13 @@ export default function ResearchAction({ data }) {
     setAction("Please Refresh the page..");
   }
 
+  const uploadDateTime = (dateTime) => {
+    setDateTimeStarts(dateTime);
+}
+
+const handleTimeChange = (newValue) => {
+    setApproveTime(newValue)
+}
 
   return (
     <>
@@ -103,10 +124,8 @@ export default function ResearchAction({ data }) {
         <>
           <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
             <div className="px-4 py-2 sm:px-6">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">Take Action</h3>
+              <h3 className="flex justify-center items-center font-bold text-2xl leading-6 text-gray-900">Take Action</h3>
             </div>
-
-
             <div className="border-t border-gray-200">
               <dl>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -159,21 +178,41 @@ export default function ResearchAction({ data }) {
                 </div>
 
 
-                <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Upload Signature</dt>
-
-
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowModal(true);
-                      }}
-                      className="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 gap-x-3 hover:bg-gray-100"
-                    >
-                      Upload Signature
-                    </button>
-                  </dd>
+                <div className="flex bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <dd className="flex flex-col justify-center items-center text-sm text-gray-900">
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setShowModal(true);
+                            }}
+                            className="flex items-center px-4 py-2 text-xl font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 hover:bg-blue-400  dark:text-gray-800 gap-x-3 rounded-lg"
+                        >
+                            Upload Signature
+                        </button>
+                    </dd>
+                    <div className='flex flex-col justify-center items-center'>
+                        <p className='m-3 flex'>Date and Time of Approval</p>
+                        <div className='flex'>
+                        <LocalizationProvider dateAdapter={AdapterDayjs} className="flex">
+                            <div style={{ width: '120px', marginRight: '10px' }}>
+                                <TimePicker
+                                    label="OnTime"
+                                    name="timeofApproval"
+                                    value={approveTime}
+                                    onChange={handleTimeChange}
+                                />
+                            </div>
+                            <div style={{ width: '200px', marginRight: '10px' }}>
+                                <DatePicker
+                                    label="OnDate"
+                                    name="dateofApprival"
+                                    value={dateTimeStarts}
+                                    onChange={uploadDateTime}
+                                />
+                            </div>
+                        </LocalizationProvider>
+                        </div>
+                    </div>
                 </div >
 
                 {image &&
