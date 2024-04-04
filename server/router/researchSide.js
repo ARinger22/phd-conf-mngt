@@ -61,8 +61,7 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
                 remarksResearch: remarksResearch,
                 researchSignLink: researchSignLink,
                 lastModified: userEmail,
-                research_approve_date: approve_date,
-                research_approve_time : approve_time,
+                researchSignTimestamp: new Date().toLocaleString(),
             });
             return res.status(200).json("Updated..");
         }
@@ -80,8 +79,7 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 researchSignLink: researchSignLink,
                 status: status,
-                research_approve_date: approve_date,
-                research_approve_time : approve_time,
+                researchSignTimestamp: new Date().toLocaleString(),
             });
             
             return res.status(200).json("Updated..");

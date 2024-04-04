@@ -111,6 +111,7 @@ const applicationData = new mongoose.Schema({
     },
 
 
+
     hodSignLink: {
         type: String,
     },
@@ -145,6 +146,22 @@ const applicationData = new mongoose.Schema({
 
 
     deanSignLink: {
+        type: String
+    },
+
+    facultySignTimestamp: {
+        type: String
+    },
+    hodSignTimestamp: {
+        type: String
+    },
+    researchSignTimestamp: {
+        type: String
+    },
+    accountSignTimestamp: {
+        type: String
+    },
+    deanSignTimestamp: {
         type: String
     },
 

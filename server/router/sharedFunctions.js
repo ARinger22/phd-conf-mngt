@@ -286,7 +286,7 @@ router.post('/viewAnApplication', async (req, res) => {
 
                 return res.status(200).json({ data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
             }
-        }
+        } 
         else {
             console.log("UO");
             console.log(dataSettlement);

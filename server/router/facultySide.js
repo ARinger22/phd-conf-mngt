@@ -113,7 +113,7 @@ router.post('/studentInfoFaculty', async (req, res) => {
 
 // Approve or Disapprove Logic
 router.post('/facultyApproveOrDisapprove', async (req, res) => {
-    var { id, status, image, approve_date, approve_time} = req.body;
+    var { id, status, image} = req.body;
 
     try {
 
@@ -152,8 +152,7 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 facultySignLink: facultySignLink,
                 status: status,
-                faculty_approve_date: approve_date,
-                faculty_approve_time : approve_time,
+                facultySignTimestamp: new Date().toLocaleString(),
             });
             
             return res.status(200).json("Updated..");
@@ -172,8 +171,7 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 facultySignLink: facultySignLink,
                 status: status,
-                faculty_approve_date: approve_date,
-                faculty_approve_time : approve_time,
+                facultySignTimestamp: new Date().toLocaleString(),
             });
             
             return res.status(200).json("Updated..");

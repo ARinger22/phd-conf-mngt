@@ -14,8 +14,6 @@ export default function FacultyAction({ user, data }) {
     const [disable, setDisable] = useState(false);
     const [action, setAction] = useState("Take Action");
     const [showModal, setShowModal] = useState(false);
-    const [dateTimeStarts, setDateTimeStarts] = useState(null);
-    const [approveTime, setApproveTime] = useState(null);
     const [image, setImage] = useState(null);
     const handleDisapprove = (e) => {
         e.preventDefault();
@@ -45,20 +43,11 @@ export default function FacultyAction({ user, data }) {
             return;
         }
 
-        if (dateTimeStarts === null || approveTime === null) {
-            window.alert("Please set the date and time of approval");
-            setDisable(false)
-            setAction("Take Action");
-            return;
-        }
-
         const token = getUserToken();
         const formData = new FormData();
         formData.append("id", data._id);
         formData.append("status", status);
         formData.append("image", image);
-        formData.append("approve_date", dateTimeStarts);
-        formData.append("approve_time", approveTime)
 
         const res = await fetch(`${BASE_URL}/facultyApproveOrDisapprove`, {
             method: "POST",
@@ -75,14 +64,6 @@ export default function FacultyAction({ user, data }) {
             window.alert("Error Occurred! Try Again..")
         }
         setAction("Please Refresh the page..");
-    }
-
-    const uploadDateTime = (dateTime) => {
-        setDateTimeStarts(dateTime);
-    }
-
-    const handleTimeChange = (newValue) => {
-        setApproveTime(newValue)
     }
 
     return (
@@ -113,29 +94,6 @@ export default function FacultyAction({ user, data }) {
                                             Upload Signature
                                         </button>
                                     </dd>
-                                    <div className='flex flex-col justify-center items-center'>
-                                        <p className='m-3 flex'>Date and Time of Approval</p>
-                                        <div className='flex'>
-                                        <LocalizationProvider dateAdapter={AdapterDayjs} className="flex">
-                                            <div style={{ width: '120px', marginRight: '10px' }}>
-                                                <TimePicker
-                                                    label="OnTime"
-                                                    name="timeofApproval"
-                                                    value={approveTime}
-                                                    onChange={handleTimeChange}
-                                                />
-                                            </div>
-                                            <div style={{ width: '200px', marginRight: '10px' }}>
-                                                <DatePicker
-                                                    label="OnDate"
-                                                    name="dateofApprival"
-                                                    value={dateTimeStarts}
-                                                    onChange={uploadDateTime}
-                                                />
-                                            </div>
-                                        </LocalizationProvider>
-                                        </div>
-                                    </div>
                                 </div >
 
                                 {image &&

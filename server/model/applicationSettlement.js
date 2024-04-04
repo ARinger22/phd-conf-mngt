@@ -124,6 +124,22 @@ const applicationData = new mongoose.Schema(
     image: {
       type: String,
     },
+
+    facultySignTimestamp: {
+      type: String
+    },
+    hodSignTimestamp: {
+      type: String
+    },
+    researchSignTimestamp: {
+      type: String
+    },
+    accountSignTimestamp: {
+      type: String
+    },
+    deanSignTimestamp: {
+      type: String
+    },
   },
   {
     timestamps: true,

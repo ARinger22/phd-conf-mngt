@@ -107,7 +107,7 @@ export default function ApplicationMainPage({ role, goBack }) {
                                         {data?.nameOfConference}
                                     </h2>
                                     <h2 className='text-xl text-gray-500'>
-                                        Application for conference in {data?.type === 0 ? "India" : "Abroad"}
+                                        {data?.type === 1 ? "Application for conference in Abroad" : ( data?.type === 0 ? "Application for conference in Abroad" : "Settlement Form")}
                                     </h2>
                                 </div>
                                 <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
