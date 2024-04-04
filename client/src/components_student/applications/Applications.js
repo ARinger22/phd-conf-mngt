@@ -183,14 +183,12 @@ function Application() {
         body: JSON.stringify({ id: name })
       });
       const data = await resp.json();
-      if (data.status === 200) {
-        alert("Application Withdrawn Successfully. Please Refresh the Page to see the changes.");
-        getBasicInfo();
-      }
-      else {
-        alert("Application Withdrawal Failed");
-      }
+      console.log(data);
+      console.log(data.status)
+      alert("Application Withdrawn Successfully. Please Refresh the Page to see the changes.");
+      getBasicInfo();
     } catch (error) {
+      alert("Application Withdrawal Failed");
       console.log(error);
     }
   }
