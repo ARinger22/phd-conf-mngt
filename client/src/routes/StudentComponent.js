@@ -11,6 +11,7 @@ import Applications from '../components_student/applications/Applications';
 import ViewApplication from '../components_student/applications/ViewApplication';
 import Footer from '../components_student/Side/Footer'
 import FormSettlementData from '../components_student/forms/settlement/FormSettlementData';
+import Archive from '../components_student/archive/Archive';
 
 
 export const StudentHomePage =
@@ -93,6 +94,17 @@ export const StudentSpecficApplication =
         <div className='flex'>
             <SideBar />
             <ViewApplication />
+        </div>
+        <Footer />
+    </>
+
+
+export const StudentArchive =
+    <>
+        <UpperNav />
+        <div className='flex'>
+            <SideBar />
+            <Archive />
         </div>
         <Footer />
     </>

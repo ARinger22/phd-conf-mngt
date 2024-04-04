@@ -468,6 +468,64 @@ router.post('/studentApplicationView', async (req, res) => {
     }
 })
 
+
+router.post('/studentApplicationViewArchive', async (req, res) => {
+
+    console.log("Student Application View Archive..");
+    // bearer header 'Bearer token'
+    const bearerHeader = await req.headers["authorization"];
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+    // verfiy the token
+    var decode
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+    //setting email from decode
+    const email = decode.email;
+    const status = req.body.status;
+    console.log("Status: " + status);
+    try {
+        // const data = await AppData.find({ email: email, status: status});
+        // sorting acc to latest updated..
+        if(status >= 0){ 
+            const data1 = await AppData.find({ status: status, isarchived: true }).sort({ "updatedAt": -1 });
+            console.log("Data1: " + data1);
+            const data2 = await AppDataSett.find({ status: status, isarchived: true }).sort({ "updatedAt": -1 });
+            const allData = await AppData.find({ isarchived: true }).sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
+            return res.status(200).json(data3);
+        }
+        else if(status == -1){
+            const data1 = await AppData.find({ email: email, isarchived: true }).sort({ "updatedAt": -1 });
+            console.log("Data1: " + data1); 
+            const parentIds = data1.map(entry => entry._id.toString());
+            const data2 = await AppDataSett.aggregate([
+                {
+                    $match: { parentId: { $in: parentIds }, isarchived: true } 
+                },
+                {
+                    $sort: { "updatedAt": -1 } 
+                }
+            ]).exec();
+            const allData = await AppData.find({ isarchived: true }).sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
+            return res.status(200).json(data3);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 //creating application token for viewing..
 router.post('/createApplicationToken', async (req, res) => {
 
