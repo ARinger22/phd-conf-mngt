@@ -13,6 +13,8 @@ function Application() {
   const [apps2, setApps2] = useState([]);
   const [st, setSt] = useState(1);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabIndex2, setActiveTabIndex2] = useState(0);
+  const [allData1, setAllData1] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   function handleSearchInputChange(event) {
@@ -38,20 +40,18 @@ function Application() {
       apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
     }
   }
-  // unsorted
-  // const handleChange = () => {
-  //   console.log("clicked")
-  //   if (st === 1) {
-  //     // sorted
-  //     setSt(2);
-  //   }
-  //   else {
-  //     setSt(1);
-  //   }
-  //   console.log(apps);
-  //   apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-  //   console.log(apps);
-  // }
+  function handleTabClick2(index){
+    setActiveTabIndex2(index);
+    if (index === 0) {
+      apps2.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    }
+    else if (index === 1) {
+      apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+    }
+    else if (index === 2) {
+      apps2.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
+    }
+  }
 
   const getBasicInfo = async () => {
     const status = 3;
@@ -68,6 +68,7 @@ function Application() {
       const data = await resp.json();
       setApps(data.data);
       setApps2(data.data2);
+      setAllData1(data.allData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -77,13 +78,6 @@ function Application() {
   useEffect(() => {
     getBasicInfo();
   }, []);
-  //   getBasicInfo().then(() => {
-  //     apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-  //     setIsLoading(false);
-  //   }).catch((e) => {
-  //     console.log(e.message)
-  //   });
-  // }, []);
 
   const getStatus = (code) => {
     if (code === "0")
@@ -153,45 +147,20 @@ function Application() {
     } catch (error) {
       console.log(error);
     }
-
   }
-  // const renderApplications = (applications) => {
-  //   return (
-  //     <table>
-  //       <thead>
-  //         <tr>
-  //           <th>Status</th>
-  //           <th>Conference Name</th>
-  //           <th>Amount Needed</th>
-  //           <th>Venue</th>
-  //           <th>Action</th>
-  //           <th>Submission Date</th>
-  //         </tr>
-  //       </thead>
-  //       <tbody>
-  //         {applications.map((item, index) => (
-  //           <tr key={index}>
-  //             <td>{getStatus(item.status)}</td>
-  //             <td>{item.nameOfConference}</td>
-  //             <td>{getFinances(item.finances)} Rs</td>
-  //             <td>{item.venueOfConference}</td>
-  //             <td>
-  //               <button
-  //                 name={item._id}
-  //                 onClick={viewSpecficApplication}
-  //               >
-  //                 View Full Application
-  //               </button>
-  //             </td>
-  //             <td>{getDays(item.createdAt)}</td>
-  //           </tr>
-  //         ))}
-  //       </tbody>
-  //     </table>
-  //   );
-  // }
+  const getVanue = (item)=> {
+    if(!allData1) return null;
+    const value = allData1.find(first => first._id === item.parentId);
+    if(value && value.venueOfConference) item.venueOfConference = value.venueOfConference;
+    return value ? value.venueOfConference : null;
+  };
 
-
+  const getName = (item)=> {
+    if(!allData1) return null;
+    const value = allData1.find(first => first._id === item.parentId);
+    if(value && value.nameOfConference) item.nameOfConference = value.nameOfConference;
+    return value ? value.nameOfConference : null;
+  };
   return (
     <>
       <br />
@@ -201,7 +170,7 @@ function Application() {
         </Container>
         :
         <Container>
-          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md">
+          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-5">
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
               <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
@@ -255,15 +224,33 @@ function Application() {
               </TableBody>
             </Table>
           </TableContainer>
-          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Settlement Forms</div>
+          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-10">
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
+              <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+            </span>
+            <div className="flex">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.label}
+                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex2 ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                }`}
+                onClick={() => handleTabClick2(index)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className='flex font-bold text-3xl text-black-800 items-center justify-center mt-5'>Settlement Forms</div>
           <TableContainer component={Paper} className="my-3">
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>Status</TableCell>
-                  <TableCell>Department</TableCell>
+                  <TableCell>Conference Name</TableCell>
                   <TableCell>Amount Needed</TableCell>
-                  <TableCell>Mobile Number</TableCell>
+                  <TableCell>Vanue</TableCell>
                   <TableCell>Action</TableCell>
                   <TableCell>Submission Date</TableCell>
                 </TableRow>
@@ -272,9 +259,9 @@ function Application() {
                 {apps2.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell>{getStatus(item.status)}</TableCell>
-                    <TableCell>{item.department}</TableCell>
+                    <TableCell>{getName(item)}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
-                    <TableCell>{item.mobileNo}</TableCell>
+                    <TableCell>{getVanue(item)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"

@@ -443,7 +443,8 @@ router.post('/studentApplicationView', async (req, res) => {
         if(status >= 0){ 
             const data1 = await AppData.find({ status: status }).sort({ "updatedAt": -1 });
             const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
-            const data3 = { data: data1, data2: data2 };
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
         else if(status == -1){
@@ -457,7 +458,8 @@ router.post('/studentApplicationView', async (req, res) => {
                     $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
-            const data3 = { data: data1, data2: data2 };
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
 
