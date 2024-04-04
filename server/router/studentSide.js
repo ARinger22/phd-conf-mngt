@@ -417,6 +417,8 @@ module.exports = router;
 
 // apps view
 router.post('/studentApplicationView', async (req, res) => {
+
+    console.log("Student Application View..");
     // bearer header 'Bearer token'
     const bearerHeader = await req.headers["authorization"];
     if (!bearerHeader) {
@@ -436,13 +438,16 @@ router.post('/studentApplicationView', async (req, res) => {
     }
     //setting email from decode
     const email = decode.email;
-    const status = req.body.status;
+    var status = req.body.status;
+    console.log("Status: " + status);
     try {
         // const data = await AppData.find({ email: email, status: status});
         // sorting acc to latest updated..
         if(status >= 0){ 
-            const data1 = await AppData.find({ status: status }).sort({ "updatedAt": -1 });
+            const data1 = await AppData.find({ email:email, status: status }).sort({ "updatedAt": -1 });
             const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
+
+
             const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
@@ -458,6 +463,15 @@ router.post('/studentApplicationView', async (req, res) => {
                     $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data1, data2: data2, allData: allData };
+            return res.status(200).json(data3);
+        }
+        else{
+            status = 0;
+            console.log("HEHEHEH")
+            const data1 = await AppData.find({email:email, status: status }).sort({ "updatedAt": -1 });
+            const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
             const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
