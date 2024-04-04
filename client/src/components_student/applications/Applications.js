@@ -80,15 +80,15 @@ function Application() {
 
   const getStatus = (code) => {
     if (code === "0")
-      return "Pending Faculty Approval";
+      return "Faculty";
     else if (code === "1")
-      return "Pending Hod Section Approval";
+      return "Hod Section";
     else if (code === "2")
-      return "Pending Research Section Approval";
+      return "Research Section";
     else if (code === "3")
-      return "Pending Account Section Approval";
+      return "Account Section";
     else if (code === "4")
-      return "Pending Dean Approval";
+      return "Dean";
     else
       return "Application Approved";
   }
@@ -99,8 +99,14 @@ function Application() {
 
     const days = Math.floor((today - submitDate) / (1000 * 3600 * 24));
 
-    if (days < 1)
-      return "Submitted Recently";
+    const hours = Math.floor((today - submitDate) / (1000 * 3600));
+
+    if (days < 1){
+      if (hours < 1)
+        return "Submitted Recently";
+      else
+        return (hours + " Hours ago");
+    }
     else if (days === 1)
       return ("1 Day Ago");
     else
@@ -163,6 +169,32 @@ function Application() {
     return value ? value.nameOfConference : null;
   };
 
+  const withdrawApplication = async (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    try {
+      const token = getUserToken();
+      const resp = await fetch(`${BASE_URL}/withdrawApplication`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ id: name })
+      });
+      const data = await resp.json();
+      if (data.status === 200) {
+        alert("Application Withdrawn Successfully. Please Refresh the Page to see the changes.");
+        getBasicInfo();
+      }
+      else {
+        alert("Application Withdrawal Failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <br />
@@ -196,12 +228,13 @@ function Application() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Conference Name</TableCell>
-                  <TableCell>Amount Needed</TableCell>
-                  <TableCell>Venue</TableCell>
-                  <TableCell>Action</TableCell>
-                  <TableCell>Submission Date</TableCell>
+                  <TableCell><b>Pending at</b></TableCell>
+                  <TableCell><b>Conference Name</b></TableCell>
+                  <TableCell><b>Amount Needed</b></TableCell>
+                  <TableCell><b>Venue</b></TableCell>
+                  <TableCell><b>Submission Date</b></TableCell>
+                  <TableCell><b>Action</b></TableCell>
+                  <TableCell><b>Withdraw</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -211,6 +244,7 @@ function Application() {
                     <TableCell>{item.nameOfConference}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
                     <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
@@ -220,7 +254,16 @@ function Application() {
                         View Full Application
                       </Button>
                     </TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={withdrawApplication}
+                        name={item._id}
+                        style={{ backgroundColor: 'red' }} 
+                      >
+                        Withdraw
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

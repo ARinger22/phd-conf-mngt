@@ -23,6 +23,10 @@ const applicationData = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isarchived: {
+      type: Boolean,
+      default: false
+    },
     empCode: {
       type: String,
       required: true,

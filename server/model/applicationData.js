@@ -12,6 +12,10 @@ const applicationData = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    isarchived: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: String,
         required: true

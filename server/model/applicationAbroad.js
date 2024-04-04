@@ -16,8 +16,10 @@ const applicationDataAbroad = new mongoose.Schema({
         type: String,
         required: true
     },
-
-
+    isarchived: {
+        type: Boolean,
+        default: false
+    },
     mobileNo: {
         type: String,
         required: true

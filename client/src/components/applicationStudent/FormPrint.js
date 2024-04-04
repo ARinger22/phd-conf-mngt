@@ -51,7 +51,7 @@ function FormPrint({ data, user }) {
           <Grid item xs={2}>
             <img
               src="https://scontent-del1-2.xx.fbcdn.net/v/t1.18169-9/17264253_1867054683517452_4318177070545308732_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=1LmE8QJEZloAX9D8hDW&_nc_ht=scontent-del1-2.xx&oh=00_AfCHBX4ZV0Mus_V0UPF9vKU-5y42esnQU0QQj0e8W4hqlQ&oe=6482F87B"
-              alt="your-image-alt-text"
+              // alt="your-image-alt-text"
             />
           </Grid>
           <Grid item xs={10}>
