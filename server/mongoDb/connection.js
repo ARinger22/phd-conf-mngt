@@ -7,10 +7,10 @@ const DB = process.env.MONGODB_CONNECTION_KEY
 mongoose.connect(DB).then( () => {
     console.log("Connection Success..");
 
-    // const AppData = require('../model/applicationData');
+    // const AppDataSett = require('../model/applicationSettlement');
     
     // // insert a new field in the database of all the documents
-    // AppData.updateMany({}, { $set: { isarchived: false } })
+    // AppDataSett.updateMany({}, { $set: { isarchived: false } })
     // .then((result) => {
     //     console.log("Updated..");
     // }).catch((err) => {

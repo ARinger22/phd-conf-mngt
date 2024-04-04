@@ -508,7 +508,42 @@ router.post('/withdrawApplication', async (req, res) => {
     // change isarchived to true
     try {
         const data = await AppData.updateOne({ _id: id }, { $set: { isarchived: true } });
-        console.log("Sexy Bitch 143");
+        return res.status(200).json({ message: "Application Withdrawn.." });
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: "Can't Withdraw Application.." });
+    }
+})
+
+
+
+//creating application token for viewing..
+router.post('/withdrawApplicationSettlement', async (req, res) => {
+
+    console.log("Withdraw Application..");
+    const bearerHeader = await req.headers["authorization"];
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+    // verfiy the token
+    var decode = null;
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+
+    const id = req.body.id;
+    console.log("Id: " + id);
+
+    // change isarchived to true
+    try {
+        const data = await AppDataSett.updateOne({ _id: id }, { $set: { isarchived: true } });
         return res.status(200).json({ message: "Application Withdrawn.." });
     } catch (error) {
         console.log(error);

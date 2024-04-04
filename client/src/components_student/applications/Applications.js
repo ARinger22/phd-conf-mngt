@@ -193,6 +193,31 @@ function Application() {
     }
   }
 
+
+  const withdrawApplicationSettlement = async (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    try {
+      const token = getUserToken();
+      const resp = await fetch(`${BASE_URL}/withdrawApplicationSettlement`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ id: name })
+      });
+      const data = await resp.json();
+      console.log(data);
+      console.log(data.status)
+      alert("Application Withdrawn Successfully. Please Refresh the Page to see the changes.");
+      getBasicInfo();
+    } catch (error) {
+      alert("Application Withdrawal Failed");
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <br />
@@ -289,13 +314,14 @@ function Application() {
           <TableContainer component={Paper} className="my-3">
             <Table>
               <TableHead>
-                <TableRow>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Conference Name</TableCell>
-                  <TableCell>Amount Needed</TableCell>
-                  <TableCell>Venue</TableCell>
-                  <TableCell>Action</TableCell>
-                  <TableCell>Submission Date</TableCell>
+              <TableRow>
+                  <TableCell><b>Pending at</b></TableCell>
+                  <TableCell><b>Conference Name</b></TableCell>
+                  <TableCell><b>Amount Needed</b></TableCell>
+                  <TableCell><b>Venue</b></TableCell>
+                  <TableCell><b>Submission Date</b></TableCell>
+                  <TableCell><b>Action</b></TableCell>
+                  <TableCell><b>Withdraw</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -305,6 +331,7 @@ function Application() {
                     <TableCell>{getName(item)}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
                     <TableCell>{getVanue(item)}</TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
@@ -314,7 +341,17 @@ function Application() {
                         View Full Application
                       </Button>
                     </TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        onClick={withdrawApplicationSettlement}
+                        name={item._id}
+                        style={{ backgroundColor: 'red' }} 
+                      >
+                        Withdraw
+                      </Button>
+                    </TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>
