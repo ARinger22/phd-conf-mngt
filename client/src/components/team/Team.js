@@ -5,6 +5,7 @@ import adish from './images/adish.jpg';
 import vinay from './images/vinay.jpg';
 import yadwinder from './images/yadwinder.jpeg';
 import tanuj from './images/tanuj.jpg';
+import arnav from './images/arnav.jpeg';
 import './Team.css';
 import { Link } from 'react-router-dom';
 import Footer from '../../components_student/Side/Footer';
@@ -145,7 +146,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={vinay}
+                src={arnav}
                 alt="Arnav Kharbanda"
                 loading="lazy"
                 width="640"
