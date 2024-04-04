@@ -15,7 +15,7 @@ export default function ResearchSection({ data }) {
         <>
             <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
                 <div className="px-4 py-2 sm:px-6">
-                    <h3 className="text-base font-semibold leading-6 text-gray-900">Research Section Review</h3>
+                    <h3 className="text-base font-semibold leading-6 text-gray-900">Research Section Review (Approved on {data.researchSignTimestamp})</h3>
                 </div>
                 <div className="border-t border-gray-200">
                     <dl>
@@ -26,7 +26,7 @@ export default function ResearchSection({ data }) {
                             </dd>
                         </div>
 
-                        <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        {/* <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">
                                 Earlier Sanctions
                             </dt>
@@ -51,7 +51,7 @@ export default function ResearchSection({ data }) {
                                                         </tr>
                                                     </thead>
                                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-
+                                                        TODO: Display earlier sanctions 
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -59,7 +59,7 @@ export default function ResearchSection({ data }) {
                                     </div>
                                 </div>
                             </dd>
-                        </div>
+                        </div> */}
 
                         <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Remarks</dt>
