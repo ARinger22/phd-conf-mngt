@@ -418,7 +418,6 @@ module.exports = router;
 // apps view
 router.post('/studentApplicationView', async (req, res) => {
 
-    console.log("Student Application View..");
     // bearer header 'Bearer token'
     const bearerHeader = await req.headers["authorization"];
     if (!bearerHeader) {
@@ -439,13 +438,12 @@ router.post('/studentApplicationView', async (req, res) => {
     //setting email from decode
     const email = decode.email;
     var status = req.body.status;
-    console.log("Status: " + status);
     try {
         // const data = await AppData.find({ email: email, status: status});
         // sorting acc to latest updated..
         if(status >= 0){ 
-            const data1 = await AppData.find({ email:email, status: status }).sort({ "updatedAt": -1 });
-            const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
+            const data1 = await AppData.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
+            const data2 = await AppDataSett.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
 
 
             const allData = await AppData.find().sort({ "updatedAt": -1 });
@@ -457,23 +455,15 @@ router.post('/studentApplicationView', async (req, res) => {
             const parentIds = data1.map(entry => entry._id.toString());
             const data2 = await AppDataSett.aggregate([
                 {
-                    $match: { parentId: { $in: parentIds } } 
+                    $match: { parentId: { $in: parentIds }, isarchived: {$eq: false}} 
                 },
                 {
                     $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
+            const data4 = await AppData.find({ email: email, isarchived: 0 }).sort({ "updatedAt": -1 });
             const allData = await AppData.find().sort({ "updatedAt": -1 });
-            const data3 = { data: data1, data2: data2, allData: allData };
-            return res.status(200).json(data3);
-        }
-        else{
-            status = 0;
-            console.log("HEHEHEH")
-            const data1 = await AppData.find({email:email, status: status }).sort({ "updatedAt": -1 });
-            const data2 = await AppDataSett.find({ status: status }).sort({ "updatedAt": -1 });
-            const allData = await AppData.find().sort({ "updatedAt": -1 });
-            const data3 = { data: data1, data2: data2, allData: allData };
+            const data3 = { data: data4, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
 
@@ -484,8 +474,6 @@ router.post('/studentApplicationView', async (req, res) => {
 
 
 router.post('/studentApplicationViewArchive', async (req, res) => {
-
-    console.log("Student Application View Archive..");
     // bearer header 'Bearer token'
     const bearerHeader = await req.headers["authorization"];
     if (!bearerHeader) {
@@ -506,21 +494,24 @@ router.post('/studentApplicationViewArchive', async (req, res) => {
     //setting email from decode
     const email = decode.email;
     const status = req.body.status;
-    console.log("Status: " + status);
     try {
-        // const data = await AppData.find({ email: email, status: status});
-        // sorting acc to latest updated..
         if(status >= 0){ 
-            const data1 = await AppData.find({ status: status, isarchived: true }).sort({ "updatedAt": -1 });
-            console.log("Data1: " + data1);
-            const data2 = await AppDataSett.find({ status: status, isarchived: true }).sort({ "updatedAt": -1 });
-            const allData = await AppData.find({ isarchived: true }).sort({ "updatedAt": -1 });
+            const data1 = await AppData.find({
+                $or: [
+                  { status: { $gt: status } },
+                ]
+              }).sort({ "updatedAt": -1 });
+            const data2 = await AppDataSett.find({
+                $or: [
+                  { status: { $gt: status } },
+                ]
+              }).sort({ "updatedAt": -1 });
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
         else if(status == -1){
-            const data1 = await AppData.find({ email: email, isarchived: true }).sort({ "updatedAt": -1 });
-            console.log("Data1: " + data1); 
+            const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
             const parentIds = data1.map(entry => entry._id.toString());
             const data2 = await AppDataSett.aggregate([
                 {
@@ -530,8 +521,9 @@ router.post('/studentApplicationViewArchive', async (req, res) => {
                     $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
-            const allData = await AppData.find({ isarchived: true }).sort({ "updatedAt": -1 });
-            const data3 = { data: data1, data2: data2, allData: allData };
+            const data4 = await AppData.find({ email: email, isarchived: true }).sort({ "updatedAt": -1 });
+            const allData = await AppData.find().sort({ "updatedAt": -1 });
+            const data3 = { data: data4, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
 
