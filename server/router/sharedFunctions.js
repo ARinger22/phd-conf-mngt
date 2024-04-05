@@ -41,13 +41,9 @@ router.post('/infoLoading', async (req, res) => {
         console.log(error);
         return res.status(422).json({ error: error });
     }
-
-
     //setting email and role from decode
     const role = decode.role;
     const email = decode.email;
-
-
     // fetching data from mongo
     try {
         const student = await User.findOne({ email: email });
@@ -64,14 +60,6 @@ router.post('/applicationPendingFaculty', async (req, res) => {
     try {
         const status = "0";
         const appData = await AppData.find({ status: status });
-
-        // Debug Purpose
-        // console.log(appData);
-        // console.log(typeof(appData));        // Object
-        // appData.forEach( (data) => {
-        //     console.log(data._id + "\t" + data.nameOfConference);
-        // })
-
         return res.status(200).json(appData);
     } catch (error) {
         console.log(error);
@@ -85,14 +73,6 @@ router.post('/applicationDisapprovedFaculty', async (req, res) => {
     try {
         const status = "-1";
         const appData = await AppData.find({ status: status });
-
-        // Debug Purpose
-        // console.log(appData);
-        // console.log(typeof(appData));        // Object
-        // appData.forEach( (data) => {
-        //     console.log(data._id + "\t" + data.nameOfConference);
-        // })
-
         return res.status(200).json(appData);
     } catch (error) {
         console.log(error);
@@ -106,14 +86,6 @@ router.post('/applicationApprovedFaculty', async (req, res) => {
     try {
         const status = "1";
         const appData = await AppData.find({ status: status });
-
-        // Debug Purpose
-        // console.log(appData);
-        // console.log(typeof(appData));        // Object
-        // appData.forEach( (data) => {
-        //     console.log(data._id + "\t" + data.nameOfConference);
-        // })
-
         return res.status(200).json(appData);
     } catch (error) {
         console.log(error);
@@ -127,14 +99,6 @@ router.post('/applicationApprovedResearch', async (req, res) => {
     try {
         const status = "2";
         const appData = await AppData.find({ status: status });
-
-        // Debug Purpose
-        // console.log(appData);
-        // console.log(typeof(appData));        // Object
-        // appData.forEach( (data) => {
-        //     console.log(data._id + "\t" + data.nameOfConference);
-        // })
-
         return res.status(200).json(appData);
     } catch (error) {
         console.log(error);
@@ -148,14 +112,6 @@ router.post('/applicationDisapprovedResearch', async (req, res) => {
     try {
         const status = "2";
         const appData = await AppData.find({ status: status });
-
-        // Debug Purpose
-        // console.log(appData);
-        // console.log(typeof(appData));        // Object
-        // appData.forEach( (data) => {
-        //     console.log(data._id + "\t" + data.nameOfConference);
-        // })
-
         return res.status(200).json(appData);
     } catch (error) {
         console.log(error);
@@ -245,28 +201,16 @@ router.post('/viewAnApplication', async (req, res) => {
             Email = data.email;
 
         }
-        console.log(Email, data?._doc?.email, dataSettlement?._doc?.email);
-        console.log(data);
-        console.log(dataSettlement);
         const user = await User.findOne({ email: Email });
-        console.log("USER");
-        console.log(user);
         if (data?.email != null) {
             if (data.type === 1) {
-                console.log("Id Bitch: ", id);
                 const dataAbroad = await AppDataAbroad.findById(id);
-
-                console.log("Data Bitch: ", dataAbroad);
-
                 const invitationLetterAdditonalUrl = await createPublicUrl(dataAbroad.invitationLetterAdditionalFileId);
                 const letterOfInvitationUrl = await createPublicUrl(dataAbroad.letterOfInvitationFileId);
                 const conferenceBrochureUrl = await createPublicUrl(dataAbroad.conferenceBrochureFileId);
                 const copyOfAbstractUrl = await createPublicUrl(dataAbroad.copyOfAbstractFileId);
                 const accomodationCostUrl = await createPublicUrl(dataAbroad.accomodationCostFileId);
                 const acceptanceOfPaperUrl = await createPublicUrl(dataAbroad.acceptanceOfPaperFileId)
-
-                console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
-
                 return res.status(200).json(
                     {
                         data: dataAbroad,
@@ -288,14 +232,7 @@ router.post('/viewAnApplication', async (req, res) => {
             }
         } 
         else {
-            console.log("UO");
-            console.log(dataSettlement);
-
             const parentId = dataSettlement._doc.parentId;
-
-            console.log(parentId);
-
-            // console.log("Id Bitch: ", id);
             const dataAbroad = await AppDataAbroad.findById(parentId);
             const dataIndia = await AppData.findById(parentId);
 
@@ -306,32 +243,11 @@ router.post('/viewAnApplication', async (req, res) => {
             else {
                 data = dataAbroad;
             }
-
             data.type = 3;
-            
-            console.log("DATA");
-            console.log(data);
-
             const combinedData = {
                 ...data._doc,
                 ...dataSettlement._doc
             }
-
-
-
-            // const data = await 
-
-            // console.log("Data Bitch: ", dataAbroad);
-
-            // const invitationLetterAdditonalUrl = await createPublicUrl(data._doc.invitationLetterAdditionalFileId);
-            // const letterOfInvitationUrl = await createPublicUrl(data._doc.letterOfInvitationFileId);
-            // const conferenceBrochureUrl = await createPublicUrl(data._doc.conferenceBrochureFileId);
-            // const copyOfAbstractUrl = await createPublicUrl(data._doc.copyOfAbstractFileId);
-            // const accomodationCostUrl = await createPublicUrl(data._doc.accomodationCostFileId);
-            // const acceptanceOfPaperUrl = await createPublicUrl(data._doc.acceptanceOfPaperFileId)
-
-            // console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
-
             return res.status(200).json(
                 {
                     data: combinedData,

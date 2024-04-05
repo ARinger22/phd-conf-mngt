@@ -345,6 +345,13 @@ export default function InputData(props) {
             <legend className="text-sm font-semibold leading-6 text-gray-900">Supporting Documents</legend>
             <div className="mt-6 space-y-6">
               <Enclosures
+                title="Signature"
+                name="signature"
+                onChangeFunction={props.fileFunction}
+                type="file"
+                acceptType="application/pdf"
+              />
+              <Enclosures
                 title="Letter of Invitation"
                 name="letterOfInvitation"
                 onChangeFunction={props.fileFunction}

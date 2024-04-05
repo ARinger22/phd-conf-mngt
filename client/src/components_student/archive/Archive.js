@@ -89,6 +89,8 @@ function Archive() {
       return "Account Section";
     else if (code === "4")
       return "Dean";
+    else if(code === "-1")
+      return "Application Rejected";
     else
       return "Application Approved";
   }

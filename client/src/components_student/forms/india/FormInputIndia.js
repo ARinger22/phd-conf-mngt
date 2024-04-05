@@ -43,6 +43,7 @@ function FormInput() {
     });
 
     const [enclosures, setEnclosures] = useState({
+        "signature": null,
         "copyOfAcceptance": null,
         "copyOfConferenceBrochure": null,
         "copyOfAbstract": null,
@@ -191,16 +192,17 @@ function FormInput() {
         const finances = finalFinances();
         formData.append("finances", JSON.stringify(finances));
 
+        formData.append("sign", enclosures.signature !== null && enclosures.signature !== undefined);
         formData.append("coaa", enclosures.copyOfAcceptance !== null && enclosures.copyOfAcceptance !== undefined);
         formData.append("coaba", enclosures.copyOfAbstract !== null && enclosures.copyOfAbstract !== undefined);
         formData.append("cocba", enclosures.copyOfConferenceBrochure !== null && enclosures.copyOfConferenceBrochure !== undefined);
 
         //appending enclosures
+        formData.append("signature", enclosures.signature);
         formData.append("copyOfAcceptance", enclosures.copyOfAcceptance);
         formData.append("copyOfConferenceBrochure", enclosures.copyOfConferenceBrochure);
         formData.append("copyOfAbstract", enclosures.copyOfAbstract);
 
-        // console.log(enclosures);
 
         // checking all data entered
         if (!checkData() ||
