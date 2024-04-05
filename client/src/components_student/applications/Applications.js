@@ -251,13 +251,13 @@ function Application() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Pending at</TableCell>
-                  <TableCell>Conference Name</TableCell>
-                  <TableCell>Amount Needed</TableCell>
-                  <TableCell>Venue</TableCell>
-                  <TableCell>Submission Date</TableCell>
-                  <TableCell>Action</TableCell>
-                  <TableCell>Withdraw</TableCell>
+                  <TableCell><b>Pending at</b></TableCell>
+                  <TableCell><b>Conference Name</b></TableCell>
+                  <TableCell><b>Amount Needed</b></TableCell>
+                  <TableCell><b>Venue</b></TableCell>
+                  <TableCell><b>Submission Date</b></TableCell>
+                  <TableCell><b>Action</b></TableCell>
+                  <TableCell><b>Withdraw</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
