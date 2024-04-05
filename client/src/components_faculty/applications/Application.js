@@ -30,7 +30,6 @@ function Application() {
     setActiveTabIndex(index);
     if (index === 0) {
       apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
-      // apps2.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
     }
     else if (index === 1) {
       apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));

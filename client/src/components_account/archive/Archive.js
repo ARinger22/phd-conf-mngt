@@ -53,7 +53,7 @@ function Application() {
     }
 
     const getBasicInfo = async () => {
-        const status = 4;
+        const status = 3;
         try {
             const token = getUserToken();
             const resp = await fetch(`${BASE_URL}/studentApplicationViewArchive`, {

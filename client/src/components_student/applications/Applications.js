@@ -332,7 +332,6 @@ function Application() {
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
                     <TableCell>{getVanue(item)}</TableCell>
                     <TableCell>{getDays(item.createdAt)}</TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
