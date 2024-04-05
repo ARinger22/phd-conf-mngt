@@ -35,7 +35,6 @@ export default function ApplicationsHome() {
         else if (index === 2) {
             apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
         }
-        console.log(apps)
     }
 
     const getAppInfo = async (req, res) => {

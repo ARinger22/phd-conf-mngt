@@ -152,7 +152,13 @@ export default function InputData(props) {
                 <BsAsterisk className='text-[#FF0000] h-2' />
               </legend>
               <div className="mt-6 space-y-6">
-
+                <Enclosures
+                  title="Signature"
+                  onChangeFunction={props.fileFunction}
+                  name="signature"
+                  type="file"
+                  acceptType="application/pdf"
+                />
                 <Enclosures
                   title="Copy of Acceptance"
                   onChangeFunction={props.fileFunction}
