@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@google-cloud/local-auth": "^2.1.0",
+    "@google-cloud/local-auth": "^2.1.1",
     "@google-cloud/storage": "^6.9.5",
     "cloudinary": "^1.36.4",
     "cookie-session": "^2.0.0",

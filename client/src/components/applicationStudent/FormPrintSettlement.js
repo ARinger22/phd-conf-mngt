@@ -66,7 +66,7 @@ function FormPrintSettlement({ data, user }) {
                     <Grid item xs={2}>
                         <img
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUt2pRCk3SRqS-EyLO87iM7cmj2eZmPuE2pRBZ1uHPZg&s"
-                            // alt="your-image-alt-text"
+                        // alt="your-image-alt-text"
                         />
                     </Grid>
                     <Grid item xs={10}>
@@ -490,14 +490,14 @@ function FormPrintSettlement({ data, user }) {
 
                 <br></br>
 
-                
+
                 <Container>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
                                 <pre><b>Certified that</b></pre>
                                 <pre> All claims mentioned in this form correspond to actual expenditure incurred by me <br></br> for which no reimbursement/claims have been
-made from any other source (Govt./Private/Others)</pre>
+                                    made from any other source (Govt./Private/Others)</pre>
                                 <pre> I was not provided with any free boarding/lodging/conveyance/registration fee waiver/travel <br></br> coupons for which claim has been made.</pre>
                             </Grid>
                         </Grid>
@@ -536,19 +536,22 @@ made from any other source (Govt./Private/Others)</pre>
                             </Grid>
                         </Grid>
                         <br></br>
-                        <Grid className="py-2" container spacing={2}>
+                        <Grid className="py-2"
+                            container
+                            spacing={2}
+                            justifyContent="flex-end">
                             <Grid item xs={4}>
                                 <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                                 <pre><b>Signature of PhD Scholar</b></pre>
                             </Grid>
-                            <Grid item xs={4}>
+                            {/* <Grid item xs={4}>
                                 <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                                 <pre><b>Supervisor(s)</b></pre>
                             </Grid>
                             <Grid item xs={4}>
                                 <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
                                 <pre><b>Head of the Department</b></pre>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </div>
                 </Container>
@@ -584,7 +587,7 @@ made from any other source (Govt./Private/Others)</pre>
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
+                            {/* <Grid className="py-2" container spacing={2}>
                                 <Grid item xs={4}>
                                     <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                                     <pre><b>Dealing Assistant</b></pre>
@@ -597,6 +600,28 @@ made from any other source (Govt./Private/Others)</pre>
                                     <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                                     <pre><b>Assistant Registrar</b></pre>
                                 </Grid>
+                            </Grid> */}
+                            <Grid className="py-2 flex flex-col" container spacing={2}>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>JA/SA/Dealing Assistant</b>
+                                    </pre>
+                                    <pre></pre>
+                                </Grid>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>JS/Supdt.</b>{" "}
+                                    </pre>
+                                </Grid>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>Assistant registrar/DR/JR</b>
+                                    </pre>
+                                </Grid>
+                                <pre></pre>
                             </Grid>
                         </div>
                     </div>
@@ -638,18 +663,24 @@ made from any other source (Govt./Private/Others)</pre>
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
+                            <Grid className="py-2" container spacing={2} alignItems="center">
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Dealing Assistant</b></pre>
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                        <b>JA/Dealing Assistant </b>
+                                    </pre>
                                 </Grid>
+                                {/* <Grid item xs={4}>
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <b>Accounts Officer</b>
+                  </pre>
+                </Grid> */}
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Accounts Officer</b></pre>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Deputy Registrar</b></pre>
+                                    <pre >
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                        <b>AR/Deputy Registrar</b>
+                                    </pre>
                                 </Grid>
                             </Grid>
                         </div>
@@ -663,7 +694,7 @@ made from any other source (Govt./Private/Others)</pre>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
-                                <pre><b>Associate Dean (PG & Research)</b></pre>
+                                <pre><b>Associate Dean/Dean (PGS & Research)</b></pre>
                             </Grid>
                             <pre></pre>
                         </Grid>
@@ -681,10 +712,17 @@ made from any other source (Govt./Private/Others)</pre>
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
-                                <Grid item xs={12}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
-                                    <pre><b>Dealing Assistant</b></pre>
+                            <Grid
+                                className="py-2"
+                                container
+                                spacing={2}
+                                justifyContent="flex-end"
+                            >
+                                <Grid item>
+                                    <pre style={{ margin: 1 }}>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
+                                        <b>Associate Dean/Dean </b>
+                                    </pre>
                                 </Grid>
                             </Grid>
                         </div>
@@ -697,7 +735,7 @@ made from any other source (Govt./Private/Others)</pre>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
-                                <pre><b>Accounts Section for releasing of payment</b></pre>
+                                <pre><b>Accounts Section for releasing the payment</b></pre>
                             </Grid>
                             <pre></pre>
                         </Grid>
