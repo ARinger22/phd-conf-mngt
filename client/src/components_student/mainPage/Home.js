@@ -9,10 +9,60 @@ import { FaChartLine } from 'react-icons/fa';
 import FlexPage from '../../components/commonPages/FlexPage';
 import { BASE_URL } from '../../components/requests/URL';
 import { getUserToken } from '../../components_login/Tokens';
+import { Container } from '@mui/material';
+import LoaderCard from '../../components/loading/LoaderCard';
+import { FaPaperPlane } from 'react-icons/fa';
+import { delay } from '../../components/loading/Delay';
+
+
+const data = [];
 
 function Home(props) {
 
+
+    const [isLoading, setIsLoading] = useState(true);
     const [studentInfo, setStudentInfo] = useState({});
+    const [apps, setApps] = useState(data);
+
+
+    const getStatus = (code) => {
+        if (code === "0")
+            return "Pending Faculty Approval";
+        else if (code === "1")
+            return "Pending Hod Section Approval";
+        else if (code === "2")
+            return "Pending Research Section Approval";
+        else if (code === "3")
+            return "Pending Account Section Approval";
+        else if (code === "4")
+            return "Pending Dean Approval";
+        else
+            return "Application Approved";
+    }
+
+    const getDays = (subDate) => {
+        const today = new Date();
+        const submitDate = new Date(subDate);
+
+        const days = Math.floor((today - submitDate) / (1000 * 3600 * 24));
+
+        if (days < 1)
+            return "Submitted Recently";
+        else if (days === 1)
+            return ("1 Day Ago");
+        else
+            return (days + " Days ago");
+
+    }
+
+    const getFinances = (finance) => {
+        var totalAmount = 0;
+
+        finance.forEach(element => {
+            totalAmount = totalAmount + Number(element.amount);
+        });
+        return totalAmount;
+    }
 
     async function fetchUserInfo() {
         const response = await fetch(`${BASE_URL}/studentInfoLoading`, {
@@ -24,6 +74,44 @@ function Home(props) {
         })
         return response.json();
     }
+
+
+    const getBasicInfo = async (req, res) => {
+        try {
+            const token = getUserToken();
+            const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+            });
+            const data = await resp.json();
+            console.log("data");
+            console.log(data);
+            const { data: data1, data2 } = data;
+            setApps(data1[0]);
+            console.log("data1");
+            console.log(data1);
+
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getBasicInfo().then((resp) => {
+            console.log("yoo");
+
+            setIsLoading(false);
+
+
+        }).catch((e) => {
+            console.log(e.message)
+        });
+    }, []);
+
     useEffect(() => {
         fetchUserInfo().then((data) => {
             setStudentInfo(data);
@@ -55,10 +143,68 @@ function Home(props) {
 
                                     </div>
                                 </div>
-                                <ApplicationsHome />
+
                                 <div className="p-2">
                                 </div>
                             </div>
+
+
+                            <br />
+                            {isLoading ?
+                                <Container>
+                                    <LoaderCard />
+                                </Container>
+                                :
+                                <Container>
+                                    <div className="my-3 flex flex-wrap justify-center gap-4">
+                                        {
+                                            <>
+                                                <div>
+                                                    <section className="bg-white dark:bg-gray-900">
+                                                        <div className="">
+                                                            <h2 className="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">{apps.nameOfConference}</h2>
+                                                            <p className="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white"></p>
+                                                            <dl>
+                                                                <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">{getStatus(apps.status)}</dt>
+                                                                <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Venue: {apps.venueOfConference}</dd>
+                                                                <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Amount Needed: {getFinances(apps.finances)} Rs</dd>
+                                                            </dl>
+                                                            <dl className="flex items-center space-x-6">
+                                                                <div>
+                                                                    <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Submission status</dt>
+                                                                    <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{getDays(apps.createdAt)}</dd>
+                                                                </div>
+                                                                <div>
+                                                                    <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
+                                                                    <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">India</dd>
+                                                                </div>
+                                                            </dl>
+                                                            <div className="pb-4 flex items-center space-x-4">
+                                                                <button type="button" className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                                    <svg aria-hidden="true" className="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd"></path></svg>
+                                                                    Edit
+                                                                </button>
+                                                                {/* <button type="button" name={item._id}
+                                                                    onClick={viewSpecficApplication} className="inline-flex items-center text-white bg-dark-purple hover:bg-button-hover-blue hover:text-teal-400 focus:ring-4 focus:outline-none focus:ring-button-hover-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-button-hover-blue dark:hover:bg-button-hover-blue dark:focus:ring-button-hover-blue">
+                                                                    <FaPaperPlane style={{ marginRight: '0.5rem' }} />
+                                                                    View Full Application
+                                                                </button>  */}
+                                                            </div>
+                                                        </div>
+                                                    </section>
+
+                                                </div>
+
+                                                <br />
+
+                                            </>
+                                        }
+
+                                    </div>
+                                </Container>
+                            }
+
+                            {/* <ApplicationsHome /> */}
                         </div>
                         <div className="max-w-sm mx-auto">
                             <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">

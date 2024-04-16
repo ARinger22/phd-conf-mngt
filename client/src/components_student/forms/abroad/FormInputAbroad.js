@@ -418,6 +418,7 @@ export default function FormInputAbroad() {
         formData.append("flightDetails", JSON.stringify(flightDetails));
         formData.append("finances", JSON.stringify(finances));
 
+        formData.append("signature", enclosures.signature);
         formData.append("letterOfInvitation", enclosures.letterOfInvitation);
         formData.append("copyOfAbstract", enclosures.copyOfAbstract);
         formData.append("conferenceBrochure", enclosures.conferenceBrochure);

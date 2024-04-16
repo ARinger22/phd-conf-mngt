@@ -1,5 +1,5 @@
 # PhD Conference Grant Management 
-## DEP project by Team-12 
+## DEP project by T09
 ### Deployed At: <a href="http://172.30.2.244/"> Link </a>
 ### Project Web Page: <a href="https://sites.google.com/view/goyalpuneet/phd-conference-grants"> Link </a>
 
@@ -11,8 +11,13 @@
 - Tanuj Kumar - 2020CSB1134
 - Adish Lodha - 2020CSB1063
 
+- Simran Kaur - 2021CSB1134
+- Vanshika Dhamija - 2021CSB1138
+- Arpit Kumar Gautam - 2021CSB1073
+- Arnav Kharbanda - 2021CSB1072
+
 ## Mentor and Consultant
-- Dr. Punnet Goyal (IIT Ropar)
+- Dr. Puneet Goyal (IIT Ropar)
 
 ## Project Description
 The project stems from the need to simplify and streamline the grant application process. Currently, the offline process is time-consuming and cumbersome, making it difficult for both students and authorities to maintain and track the application data. 

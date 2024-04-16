@@ -33,7 +33,7 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
         const {
             id, status, image,
             grantUtilized, passedForPayment,
-            remarksAccount, approve_date, approve_time } = req.body;
+            remarksAccount} = req.body;
 
 
     try {
@@ -95,8 +95,7 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
                 remarksAccounts: remarksAccount,
                 accountSignLink: accountSignLink,
                 lastModified: userEmail,
-                account_approve_date: approve_date,
-                account_approve_time : approve_time,
+                accountSignTimestamp: new Date().toLocaleString(),
             });
             return res.status(200).json("Updated..");
         }
@@ -138,8 +137,7 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
                 remarksAccounts: remarksAccount,
                 accountSignLink: accountSignLink,
                 lastModified: userEmail,
-                account_approve_date: approve_date,
-                account_approve_time : approve_time,
+                accountSignTimestamp: new Date().toLocaleString(),
             });
             
             return res.status(200).json("Updated..");

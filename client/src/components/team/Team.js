@@ -5,6 +5,9 @@ import adish from './images/adish.jpg';
 import vinay from './images/vinay.jpg';
 import yadwinder from './images/yadwinder.jpeg';
 import tanuj from './images/tanuj.jpg';
+import arnav from './images/arnav.jpeg';
+import arpit from './images/arpit.jpeg';
+import vanshika from './images/vanshika.jpeg';
 import './Team.css';
 import { Link } from 'react-router-dom';
 import Footer from '../../components_student/Side/Footer';
@@ -87,6 +90,79 @@ function Team() {
           <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
             Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
           </p>
+          <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={adish}
+                alt="Simran Kaur"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Simran Kaur</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={vanshika}
+                alt="Vanshika Dhamija"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Vanshika Dhamija</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={arpit}
+                alt="Arpit Kumar Gautam"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Arpit Kumar Gautam</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+
+            </div>
+            <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
+              <img
+                className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                src={arnav}
+                alt="Arnav Kharbanda"
+                loading="lazy"
+                width="640"
+                height="805"
+              />
+              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
+                <div>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Arnav Kharbanda</h4>
+                  <span className="block text-sm text-gray-500">Member</span>
+                </div>
+                <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
+              </div>
+            </div>
+          </div>
           <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img

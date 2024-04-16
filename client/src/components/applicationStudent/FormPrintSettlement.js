@@ -66,7 +66,7 @@ function FormPrintSettlement({ data, user }) {
                     <Grid item xs={2}>
                         <img
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUt2pRCk3SRqS-EyLO87iM7cmj2eZmPuE2pRBZ1uHPZg&s"
-                            alt="your-image-alt-text"
+                            // alt="your-image-alt-text"
                         />
                     </Grid>
                     <Grid item xs={10}>

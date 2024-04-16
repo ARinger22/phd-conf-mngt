@@ -16,7 +16,7 @@ function DeanDetails({ user, data }) {
         <>
             <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
                 <div className="px-4 py-2 sm:px-6">
-                    <h3 className="text-base font-semibold leading-6 text-gray-900">Dean Review ({data.status === "5" ? "Approved" : "Rejected"})</h3>
+                    <h3 className="text-base font-semibold leading-6 text-gray-900">Dean Review ({data.status === "5" ? "Approved" : "Rejected"}) (Date: {data.deanSignTimestamp})</h3>
                 </div>
                 <div className="border-t border-gray-200">
                     <dl>

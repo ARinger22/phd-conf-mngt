@@ -16,8 +16,10 @@ const applicationDataAbroad = new mongoose.Schema({
         type: String,
         required: true
     },
-
-
+    isarchived: {
+        type: Boolean,
+        default: false
+    },
     mobileNo: {
         type: String,
         required: true
@@ -155,7 +157,23 @@ const applicationDataAbroad = new mongoose.Schema({
     },
     image: {
         type: String,
-    }
+    },
+
+    facultySignTimestamp: {
+        type: String
+    },
+    hodSignTimestamp: {
+        type: String
+    },
+    researchSignTimestamp: {
+        type: String
+    },
+    accountSignTimestamp: {
+        type: String
+    },
+    deanSignTimestamp: {
+        type: String
+    },
 },
     {
         timestamps: true

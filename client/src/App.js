@@ -17,11 +17,13 @@ import SideBar from './components/navBars/Sidebar';
 //                  Faculty Side Components
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
 import FacultyApplication from './components_faculty/applications/Application';
+import FacultyArchive from './components_faculty/archive/Archive';
 import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
 
 //                  HOD side Components
 import HodHome from './components_hod/mainPage/HodHome';
 import HodApplication from './components_hod/applications/Application';
+import HodArchive from './components_hod/archive/Archive';
 import ViewApplicationHod from './components_hod/applications/ViewApplication';
 
 //                  Research Section Components 
@@ -29,17 +31,20 @@ import ResearchHome from './components_research//mainPage/ResearchHome';
 import ResearchApplication from './components_research/applications/Application';
 import ResearchStudent from './components_research/users/ResearchStudent';
 import ResearchFaculty from './components_research/users/ResearchFaculty';
+import ResearchArchive from './components_research/archive/Archive';
 import ViewApplicationResearch from './components_research/applications/ViewApplication';
 
 
 //                Accounts Section Components
 import AccountHome from './components_account/mainPage/Home';
 import AccountApplication from './components_account/applications/Application';
+import AccountArchive from './components_account/archive/Archive';
 import ViewApplicationAccount from './components_account/applications/ViewApplication';
 
 //                Dean Components
 import DeanHome from './components_dean/mainPage/DeanHome';
 import DeanApplication from './components_dean/applications/Application';
+import DeanArchive from './components_dean/archive/Archive';
 import ViewApplicationDean from './components_dean/applications/ViewApplication';
 
 //                 User Guide
@@ -49,7 +54,8 @@ import {
   StudentFormAbroad, StudentFormIndia,
   StudentFormOption,
   StudentHomePage, StudentProfile,
-  StudentApplicationsPage, StudentSpecficApplication, StudentFormSettlement
+  StudentApplicationsPage, StudentSpecficApplication, StudentFormSettlement,
+  StudentArchive
 } from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
 import ResearchHere from './components/sidePages/ResearchHere';
@@ -78,7 +84,7 @@ function App() {
           <Route path="application" element={ <StudentRoute Component={StudentApplicationsPage} />} />
           <Route path="viewApplication" element={ <StudentRoute Component={StudentSpecficApplication} />} />
           <Route path="formSettlement" element={<StudentRoute Component={StudentFormSettlement} />} />
-
+          <Route path="archive" element={<StudentRoute Component={StudentArchive} />} />
         </Route>
 
         <Route path='/facultyLogin'>
@@ -100,6 +106,15 @@ function App() {
             <div className='flex'>
               <SideBar />
               <FacultyApplication />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='archive' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <FacultyArchive />
             </div>
             <Footer />
           </>} />
@@ -132,6 +147,15 @@ function App() {
             <div className='flex'>
               <SideBar />
               <HodApplication />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='archive' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <HodArchive />
             </div>
             <Footer />
           </>} />
@@ -173,6 +197,16 @@ function App() {
               </div>
               <Footer />
             </>} />
+
+            <Route path='archive' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <ResearchArchive />
+            </div>
+            <Footer />
+          </>} />
+          
           <Route path="student" element={
             <>
               <UpperNav />
@@ -227,6 +261,15 @@ function App() {
               <Footer />
             </>} />
 
+            <Route path='archive' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <AccountArchive />
+            </div>
+            <Footer />
+          </>} />
+
           <Route path="studentApplication" element={
             <div className="min-h-screen w-full relative">
               <UpperNav />
@@ -257,6 +300,15 @@ function App() {
             <div className='flex'>
               <SideBar />
               <DeanApplication />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='archive' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <DeanArchive />
             </div>
             <Footer />
           </>} />

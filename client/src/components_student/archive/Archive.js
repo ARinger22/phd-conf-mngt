@@ -6,7 +6,7 @@ import LoaderCard from '../../components/loading/LoaderCard';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
-function Application() {
+function Archive() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [apps, setApps] = useState([]);
@@ -14,8 +14,9 @@ function Application() {
   const [st, setSt] = useState(1);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeTabIndex2, setActiveTabIndex2] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
   const [allData1, setallData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   function handleSearchInputChange(event) {
     setSearchQuery(event.target.value);
   }
@@ -52,10 +53,10 @@ function Application() {
   }
 
   const getBasicInfo = async () => {
-    const status = 0;
+    const status = -1;
     try {
       const token = getUserToken();
-      const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
+      const resp = await fetch(`${BASE_URL}/studentApplicationViewArchive`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,15 +80,17 @@ function Application() {
 
   const getStatus = (code) => {
     if (code === "0")
-      return "Pending Faculty Approval";
+      return "Faculty";
     else if (code === "1")
-      return "Pending Hod Section Approval";
+      return "Hod Section";
     else if (code === "2")
-      return "Pending Research Section Approval";
+      return "Research Section";
     else if (code === "3")
-      return "Pending Account Section Approval";
+      return "Account Section";
     else if (code === "4")
-      return "Pending Dean Approval";
+      return "Dean";
+    else if(code === "-1")
+      return "Application Rejected";
     else
       return "Application Approved";
   }
@@ -98,8 +101,14 @@ function Application() {
 
     const days = Math.floor((today - submitDate) / (1000 * 3600 * 24));
 
-    if (days < 1)
-      return "Submitted Recently";
+    const hours = Math.floor((today - submitDate) / (1000 * 3600));
+
+    if (days < 1) {
+      if (hours < 1)
+        return "Submitted Recently";
+      else
+        return (hours + " Hours ago");
+    }
     else if (days === 1)
       return ("1 Day Ago");
     else
@@ -140,7 +149,7 @@ function Application() {
     const { name } = e.target;
     try {
       await createAppToken(name);
-      navigate('/facultyLogin/studentApplication');
+      navigate('/studentLogin/viewApplication');
 
     } catch (error) {
       console.log(error);
@@ -161,6 +170,7 @@ function Application() {
     if (value && value.nameOfConference) item.nameOfConference = value.nameOfConference;
     return value ? value.nameOfConference : null;
   };
+
 
   return (
     <>
@@ -195,12 +205,12 @@ function Application() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell><b>Status</b></TableCell>
-                  <TableCell><b>Conference Name</b></TableCell>
-                  <TableCell><b>Amount Needed</b></TableCell>
-                  <TableCell><b>Venue</b></TableCell>
-                  <TableCell><b>Action</b></TableCell>
-                  <TableCell><b>Submission Date</b></TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Conference Name</TableCell>
+                  <TableCell>Amount Needed</TableCell>
+                  <TableCell>Venue</TableCell>
+                  <TableCell>Submission Date</TableCell>
+                  <TableCell>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -210,6 +220,7 @@ function Application() {
                     <TableCell>{item.nameOfConference}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
                     <TableCell>{item.venueOfConference}</TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
@@ -219,7 +230,6 @@ function Application() {
                         View Full Application
                       </Button>
                     </TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -247,13 +257,13 @@ function Application() {
           <TableContainer component={Paper} className="my-3">
             <Table>
               <TableHead>
-                <TableRow>
+              <TableRow>
                   <TableCell><b>Status</b></TableCell>
                   <TableCell><b>Conference Name</b></TableCell>
                   <TableCell><b>Amount Needed</b></TableCell>
                   <TableCell><b>Venue</b></TableCell>
-                  <TableCell><b>Action</b></TableCell>
                   <TableCell><b>Submission Date</b></TableCell>
+                  <TableCell><b>Action</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -263,6 +273,8 @@ function Application() {
                     <TableCell>{getName(item)}</TableCell>
                     <TableCell>{getFinances(item.finances)} Rs</TableCell>
                     <TableCell>{getVanue(item)}</TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                    <TableCell>{getDays(item.createdAt)}</TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
@@ -271,8 +283,7 @@ function Application() {
                       >
                         View Full Application
                       </Button>
-                    </TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
+                    </TableCell>           
                   </TableRow>
                 ))}
               </TableBody>
@@ -284,4 +295,4 @@ function Application() {
   )
 }
 
-export default Application;
+export default Archive;

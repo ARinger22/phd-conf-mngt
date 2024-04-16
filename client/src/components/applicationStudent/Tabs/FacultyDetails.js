@@ -17,7 +17,7 @@ function FacultyDetails({ user, data }) {
         <>
             <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
                 <div className="px-4 py-2 sm:px-6">
-                    <h3 className="text-base font-semibold leading-6 text-gray-900">Supervisor Action (Approved)</h3>
+                    <h3 className="text-base font-semibold leading-6 text-gray-900">Supervisor Action (Approved on {data.facultySignTimestamp})</h3>
                 </div>
 
                 <div className="border-t border-gray-200">
@@ -39,7 +39,7 @@ function FacultyDetails({ user, data }) {
                 !(data.status === "1" || data.status === "0") &&
                 <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
                     <div className="px-4 py-2 sm:px-6">
-                        <h3 className="text-base font-semibold leading-6 text-gray-900">Hod Action (Approved)</h3>
+                        <h3 className="text-base font-semibold leading-6 text-gray-900">Hod Action (Approved on {data.hodSignTimestamp})</h3>
                     </div>
 
                     <div className="border-t border-gray-200">

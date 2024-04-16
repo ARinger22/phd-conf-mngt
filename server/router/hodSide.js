@@ -68,7 +68,7 @@ router.post('/viewHodApplications', async (req, res) => {
 })
 
 router.post('/hodApproveOrDisapprove', async (req, res) => {
-    var { id, status, image, approve_date, approve_time} = req.body;
+    var { id, status, image} = req.body;
 
     try {
 
@@ -107,8 +107,7 @@ router.post('/hodApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 hodSignLink: hodSignLink,
                 status: status,
-                hod_approve_date: approve_date,
-                hod_approve_time : approve_time,
+                hodSignTimestamp: new Date().toLocaleString(),
             });
             return res.status(200).json("Updated..");
         }
@@ -126,8 +125,7 @@ router.post('/hodApproveOrDisapprove', async (req, res) => {
                 lastModified: userEmail,
                 hodSignLink: hodSignLink,
                 status: status,
-                hod_approve_date: approve_date,
-                hod_approve_time : approve_time,
+                hodSignTimestamp: new Date().toLocaleString(),
             });
             
             return res.status(200).json("Updated..");

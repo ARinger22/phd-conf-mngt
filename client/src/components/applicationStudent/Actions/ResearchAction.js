@@ -15,8 +15,6 @@ export default function ResearchAction({ data }) {
   const [remarks, setRemarks] = useState();
   const [disable, setDisable] = useState(false);
   const [action, setAction] = useState("Take Action");
-  const [dateTimeStarts, setDateTimeStarts] = useState(null);
-  const [approveTime, setApproveTime] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -68,13 +66,6 @@ export default function ResearchAction({ data }) {
       return;
     }
 
-    if (dateTimeStarts === null || approveTime === null) {
-      window.alert("Please set the date and time of approval");
-      setDisable(false)
-      setAction("Take Action");
-      return;
-    }
-
     const token = getUserToken();
     const formData = new FormData();
     formData.append("id", data._id);
@@ -82,8 +73,6 @@ export default function ResearchAction({ data }) {
     formData.append("grantEligibility", grant);
     formData.append("remarksResearch", remarks);
     formData.append("image", image);
-    formData.append("approve_date", dateTimeStarts);
-    formData.append("approve_time", approveTime)
     
     const res = await fetch(`${BASE_URL}/researchApproveOrDisapprove`, {
       method: "POST",
@@ -104,13 +93,6 @@ export default function ResearchAction({ data }) {
     setAction("Please Refresh the page..");
   }
 
-  const uploadDateTime = (dateTime) => {
-    setDateTimeStarts(dateTime);
-}
-
-const handleTimeChange = (newValue) => {
-    setApproveTime(newValue)
-}
 
   return (
     <>
@@ -190,29 +172,7 @@ const handleTimeChange = (newValue) => {
                             Upload Signature
                         </button>
                     </dd>
-                    <div className='flex flex-col justify-center items-center'>
-                        <p className='m-3 flex'>Date and Time of Approval</p>
-                        <div className='flex'>
-                        <LocalizationProvider dateAdapter={AdapterDayjs} className="flex">
-                            <div style={{ width: '120px', marginRight: '10px' }}>
-                                <TimePicker
-                                    label="OnTime"
-                                    name="timeofApproval"
-                                    value={approveTime}
-                                    onChange={handleTimeChange}
-                                />
-                            </div>
-                            <div style={{ width: '200px', marginRight: '10px' }}>
-                                <DatePicker
-                                    label="OnDate"
-                                    name="dateofApprival"
-                                    value={dateTimeStarts}
-                                    onChange={uploadDateTime}
-                                />
-                            </div>
-                        </LocalizationProvider>
-                        </div>
-                    </div>
+                    
                 </div >
 
                 {image &&
