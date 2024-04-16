@@ -42,7 +42,7 @@ function FormPrintAbroad({ data, user }) {
                     <Grid item xs={2}>
                         <img
                             src="https://scontent-del1-2.xx.fbcdn.net/v/t1.18169-9/17264253_1867054683517452_4318177070545308732_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=1LmE8QJEZloAX9D8hDW&_nc_ht=scontent-del1-2.xx&oh=00_AfCHBX4ZV0Mus_V0UPF9vKU-5y42esnQU0QQj0e8W4hqlQ&oe=6482F87B"
-                            // alt="your-image-alt-text"
+                        // alt="your-image-alt-text"
                         />
                     </Grid>
                     <Grid item xs={10}>
@@ -156,8 +156,8 @@ function FormPrintAbroad({ data, user }) {
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
                                 <pre>1. Title of the conference/symposium: <b>{data?.nameOfConference} </b></pre>
-                                <pre>   Name of the society organizing the conference: <b>{data?.nameOfSociety}</b> </pre>
-                                <pre>   Is the conference organized by the recognized scientific society: <b>Yes</b> </pre>
+                                <pre>   Name of the society/school/workshop/conference/short term course etc organizing the conference: <b>{data?.nameOfSociety}</b> </pre>
+                                <pre>   Is the conference organized by the recognized scientific society/school/workshop/conference/short term course etc: <b>Yes</b> </pre>
                                 <br></br>
                                 <pre>   a. Venue              : <b>{data?.venueOfConference}</b></pre>
                                 <pre>   b. Period of the event: <b>{data?.conferenceStarts}</b> to <b>{data?.conferenceEnds}</b></pre>
@@ -190,12 +190,12 @@ function FormPrintAbroad({ data, user }) {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell style={{ fontSize: "16px" }}>
-                                            Sr. No.  
+                                            Sr. No.
                                             <b>{data?.flightDetails[0].serialNo}</b>
                                         </TableCell>
                                         <TableCell style={{ fontSize: "16px" }}>
                                             <p>Departure [Time/date]:  <b>{data?.flightDetails[0].destination} </b></p>
-                                            
+
                                         </TableCell>
                                         <TableCell style={{ fontSize: "data" }}>
                                             <p>Arrival: <b>{data?.flightDetails[0].arrival} </b></p>
@@ -389,19 +389,30 @@ function FormPrintAbroad({ data, user }) {
                             </Grid>
                         </Grid>
                         <br></br>
-                        <Grid className="py-2" container spacing={2}>
-                            <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
-                                <pre><b>Signature of PhD Scholar</b></pre>
+                        <Grid className="py-2"
+                            container
+                            spacing={2}
+                            justifyContent="flex-end">
+                            <Grid item className="flex-1">
+                                <pre>
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                                    <b>Signature of PhD Scholar</b>
+                                </pre>
+                                <pre></pre>
                             </Grid>
-                            <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
-                                <pre><b>Supervisor(s)</b></pre>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
-                                <pre><b>Head of the Department</b></pre>
-                            </Grid>
+                            {/* <Grid item className="flex-1">
+              <pre>
+                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                <b>Supervisors</b>{" "}
+              </pre>
+            </Grid> */}
+                            {/* <Grid item className="flex-1">
+              <pre>
+                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
+                <b>Head of the Department</b>
+              </pre>
+            </Grid> */}
+                            <pre></pre>
                         </Grid>
                     </div>
                 </Container>
@@ -437,19 +448,27 @@ function FormPrintAbroad({ data, user }) {
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
-                                <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
-                                    <pre><b>Dealing Assistant</b></pre>
+                            <Grid className="py-2 flex flex-col" container spacing={2}>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>JA/SA/Dealing Assistant</b>
+                                    </pre>
+                                    <pre></pre>
                                 </Grid>
-                                <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
-                                    <pre><b>Joint Assistant</b></pre>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>JS/Supdt.</b>{" "}
+                                    </pre>
                                 </Grid>
-                                <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
-                                    <pre><b>Assistant Registrar</b></pre>
+                                <Grid item className="flex-1">
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                        <b>Assistant registrar/DR/JR</b>
+                                    </pre>
                                 </Grid>
+                                <pre></pre>
                             </Grid>
                         </div>
                     </div>
@@ -491,20 +510,27 @@ function FormPrintAbroad({ data, user }) {
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
+                            <Grid className="py-2" container spacing={2} alignItems="center">
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Dealing Assistant</b></pre>
+                                    <pre>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                        <b>JA/Dealing Assistant </b>
+                                    </pre>
                                 </Grid>
+                                {/* <Grid item xs={4}>
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <b>Accounts Officer</b>
+                  </pre>
+                </Grid> */}
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Accounts Officer</b></pre>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                                    <pre><b>Deputy Registrar</b></pre>
+                                    <pre >
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                        <b>AR/Deputy Registrar</b>
+                                    </pre>
                                 </Grid>
                             </Grid>
+
                         </div>
                     </div>
                 </Container>
@@ -516,7 +542,7 @@ function FormPrintAbroad({ data, user }) {
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
-                                <pre><b>Associate Dean (PG & Research)</b></pre>
+                                <pre><b>Associate Dean/Dean (PGS & Research)</b></pre>
                             </Grid>
                             <pre></pre>
                         </Grid>
@@ -534,10 +560,17 @@ function FormPrintAbroad({ data, user }) {
                             </Grid>
 
                             <br></br>
-                            <Grid className="py-2" container spacing={2}>
-                                <Grid item xs={12}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
-                                    <pre><b>Dealing Assistant</b></pre>
+                            <Grid
+                                className="py-2"
+                                container
+                                spacing={2}
+                                justifyContent="flex-end"
+                            >
+                                <Grid item>
+                                    <pre style={{ margin: 1 }}>
+                                        <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
+                                        <b>Associate Dean/Dean </b>
+                                    </pre>
                                 </Grid>
                             </Grid>
                         </div>
@@ -550,7 +583,7 @@ function FormPrintAbroad({ data, user }) {
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
-                                <pre><b>Accounts Section for releasing of payment</b></pre>
+                                <pre><b>Accounts Section for releasing the payment</b></pre>
                             </Grid>
                             <pre></pre>
                         </Grid>

@@ -51,7 +51,7 @@ function FormPrint({ data, user }) {
           <Grid item xs={2}>
             <img
               src="https://scontent-del1-2.xx.fbcdn.net/v/t1.18169-9/17264253_1867054683517452_4318177070545308732_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=1LmE8QJEZloAX9D8hDW&_nc_ht=scontent-del1-2.xx&oh=00_AfCHBX4ZV0Mus_V0UPF9vKU-5y42esnQU0QQj0e8W4hqlQ&oe=6482F87B"
-              // alt="your-image-alt-text"
+            // alt="your-image-alt-text"
             />
           </Grid>
           <Grid item xs={10}>
@@ -77,7 +77,7 @@ function FormPrint({ data, user }) {
           <div className={classes.form}>
             <Grid className="py-2" container spacing={2}>
               <Grid item xs={7}>
-                <pre>1. Name of PhD Scholar : {user?.name} </pre>
+                <pre >1. Name of PhD Scholar : {user?.name} </pre>
               </Grid>
               <Grid item xs={5}>
                 <pre>Mobile No: {data?.mobileNo} </pre>
@@ -352,29 +352,33 @@ function FormPrint({ data, user }) {
           <div className={classes.form}>
             <br></br>
           </div>
-          <Grid className="py-2 flex flex-col" container spacing={2}>
+          <Grid className="py-2"
+                container
+                spacing={2}
+                justifyContent="flex-end">
             <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                 <b>Signature of PhD Scholar</b>
               </pre>
               <pre></pre>
             </Grid>
-            <Grid item className="flex-1">
+            {/* <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                 <b>Supervisors</b>{" "}
               </pre>
-            </Grid>
-            <Grid item className="flex-1">
+            </Grid> */}
+            {/* <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
+                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
                 <b>Head of the Department</b>
               </pre>
-            </Grid>
+            </Grid> */}
             <pre></pre>
           </Grid>
         </Container>
+        <br></br>
         <Container>
           <div className={classes.form}>
             <div style={{ border: "2px solid black", padding: "10px" }}>
@@ -428,19 +432,48 @@ function FormPrint({ data, user }) {
                 </Grid>
                 <pre></pre>
               </Grid> */}
-              <Grid className="ml-10" container spacing={2} alignItems="center">
+              {/* <Grid className="ml-10" container spacing={2} alignItems="center">
                 <Grid item xs={6}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
-                    <b>Dealing Assistant </b>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>JA/SA/Dealing Assistant </b>
+                  </pre>
+                  <pre></pre>
+                </Grid>
+                <Grid item xs={6} mx-10>
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>JS/Supdt </b>
                   </pre>
                 </Grid>
                 <Grid item xs={6} mx-10>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
-                    <b>Assistant registrar </b>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>Assistant registrar/DR/JR </b>
                   </pre>
                 </Grid>
+              </Grid> */}
+              <Grid className="py-2 flex flex-col" container spacing={2}>
+                <Grid item className="flex-1">
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>JA/SA/Dealing Assistant</b>
+                  </pre>
+                  <pre></pre>
+                </Grid>
+                <Grid item className="flex-1">
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>JS/Supdt.</b>{" "}
+                  </pre>
+                </Grid>
+                <Grid item className="flex-1">
+                  <pre>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <b>Assistant registrar/DR/JR</b>
+                  </pre>
+                </Grid>
+                <pre></pre>
               </Grid>
             </div>
           </div>
@@ -500,31 +533,31 @@ function FormPrint({ data, user }) {
               <Grid className="py-2" container spacing={2} alignItems="center">
                 <Grid item xs={4}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                    <b>Dealing Assistant </b>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <b>JA/Dealing Assistant </b>
                   </pre>
                 </Grid>
-                <Grid item xs={4}>
+                {/* <Grid item xs={4}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                     <b>Accounts Officer</b>
                   </pre>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={4}>
                   <pre >
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
-                    <b>Deputy Registrar</b>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <b>AR/Deputy Registrar</b>
                   </pre>
                 </Grid>
               </Grid>
-              
+
             </div>
           </div>
         </Container>
         <Container style={{ fontSize: "20px" }}>
           <br />
-          
-          <b>Associate Dean (PG & Research)</b>
+
+          <b>Associate Dean/Dean (PGS & Research)</b>
         </Container>
         <Container>
           <div className={classes.form}>
@@ -544,8 +577,8 @@ function FormPrint({ data, user }) {
               >
                 <Grid item>
                   <pre style={{ margin: 1 }}>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
-                    <b>Dealing Assistant </b>
+                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
+                    <b>Associate Dean/Dean </b>
                   </pre>
                 </Grid>
               </Grid>
@@ -554,7 +587,7 @@ function FormPrint({ data, user }) {
         </Container>
         <Container style={{ fontSize: "20px" }}>
           <br />
-          <b>Accounts Section for releasing of payment</b>
+          <b>Accounts Section for releasing the payment</b>
           <br></br>
         </Container>
         <br></br>
