@@ -39,7 +39,6 @@ export const AccountSideBar = [
     { title: "Dashboard", src: Chart_fill, gap: false, link: "/accountLogin" },
     // { title: "TBD", src: Chat, gap: false, link: "/accountLogin" },
     { title: "Applications", src: Folder, gap: true, link: "/accountLogin/application" },
-    { title: "Settlement", src: User, gap: false, link: "/accountLogin/" },
     { title: "Archive ", src: Folder, gap: true, link: "/accountLogin/archive" },
     { title: "Logout ", src: Setting, gap: true, link: "logout" },
 
