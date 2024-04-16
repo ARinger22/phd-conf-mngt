@@ -113,7 +113,7 @@ router.post('/studentInfoFaculty', async (req, res) => {
 
 // Approve or Disapprove Logic
 router.post('/facultyApproveOrDisapprove', async (req, res) => {
-    var { id, status, image} = req.body;
+    var { id, status, image, name} = req.body;
 
     try {
 
@@ -140,17 +140,17 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
             console.log(applicationFolderName)
             const applicationFolderId = await searchDriveFolder(applicationFolderName);
             console.log(applicationFolderId)
-            const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
-            console.log("facultysignid", facultySignId)
-            if (facultySignId === null) {
-                return res.status(422).json("Error Occurred..");
-            }
+            // const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
+            // console.log("facultysignid", facultySignId)
+            // if (facultySignId === null) {
+            //     return res.status(422).json("Error Occurred..");
+            // }
             
-            const facultySignLink = await createPublicUrl(facultySignId);
-            console.log(facultySignLink);
+            // const facultySignLink = await createPublicUrl(facultySignId);
+            // console.log(facultySignLink);
             await AppData.findByIdAndUpdate(id, {
                 lastModified: userEmail,
-                facultySignLink: facultySignLink,
+                facultySignLink: name,
                 status: status,
                 facultySignTimestamp: new Date().toLocaleString(),
             });
@@ -158,18 +158,18 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
             return res.status(200).json("Updated..");
         }
         else if(appDataSett.status === "0"){
-            const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
-            const applicationFolderId = await searchDriveFolder(applicationFolderName);
-            const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
-            if (facultySignId === null) {
-                return res.status(422).json("Error Occurred..");
-            }
+            // const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
+            // const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            // const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
+            // if (facultySignId === null) {
+            //     return res.status(422).json("Error Occurred..");
+            // }
             
-            const facultySignLink = await createPublicUrl(facultySignId);
-            console.log(facultySignLink);
+            // const facultySignLink = await createPublicUrl(facultySignId);
+            // console.log(facultySignLink);
             await AppDataSett.findByIdAndUpdate(id, {
                 lastModified: userEmail,
-                facultySignLink: facultySignLink,
+                facultySignLink: name,
                 status: status,
                 facultySignTimestamp: new Date().toLocaleString(),
             });

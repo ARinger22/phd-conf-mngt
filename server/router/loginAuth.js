@@ -26,12 +26,14 @@ router.post('/login', async (req, res) => {
     const { email, mssg, otp } = req.body;
     var id;
     var role;
+    var loginuser;
     if (!email || !mssg) {
         return res.status(422).json({ error: "Please fill properly.." });
     }
     try {
-        const loginuser = await User.findOne({ email: email });
+        loginuser = await User.findOne({ email: email });
         console.log(loginuser);
+
         if (!loginuser) {
             console.log("Invalid Credientials.Nope");
             return res.status(423).json({ error: "Invalid Credientials." });
@@ -76,8 +78,9 @@ router.post('/login', async (req, res) => {
             console.log("OTP Matched");
             console.log("Role: " + role);
             console.log("Email: " + email);
+            console.log(loginuser)
             const token = await genUserToken(email, role);
-            return res.status(200).json({ role: role, token: token });
+            return res.status(200).json({ role: role, token: token, loginuser: loginuser});
         }
         else {
             return res.status(422).json({ message: "Invalid OTP" });

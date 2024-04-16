@@ -22,14 +22,15 @@ function FacultyDetails({ user, data }) {
 
                 <div className="border-t border-gray-200">
                     <dl>
-                        <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">{user.nameOfSupervisor}'s Signature</dt>
+                        <dt className="text-sm font-medium text-gray-500">Approved by {data.facultySignLink}</dt>
+                        {/* <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500">Approved by JSON.parse(localStorage.getItem("loginuser")).name</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                 <div className="col-span-full">
                                     <img className="h-20 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
                                 </div>
                             </dd>
-                        </div >
+                        </div > */}
 
                     </dl >
                 </div >
@@ -41,8 +42,21 @@ function FacultyDetails({ user, data }) {
                     <div className="px-4 py-2 sm:px-6">
                         <h3 className="text-base font-semibold leading-6 text-gray-900">Hod Action (Approved on {data.hodSignTimestamp})</h3>
                     </div>
-
                     <div className="border-t border-gray-200">
+                    <dl>
+                        <dt className="text-sm font-medium text-gray-500">Approved by {data.hodSignLink}</dt>
+                        {/* <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500">Approved by JSON.parse(localStorage.getItem("loginuser")).name</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div className="col-span-full">
+                                    <img className="h-20 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
+                                </div>
+                            </dd>
+                        </div > */}
+
+                    </dl >
+                </div >
+                    {/* <div className="border-t border-gray-200">
                         <dl>
                             <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-sm font-medium text-gray-500">Signature</dt>
@@ -54,7 +68,7 @@ function FacultyDetails({ user, data }) {
                             </div >
 
                         </dl >
-                    </div >
+                    </div > */}
                 </div >
             }
         </>

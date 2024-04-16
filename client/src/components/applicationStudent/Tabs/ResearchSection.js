@@ -69,7 +69,9 @@ export default function ResearchSection({ data }) {
                         </div>
 
                         <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
-                            <div className="border-t border-gray-200">
+                            <dt className="text-sm font-medium text-gray-500">Approved by {data.researchSignLink}</dt>
+
+                            {/* <div className="border-t border-gray-200">
                                 <dl>
                                     <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Signature</dt>
@@ -81,7 +83,7 @@ export default function ResearchSection({ data }) {
                                     </div >
 
                                 </dl >
-                            </div >
+                            </div > */}
                         </div >
                     </dl>
                 </div >

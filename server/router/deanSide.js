@@ -19,7 +19,7 @@ const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 router.post('/deanApproveOrDisapprove', async (req, res) => {
-    var { id, status, image} = req.body;
+    var { id, status, image, name} = req.body;
 
     try {
 
@@ -45,19 +45,19 @@ router.post('/deanApproveOrDisapprove', async (req, res) => {
         const appDataSett = await AppDataSett.findById(id);
 
         if (appData && appData.status === "4"){
-            const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
-            const applicationFolderId = await searchDriveFolder(applicationFolderName);
-            const deanSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "deanSign.jpg");
+            // const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+            // const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            // const deanSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "deanSign.jpg");
 
-            if (deanSignId === null) {
-                return res.status(422).json("Error Occurred..");
-            }
+            // if (deanSignId === null) {
+            //     return res.status(422).json("Error Occurred..");
+            // }
 
-            const deanSignLink = await createPublicUrl(deanSignId);
-            console.log(deanSignLink);
+            // const deanSignLink = await createPublicUrl(deanSignId);
+            // console.log(deanSignLink);
             await AppData.findByIdAndUpdate(id, {
                 lastModified: userEmail,
-                deanSignLink: deanSignLink,
+                deanSignLink: name,
                 status: status,
                 deanSignTimestamp: new Date().toLocaleString(),
             });
@@ -65,18 +65,18 @@ router.post('/deanApproveOrDisapprove', async (req, res) => {
             return res.status(200).json("Updated..");
         }
         else if(appDataSett.status === "4"){
-            const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
-            const applicationFolderId = await searchDriveFolder(applicationFolderName);
-            const deanSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "deanSign.jpg");
-            if (deanSignId === null) {
-                return res.status(422).json("Error Occurred..");
-            }
+            // const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
+            // const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            // const deanSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "deanSign.jpg");
+            // if (deanSignId === null) {
+            //     return res.status(422).json("Error Occurred..");
+            // }
             
-            const deanSignLink = await createPublicUrl(deanSignId);
-            console.log(deanSignLink);
+            // const deanSignLink = await createPublicUrl(deanSignId);
+            // console.log(deanSignLink);
             await AppDataSett.findByIdAndUpdate(id, {
                 lastModified: userEmail,
-                deanSignLink: deanSignLink,
+                deanSignLink: name,
                 status: status,
                 deanSignTimestamp: new Date().toLocaleString(),
             });

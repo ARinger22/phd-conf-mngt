@@ -21,7 +21,7 @@ require('dotenv').config();
 
 // Approve or Disapprove Logic
 router.post('/researchApproveOrDisapprove', async (req, res) => {
-    var { id, status, image, grantEligibility, remarksResearch, approve_date, approve_time } = req.body;
+    var { id, status, image, grantEligibility, remarksResearch, approve_date, approve_time, name } = req.body;
     try {
 
         const bearerHeader = await req.headers["authorization"];
@@ -44,40 +44,40 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
         const appDataSett = await AppDataSett.findById(id);
 
         if (appData && appData.status === "2"){
-            const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
-            const applicationFolderId = await searchDriveFolder(applicationFolderName);
-            const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
+            // const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+            // const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            // const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
 
-            if (researchSignId === null) {
-                console.log("Error Occurred no sign id try again....");
-                return res.status(422).json("Error Occurred..");
-            }
+            // if (researchSignId === null) {
+            //     console.log("Error Occurred no sign id try again....");
+            //     return res.status(422).json("Error Occurred..");
+            // }
 
-            const researchSignLink = await createPublicUrl(researchSignId);
-            console.log(researchSignLink);
+            // const researchSignLink = await createPublicUrl(researchSignId);
+            // console.log(researchSignLink);
             await AppData.findByIdAndUpdate(id, {
                 status: status,
                 grantEligibility: grantEligibility,
                 remarksResearch: remarksResearch,
-                researchSignLink: researchSignLink,
+                researchSignLink: name,
                 lastModified: userEmail,
                 researchSignTimestamp: new Date().toLocaleString(),
             });
             return res.status(200).json("Updated..");
         }
         else if(appDataSett.status === "2"){
-            const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
-            const applicationFolderId = await searchDriveFolder(applicationFolderName);
-            const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
-            if (researchSignId === null) {
-                return res.status(422).json("Error Occurred..");
-            }
+            // const applicationFolderName = appDataSett.travels[0].deptdate + "-" + appDataSett.travels[0].depttime + "__" + appDataSett.travels[0].arrivaldate + "-" + appDataSett.travels[0].arrivaltime;
+            // const applicationFolderId = await searchDriveFolder(applicationFolderName);
+            // const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
+            // if (researchSignId === null) {
+            //     return res.status(422).json("Error Occurred..");
+            // }
             
-            const researchSignLink = await createPublicUrl(researchSignId);
-            console.log(facultySignLink);
+            // const researchSignLink = await createPublicUrl(researchSignId);
+            // console.log(facultySignLink);
             await AppDataSett.findByIdAndUpdate(id, {
                 lastModified: userEmail,
-                researchSignLink: researchSignLink,
+                researchSignLink: name,
                 status: status,
                 researchSignTimestamp: new Date().toLocaleString(),
             });

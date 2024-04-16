@@ -36,19 +36,20 @@ export default function HodAction({ user, data }) {
     }
 
     const updateStatus = async (status) => {
-        if (image === null || image === undefined) {
-            window.alert("Please upload your signature");
-            setAction("Take Action");
-            setDisable(false)
-            return;
-        }
+        // if (image === null || image === undefined) {
+        //     window.alert("Please upload your signature");
+        //     setAction("Take Action");
+        //     setDisable(false)
+        //     return;
+        // }
 
         const token = getUserToken();
         const formData = new FormData();
         formData.append("id", data._id);
         formData.append("status", status);
         formData.append("image", image);
-
+        const user= JSON.parse(localStorage.getItem("loginuser"))
+        formData.append("name", user.name);
         const res = await fetch(`${BASE_URL}/hodApproveOrDisapprove`, {
             method: "POST",
             headers: {
@@ -80,7 +81,7 @@ export default function HodAction({ user, data }) {
                             <h3 className="flex justify-center items-center font-bold text-2xl leading-6 text-gray-900">Take Action</h3>
                         </div>
                         <div className="border-t border-gray-200">
-                            <dl>
+                            {/* <dl>
                                 <div className="flex bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                                     <dd className="flex flex-col justify-center items-center text-sm text-gray-900">
                                         <button
@@ -102,7 +103,7 @@ export default function HodAction({ user, data }) {
                                     </div>
                                 }
 
-                            </dl >
+                            </dl > */}
                         </div >
                     </div >
                     <br />
@@ -125,7 +126,7 @@ export default function HodAction({ user, data }) {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                             </svg>
-                            <span>Not recommended</span>
+                            <span>Not Recommended</span>
                         </button>
                     </div>
                 </>

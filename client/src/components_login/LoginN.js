@@ -97,10 +97,13 @@ function Login() {
             const data = await res.json();
             const role = data.role;
             const token = data.token;
+            const loginuser= data.loginuser;
             console.log("Role: " + role);
             console.log("Token: " + token);
+            console.log(loginuser)
             setUserToken(token);
             setroleToken(role);
+            localStorage.setItem("loginuser", JSON.stringify(loginuser));
             if (role === "0") {
                 navigate('/studentLogin');
             }

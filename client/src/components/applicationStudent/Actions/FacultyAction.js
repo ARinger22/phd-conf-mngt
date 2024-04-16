@@ -26,7 +26,7 @@ export default function FacultyAction({ user, data }) {
 
     const handleApprove = (e) => {
         e.preventDefault();
-
+        console.log(data, user);
         if (!disable) {
             setDisable(true);
             setAction("Approving")
@@ -36,19 +36,20 @@ export default function FacultyAction({ user, data }) {
 
 
     const updateStatus = async (status) => {
-        if (image === null || image === undefined) {
-            window.alert("Please upload your signature");
-            setDisable(false)
-            setAction("Take Action");
-            return;
-        }
+        // if (image === null || image === undefined) {
+        //     window.alert("Please upload your signature");
+        //     setDisable(false)
+        //     setAction("Take Action");
+        //     return;
+        // }
 
         const token = getUserToken();
         const formData = new FormData();
         formData.append("id", data._id);
         formData.append("status", status);
         formData.append("image", image);
-
+        const user= JSON.parse(localStorage.getItem("loginuser"))
+        formData.append("name", user.name);
         const res = await fetch(`${BASE_URL}/facultyApproveOrDisapprove`, {
             method: "POST",
             headers: {
@@ -57,7 +58,7 @@ export default function FacultyAction({ user, data }) {
             body: formData
         })
         if (res.status === 200) {
-            console.log("Successfull..")
+            console.log("Successful..")
             navigate('/facultyLogin/studentApplication');
         }
         else {
@@ -84,7 +85,7 @@ export default function FacultyAction({ user, data }) {
                             <dl>
                                 <div className="flex bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                                     <dd className="flex flex-col justify-center items-center text-sm text-gray-900">
-                                        <button
+                                        {/* <button
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 setShowModal(true);
@@ -92,16 +93,16 @@ export default function FacultyAction({ user, data }) {
                                             className="flex items-center px-4 py-2 text-xl font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 hover:bg-blue-400  dark:text-gray-800 gap-x-3 rounded-lg"
                                         >
                                             Upload Signature
-                                        </button>
+                                        </button> */}
                                     </dd>
                                 </div >
 
-                                {image &&
+                                {/* {image &&
                                     <div className='p-3 '>
                                         <p className='text-sm font-medium text-green-500'> Your Signature: </p>
                                         <img src={image} alt=" " className="w-1/2 h-1/2" />
                                     </div>
-                                }
+                                } */}
 
                             </dl >
                         </div >

@@ -1,24 +1,27 @@
-import React from 'react'
+import React from "react";
 
 function DeanDetails({ user, data }) {
-
-    function extractFileId(driveLink) {
-        const startIndex = driveLink.indexOf('/file/d/') + 8;
-        const endIndex = driveLink.indexOf('/view');
-        if (startIndex !== -1 && endIndex !== -1) {
-            return driveLink.substring(startIndex, endIndex);
-        } else {
-            return null;
-        }
+  function extractFileId(driveLink) {
+    const startIndex = driveLink.indexOf("/file/d/") + 8;
+    const endIndex = driveLink.indexOf("/view");
+    if (startIndex !== -1 && endIndex !== -1) {
+      return driveLink.substring(startIndex, endIndex);
+    } else {
+      return null;
     }
+  }
 
-    return (
-        <>
-            <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
-                <div className="px-4 py-2 sm:px-6">
-                    <h3 className="text-base font-semibold leading-6 text-gray-900">Dean Review ({data.status === "5" ? "Approved" : "Rejected"}) (Date: {data.deanSignTimestamp})</h3>
-                </div>
-                <div className="border-t border-gray-200">
+  return (
+    <>
+      <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
+        <div className="px-4 py-2 sm:px-6">
+          <h3 className="text-base font-semibold leading-6 text-gray-900">
+            Dean Review ({data.status === "5" ? "Approved" : "Rejected"}) (Date:{" "}
+            {data.deanSignTimestamp})
+          </h3>
+        </div>
+        <dt className="text-sm font-medium text-gray-500">Approved by {data.deanSignLink}</dt>
+        {/* <div className="border-t border-gray-200">
                     <dl>
                         <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Dean Signature</dt>
@@ -30,10 +33,10 @@ function DeanDetails({ user, data }) {
                         </div >
 
                     </dl >
-                </div >
-            </div >
-        </>
-    )
+                </div > */}
+      </div>
+    </>
+  );
 }
 
-export default DeanDetails
+export default DeanDetails;

@@ -63,12 +63,12 @@ export default function AccountAction({ user, data }) {
             return;
         }
 
-        if (image === null || image === undefined) {
-            window.alert("Please upload your signature");
-            setDisable(false)
-            setAction("Take Action");
-            return;
-        }
+        // if (image === null || image === undefined) {
+        //     window.alert("Please upload your signature");
+        //     setDisable(false)
+        //     setAction("Take Action");
+        //     return;
+        // }
 
         const token = getUserToken();
         const formData = new FormData();
@@ -80,7 +80,8 @@ export default function AccountAction({ user, data }) {
         formData.append("passedForPayment", payment);
         formData.append("remarksAccount", remarks);
         formData.append("image", image);
-
+        const user= JSON.parse(localStorage.getItem("loginuser"))
+        formData.append("name", user.name);
 
         const res = await fetch(`${BASE_URL}/accountApproveOrDisapprove`, {
             method: "POST",
@@ -147,7 +148,7 @@ export default function AccountAction({ user, data }) {
                             </dl>
                         </div >
 
-                        <div className="flex bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                        {/* <div className="flex bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                             <dd className="flex flex-col justify-center items-center text-sm text-gray-900">
                                 <button
                                     onClick={(e) => {
@@ -159,14 +160,14 @@ export default function AccountAction({ user, data }) {
                                     Upload Signature
                                 </button>
                             </dd>
-                        </div >
+                        </div > */}
 
-                        {image &&
+                        {/* {image &&
                             <div className='p-3 '>
                                 <p className='text-sm font-medium text-green-500'> Your Signature: </p>
                                 <img src={image} alt=" " className="w-1/2 h-1/2" />
                             </div>
-                        }
+                        } */}
                         <br />
                     </div >
 
