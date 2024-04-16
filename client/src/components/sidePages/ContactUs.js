@@ -31,7 +31,7 @@ function ContactUs() {
     };
     return (
         <>
-            <nav className="bg-gray-800 text-white">
+            <nav className="bg-dark-purple text-white">
                 <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
                     <div className="flex justify-between items-center">
                         <Link to="/" className="text-xl font-bold">PhD CGM :: PhD Conference Grant Management Portal</Link>
@@ -44,17 +44,17 @@ function ContactUs() {
 
                     <div className={`md:flex flex-col md:flex-row md:items-center ${isOpen ? '' : 'hidden'} ${isOpen ? 'mt-4' : ''}`}>
                         <div className="flex flex-col md:flex-row md:space-x-2 mr-5">
-                            <Link to="/" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Home</Link>
-                            <Link to="/meetTheTeam" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Team</Link>
-                            <Link to="/userGuide" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">User Guide</Link>
-                            <Link to="/researchInfo" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Research at IIT Ropar</Link>
-                            <Link to="/contactUs" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Contact Us</Link>
+                            <Link to="/" className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400">Home</Link>
+                            <Link to="/meetTheTeam" className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400">Team</Link>
+                            <Link to="/userGuide" className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400">User Guide</Link>
+                            <Link to="/researchInfo" className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400">Research at IIT Ropar</Link>
+                            <Link to="/contactUs" className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400">Contact Us</Link>
                         </div>
                         <div className="mt-4 md:mt-0 ml-2 mr-4">
                             <button onClick={(e) => {
                                 e.preventDefault();
                                 navigate('/login');
-                            }} className="border px-5 py-2 rounded font-bold">Login</button>
+                            }} className="border px-5 py-2 rounded font-bold hover:bg-button-hover-blue hover:text-teal-400">Login</button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ function ContactUs() {
             <section className="bg-gray-100 dark:bg-gray-800">
                 <div className="py-12 px-4 mx-auto max-w-screen-md">
                     <h2 className="mb-6 text-4xl font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
-                    <p className="mb-8 text-lg font-medium text-center text-gray-700 dark:text-gray-300">Got a question or feedback? We'd love to hear from you.</p>
+                    <p className="mb-8 text-lg font-medium text-center text-button-hover-blue dark:text-gray-300">Got a question or feedback? We'd love to hear from you.</p>
                     <form onSubmit={handleContact} className="space-y-6">
                         <div className="flex flex-col">
                             <label htmlFor="email" className="mb-2 text-sm font-medium text-gray-800 dark:text-gray-200">Your Email</label>
