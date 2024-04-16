@@ -34,7 +34,7 @@ function UpperNav() {
                     <div className="flex">
 
                         <div style={{ "color": "white", "fontSize": "40px" }} className="flex-1 flex-wrap justify-between items-center py-1 mx-auto max-w-screen-xl">
-                            Phd CGM : PhD Conference Grant Management Portal
+                            PhD CGM : PhD Conference Grant Management Portal
                         </div>
                         {userData && userData?.name && userData?.email &&
                             <div className="flex items-center">

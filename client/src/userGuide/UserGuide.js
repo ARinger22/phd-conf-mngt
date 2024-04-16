@@ -12,7 +12,7 @@ const UserGuide = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 text-white">
+      <nav className="bg-dark-purple text-white">
         <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
           <div className="flex justify-between items-center">
             <Link to="/" className="text-xl font-bold">
@@ -43,31 +43,31 @@ const UserGuide = () => {
             <div className="flex flex-col md:flex-row md:space-x-2 mr-5">
               <Link
                 to="/"
-                className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white"
+                className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400"
               >
                 Home
               </Link>
               <Link
                 to="/meetTheTeam"
-                className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white"
+                className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400"
               >
                 Team
               </Link>
               <Link
                 to="/userGuide"
-                className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white"
+                className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400"
               >
                 User Guide
               </Link>
               <Link
                 to="/researchInfo"
-                className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white"
+                className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400"
               >
                 Research at IIT Ropar
               </Link>
               <Link
                 to="/contactUs"
-                className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white"
+                className="block md:inline-block py-2 px-2 text-white hover:bg-button-hover-blue hover:text-teal-400"
               >
                 Contact Us
               </Link>
@@ -78,7 +78,7 @@ const UserGuide = () => {
                   e.preventDefault();
                   navigate("/login");
                 }}
-                className="border px-5 py-2 rounded font-bold"
+                className="border px-5 py-2 rounded font-bold hover:bg-button-hover-blue hover:text-teal-400"
               >
                 Login
               </button>
@@ -99,7 +99,7 @@ const UserGuide = () => {
             </p>
             <div className="flex space-x-3">
               <a
-                href="#"
+                href="/login"
                 className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white rounded-lg bg-dark-purple hover:text-teal-400 hover:bg-button-hover-blue transition duration-300"
               >
                 Get Started

@@ -20,3 +20,6 @@ mongoose.connect(DB).then( () => {
 }).catch((err) => {
     console.log("Connection Failed..", err);
 });
+
+
+
