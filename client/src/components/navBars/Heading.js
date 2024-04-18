@@ -26,13 +26,14 @@ export default function Heading() {
         display: 'flex',
         alignItems: 'center', // Center vertically
         justifyContent: 'center', // Center horizontally
+        width: '100%',
       }}
     >
       <Grid container spacing={2} alignItems="center" justifyContent="center">
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
-          <a href="https://www.iitrpr.ac.in/logo-iit-ropar">
-            <Img alt="complex" src={img} /></a>
+            <a href="https://www.iitrpr.ac.in/logo-iit-ropar">
+              <Img alt="complex" src={img} /></a>
           </ButtonBase>
         </Grid>
         <Grid item>
@@ -48,7 +49,7 @@ export default function Heading() {
                 {/* <h6>Welcome to the Faculty Portal </h6> */}
                 {/* <h4>Indian Institute of Technology Ropar</h4> */}
                 <a href="https://www.iitrpr.ac.in/" target="_blank" rel="noopener noreferrer">
-                भारतीय प्रौद्योगिकी संस्थान रोपड़
+                  भारतीय प्रौद्योगिकी संस्थान रोपड़
                 </a>
                 {/* <h4>भारतीय प्रौद्योगिकी संस्थान रोपड़</h4> */}
               </Typography>

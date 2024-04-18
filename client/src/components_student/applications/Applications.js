@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserToken, setAppToken } from '../../components_login/Tokens';
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { Container, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { BASE_URL } from '../../components/requests/URL';
@@ -227,136 +227,150 @@ function Application() {
         </Container>
         :
         <Container>
-          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-5">
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
-              <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
-            </span>
-            <div className="flex">
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.label}
-                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
-                    }`}
-                  onClick={() => handleTabClick(index)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="p-2"></div>
-          <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
-          <TableContainer component={Paper} className="my-3">
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell><b>Pending at</b></TableCell>
-                  <TableCell><b>Conference Name</b></TableCell>
-                  <TableCell><b>Amount Needed</b></TableCell>
-                  <TableCell><b>Venue</b></TableCell>
-                  <TableCell><b>Submission Date</b></TableCell>
-                  <TableCell><b>Action</b></TableCell>
-                  <TableCell><b>Withdraw</b></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {apps.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{getStatus(item.status)}</TableCell>
-                    <TableCell>{item.nameOfConference}</TableCell>
-                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
-                    <TableCell>{item.venueOfConference}</TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        onClick={viewSpecficApplication}
-                        name={item._id}
-                      >
-                        View Full Application
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        onClick={withdrawApplication}
-                        name={item._id}
-                        style={{ backgroundColor: 'red' }}
-                      >
-                        Withdraw
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-10">
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
-              <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
-            </span>
-            <div className="flex">
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.label}
-                  className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex2 ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
-                    }`}
-                  onClick={() => handleTabClick2(index)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className='flex font-bold text-3xl text-black-800 items-center justify-center mt-5'>Settlement Forms</div>
-          <TableContainer component={Paper} className="my-3">
-            <Table>
-              <TableHead>
-              <TableRow>
-                  <TableCell><b>Pending at</b></TableCell>
-                  <TableCell><b>Conference Name</b></TableCell>
-                  <TableCell><b>Amount Needed</b></TableCell>
-                  <TableCell><b>Venue</b></TableCell>
-                  <TableCell><b>Submission Date</b></TableCell>
-                  <TableCell><b>Action</b></TableCell>
-                  <TableCell><b>Withdraw</b></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {apps2.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{getStatus(item.status)}</TableCell>
-                    <TableCell>{getName(item)}</TableCell>
-                    <TableCell>{getFinances(item.finances)} Rs</TableCell>
-                    <TableCell>{getVanue(item)}</TableCell>
-                    <TableCell>{getDays(item.createdAt)}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        onClick={viewSpecficApplication}
-                        name={item._id}
-                      >
-                        View Full Application
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        onClick={withdrawApplicationSettlement}
-                        name={item._id}
-                        style={{ backgroundColor: 'red' }} 
-                      >
-                        Withdraw
-                      </Button>
-                    </TableCell>
-                    
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={12} md={12}>
+              <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-5">
+                <span style={{ display: 'flex', alignItems: 'center' }}>
+                  <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
+                  <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+                </span>
+                <div className="flex">
+                  {tabs.map((tab, index) => (
+                    <button
+                      key={tab.label}
+                      className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                        }`}
+                      onClick={() => handleTabClick(index)}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12}>
+              {/* Application Forms */}
+              <div className='flex font-bold text-3xl text-black-800 items-center justify-center'>Application Forms</div>
+              {/* Table for Applications */}
+              <Grid item xs={12}>
+                <TableContainer component={Paper} className="my-3">
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell><b>Pending at</b></TableCell>
+                        <TableCell><b>Conference Name</b></TableCell>
+                        <TableCell><b>Amount Needed</b></TableCell>
+                        <TableCell><b>Venue</b></TableCell>
+                        <TableCell><b>Submission Date</b></TableCell>
+                        <TableCell><b>Action</b></TableCell>
+                        <TableCell><b>Withdraw</b></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {apps.map((item, index) => (
+                        <TableRow key={index}>
+                          <TableCell>{getStatus(item.status)}</TableCell>
+                          <TableCell>{item.nameOfConference}</TableCell>
+                          <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                          <TableCell>{item.venueOfConference}</TableCell>
+                          <TableCell>{getDays(item.createdAt)}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="contained"
+                              onClick={viewSpecficApplication}
+                              name={item._id}
+                            >
+                              View Full Application
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              variant="contained"
+                              onClick={withdrawApplication}
+                              name={item._id}
+                              style={{ backgroundColor: 'red' }}
+                            >
+                              Withdraw
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+
+            </Grid>
+            <Grid item xs={12} sm={12} md={12}>
+              <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg shadow-md mt-10">
+                <span style={{ display: 'flex', alignItems: 'center' }}>
+                  <FaSort color="dark-purple" style={{ marginRight: '0.5rem' }} />
+                  <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+                </span>
+                <div className="flex">
+                  {tabs.map((tab, index) => (
+                    <button
+                      key={tab.label}
+                      className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex2 ? 'bg-dark-purple text-white hover:bg-button-hover-blue hover:text-teal-400' : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-950'
+                        }`}
+                      onClick={() => handleTabClick2(index)}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12}>
+              <div className='flex font-bold text-3xl text-black-800 items-center justify-center mt-5'>Settlement Forms</div>
+              <TableContainer component={Paper} className="my-3">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell><b>Pending at</b></TableCell>
+                      <TableCell><b>Conference Name</b></TableCell>
+                      <TableCell><b>Amount Needed</b></TableCell>
+                      <TableCell><b>Venue</b></TableCell>
+                      <TableCell><b>Submission Date</b></TableCell>
+                      <TableCell><b>Action</b></TableCell>
+                      <TableCell><b>Withdraw</b></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {apps2.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{getStatus(item.status)}</TableCell>
+                        <TableCell>{getName(item)}</TableCell>
+                        <TableCell>{getFinances(item.finances)} Rs</TableCell>
+                        <TableCell>{getVanue(item)}</TableCell>
+                        <TableCell>{getDays(item.createdAt)}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            onClick={viewSpecficApplication}
+                            name={item._id}
+                          >
+                            View Full Application
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            onClick={withdrawApplicationSettlement}
+                            name={item._id}
+                            style={{ backgroundColor: 'red' }}
+                          >
+                            Withdraw
+                          </Button>
+                        </TableCell>
+
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Grid>
         </Container>
       }
     </>

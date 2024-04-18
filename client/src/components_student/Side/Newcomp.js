@@ -32,6 +32,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     width: '100% !important', // Overrides inline-style
     height: 100,
   },
+  width: '100%',
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -98,10 +99,10 @@ const handleClick2 = (event) => {
 };
 export default function ButtonBases() {
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
       {images.map((image) => (
         <ImageButton
-        onClick={handleClick}
+          onClick={handleClick}
           focusRipple
           key={image.title}
           style={{
@@ -117,8 +118,8 @@ export default function ButtonBases() {
               color="inherit"
               sx={{
                 position: 'relative',
-                p: 4,
-                pt: 2,
+                p: 'calc(16px + 2vw)', // Responsive padding based on viewport width
+                pt: 'calc(8px + 1vw)', // Responsive padding-top based on viewport width
                 pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
               }}
             >

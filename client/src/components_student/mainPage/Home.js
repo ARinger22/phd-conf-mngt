@@ -131,8 +131,8 @@ function Home(props) {
                     </span>
                 </div>
                 <div className='px-2 w-full'>
-                    <div className='flex'>
-                        <div className="max-w-sm mx-auto rounded overflow-hidden ">
+                    <div className='flex flex-col md:flex-row md:gap-6'>
+                        <div className="max-w-full md:max-w-md mx-auto rounded overflow-hidden ">
                             <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
                                 <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                                     <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -206,7 +206,7 @@ function Home(props) {
 
                             {/* <ApplicationsHome /> */}
                         </div>
-                        <div className="max-w-sm mx-auto">
+                        <div className="max-w-full md:max-w-md mx-auto">
                             <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
                                 <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                                     <span style={{ display: 'flex', alignItems: 'center' }}>
