@@ -63,7 +63,7 @@ export default function DeanHome() {
             <div className='px-2 w-full'>
               <div className='flex'>
                 <div className="max-w-sm mx-auto rounded overflow-hidden ">
-                  <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
+                  <div className="my-5  bg-white rounded-lg shadow-md">
                     <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                       <span style={{ display: 'flex', alignItems: 'center' }}>
                         <FaSort color="dark-purple" size={32} style={{ marginRight: '0.5rem' }} />

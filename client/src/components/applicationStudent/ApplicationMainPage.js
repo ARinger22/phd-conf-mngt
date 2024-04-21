@@ -107,7 +107,7 @@ export default function ApplicationMainPage({ role, goBack }) {
                                         {data?.nameOfConference}
                                     </h2>
                                     <h2 className='text-xl text-gray-500'>
-                                        {data?.type === 1 ? "Application for conference in Abroad" : ( data?.type === 0 ? "Application for conference in Abroad" : "Settlement Form")}
+                                        {data?.type === 1 ? "Application for conference in Abroad" : (data?.type === 0 ? "Application for conference in Abroad" : "Settlement Form")}
                                     </h2>
                                 </div>
                                 <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -120,8 +120,8 @@ export default function ApplicationMainPage({ role, goBack }) {
                                 </div>
                             </div>
 
-                            <div className="mt-5 flex lg:ml-4 lg:mt-0">
-                                <span className="ml-3 hidden sm:block">
+                            <div className="mt-5 flex flex-col lg:flex-row lg:ml-4 lg:mt-0">
+                                <span className="ml-3">
                                     <button type="button" onClick={(e) => {
                                         e.preventDefault();
                                         handlePrint();
@@ -133,12 +133,13 @@ export default function ApplicationMainPage({ role, goBack }) {
                                         Download
                                     </button>
                                 </span>
-                                <span className="sm:ml-3">
+                                <span className="ml-3">
                                     <button type="button" onClick={goBack} className="inline-flex items-center rounded-md bg-dark-purple px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-button-hover-blue hover:text-teal-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-purple">
                                         Go Back
                                     </button>
                                 </span>
                             </div>
+
                         </div>
 
                         <ApplicationData data={data} user={applicantInfo} role={role} links={links} />

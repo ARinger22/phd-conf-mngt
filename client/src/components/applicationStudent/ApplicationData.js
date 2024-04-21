@@ -41,40 +41,54 @@ function ApplicationData({ data, user, role, links }) {
         <>
             <Box sx={{ width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChange} aria-label="wrapped label tabs">
-                            <Tab value="personal details" label="Personal Details" />
-                            <Tab value="conference details" label="Conference Details" />
-                            <Tab value="finance details" label="Finance Details" />
-                            {(showClass(data.status, "0") && role === "1") &&
-                                <Tab value="faculty approval" label="Take Action" />
-                            }
-                            {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
-                                <Tab value="faculty approved" label="Faculty" />
-                            }
-                            {(showClass(data.status, "1") && role === "2") &&
-                                <Tab value="HOD section approval" label="Take Action" />
-                            }
-                            {(showClass(data.status, "2") && role === "3") &&
-                                <Tab value="research section approval" label="Take Action" />
-                            }
-                            {(showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
-                                <Tab value="research section approved" label="Research Section" />
-                            }
-                            {(showClass(data.status, "3") && role === "4") &&
-                                <Tab value="account section approval" label="Take Action" />
-                            }
-                            {(showClass(data.status, "4") || showClass(data.status, "5")) &&
-                                <Tab value="account section approved" label="Account Section" />
-                            }
-                            {(showClass(data.status, "4") && role === "5") &&
-                                <Tab value="Dean approval" label="Take Action" />
-                            }
-                            {(showClass(data.status, "5") || showClass(data.status, "6")) &&
-                                <Tab value="Dean approved" label="Dean" />
-                            }
-                        </TabList>
-                    </Box>
+                    <div style={{
+                        maxWidth: '100%', // Ensure the container takes full width
+                        overflowX: 'auto', // Allow horizontal scrolling when content overflows
+                    }}>
+                        <Box sx={{
+                            borderBottom: 1,
+                            borderColor: 'divider',
+                            display: 'flex', // Use flex display for responsiveness
+                            flexWrap: 'nowrap', // Ensure content stays in one line
+                            '& > div': {
+                                flex: '0 0 auto', // Allow the Box to grow, but don't allow shrinking
+                                minWidth: '100%', // Ensure the Box takes up full width of its content
+                            },
+                        }}>
+                            <TabList onChange={handleChange} aria-label="wrapped label tabs">
+                                <Tab value="personal details" label="Personal Details" />
+                                <Tab value="conference details" label="Conference Details" />
+                                <Tab value="finance details" label="Finance Details" />
+                                {(showClass(data.status, "0") && role === "1") &&
+                                    <Tab value="faculty approval" label="Take Action" />
+                                }
+                                {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
+                                    <Tab value="faculty approved" label="Faculty" />
+                                }
+                                {(showClass(data.status, "1") && role === "2") &&
+                                    <Tab value="HOD section approval" label="Take Action" />
+                                }
+                                {(showClass(data.status, "2") && role === "3") &&
+                                    <Tab value="research section approval" label="Take Action" />
+                                }
+                                {(showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
+                                    <Tab value="research section approved" label="Research Section" />
+                                }
+                                {(showClass(data.status, "3") && role === "4") &&
+                                    <Tab value="account section approval" label="Take Action" />
+                                }
+                                {(showClass(data.status, "4") || showClass(data.status, "5")) &&
+                                    <Tab value="account section approved" label="Account Section" />
+                                }
+                                {(showClass(data.status, "4") && role === "5") &&
+                                    <Tab value="Dean approval" label="Take Action" />
+                                }
+                                {(showClass(data.status, "5") || showClass(data.status, "6")) &&
+                                    <Tab value="Dean approved" label="Dean" />
+                                }
+                            </TabList>
+                        </Box>
+                    </div>
 
                     <TabPanel value="personal details">
                         <PersonalDetails user={user} data={data} />
