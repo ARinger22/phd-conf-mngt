@@ -71,7 +71,7 @@ export default function ResearchAction({ data }) {
     formData.append("grantEligibility", grant);
     formData.append("remarksResearch", remarks);
     formData.append("image", image);
-    const user = JSON.parse(localStorage.getItem("loginuser"));
+    const user = JSON.parse(localStorage.getItem("loginresearch"));
     formData.append("name", user.name);
     const res = await fetch(`${BASE_URL}/researchApproveOrDisapprove`, {
       method: "POST",

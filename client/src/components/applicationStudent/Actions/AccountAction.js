@@ -80,7 +80,7 @@ export default function AccountAction({ user, data }) {
         formData.append("passedForPayment", payment);
         formData.append("remarksAccount", remarks);
         formData.append("image", image);
-        const user = JSON.parse(localStorage.getItem("loginuser"))
+        const user = JSON.parse(localStorage.getItem("loginaccount"))
         formData.append("name", user.name);
 
         const res = await fetch(`${BASE_URL}/accountApproveOrDisapprove`, {

@@ -48,7 +48,7 @@ export default function DeanAction({ user, data }) {
     formData.append("id", data._id);
     formData.append("status", status);
     formData.append("image", image);
-    const user = JSON.parse(localStorage.getItem("loginuser"));
+    const user = JSON.parse(localStorage.getItem("logindean"));
     formData.append("name", user.name);
     const res = await fetch(`${BASE_URL}/deanApproveOrDisapprove`, {
       method: "POST",

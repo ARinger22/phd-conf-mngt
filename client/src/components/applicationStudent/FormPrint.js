@@ -34,8 +34,8 @@ function FormPrint({ data, user }) {
     </TableRow>
   ));
   function extractFileId(driveLink) {
-    const startIndex = driveLink?.indexOf('/file/d/') + 8;
-    const endIndex = driveLink?.indexOf('/view');
+    const startIndex = driveLink?.indexOf("/file/d/") + 8;
+    const endIndex = driveLink?.indexOf("/view");
     if (startIndex !== -1 && endIndex !== -1) {
       return driveLink?.substring(startIndex, endIndex);
     } else {
@@ -51,7 +51,7 @@ function FormPrint({ data, user }) {
           <Grid item xs={2}>
             <img
               src="https://scontent-del1-2.xx.fbcdn.net/v/t1.18169-9/17264253_1867054683517452_4318177070545308732_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=1LmE8QJEZloAX9D8hDW&_nc_ht=scontent-del1-2.xx&oh=00_AfCHBX4ZV0Mus_V0UPF9vKU-5y42esnQU0QQj0e8W4hqlQ&oe=6482F87B"
-            // alt="your-image-alt-text"
+              // alt="your-image-alt-text"
             />
           </Grid>
           <Grid item xs={10}>
@@ -77,7 +77,7 @@ function FormPrint({ data, user }) {
           <div className={classes.form}>
             <Grid className="py-2" container spacing={2}>
               <Grid item xs={7}>
-                <pre >1. Name of PhD Scholar : {user?.name} </pre>
+                <pre>1. Name of PhD Scholar : {user?.name} </pre>
               </Grid>
               <Grid item xs={5}>
                 <pre>Mobile No: {data?.mobileNo} </pre>
@@ -237,7 +237,8 @@ function FormPrint({ data, user }) {
               <Grid item xs={7}>
                 <pre>
                   Financial support required (if any) from institute fund/
-                  project/ any other (please specify)<br></br> : {data?.financialSupport}
+                  project/ any other (please specify)<br></br> :{" "}
+                  {data?.financialSupport}
                 </pre>
               </Grid>
               <pre></pre>
@@ -278,7 +279,7 @@ function FormPrint({ data, user }) {
                       <TableCell style={{ fontSize: "16px" }}>
                         <b>Total</b>
                       </TableCell>
-                      <TableCell style={{ fontSize: "16px" }}>{ } RS</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{} RS</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -352,29 +353,37 @@ function FormPrint({ data, user }) {
           <div className={classes.form}>
             <br></br>
           </div>
-          <Grid className="py-2"
-                container
-                spacing={2}
-                justifyContent="flex-end">
+          <Grid
+            className="py-2"
+            container
+            spacing={2}
+            justifyContent="flex-end"
+          >
             <Grid item className="flex-1">
               <pre>
-                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                <img
+                  className="h-5 w-auto"
+                  src={`https://drive.google.com/thumbnail?id=${extractFileId(
+                    data?.facultySignLink
+                  )}`}
+                  alt="sign"
+                />
                 <b>Signature of PhD Scholar</b>
               </pre>
               <pre></pre>
             </Grid>
-            {/* <Grid item className="flex-1">
+            <Grid item className="flex-1">
               <pre>
-                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                <p>{data?.facultySignLink}</p>
                 <b>Supervisors</b>{" "}
               </pre>
-            </Grid> */}
-            {/* <Grid item className="flex-1">
+            </Grid>
+            <Grid item className="flex-1">
               <pre>
-                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
+                <p>{data?.hodSignLink}</p>
                 <b>Head of the Department</b>
               </pre>
-            </Grid> */}
+            </Grid>
             <pre></pre>
           </Grid>
         </Container>
@@ -456,20 +465,20 @@ function FormPrint({ data, user }) {
               <Grid className="py-2 flex flex-col" container spacing={2}>
                 <Grid item className="flex-1">
                   <pre>
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <p>{data?.researchSignLink}</p>
                     <b>JA/SA/Dealing Assistant</b>
                   </pre>
                   <pre></pre>
                 </Grid>
                 <Grid item className="flex-1">
                   <pre>
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <p>{data?.researchSignLink}</p>
                     <b>JS/Supdt.</b>{" "}
                   </pre>
                 </Grid>
                 <Grid item className="flex-1">
                   <pre>
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                    <p>{data?.researchSignLink}</p>
                     <b>Assistant registrar/DR/JR</b>
                   </pre>
                 </Grid>
@@ -533,7 +542,7 @@ function FormPrint({ data, user }) {
               <Grid className="py-2" container spacing={2} alignItems="center">
                 <Grid item xs={4}>
                   <pre>
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                    <p>{data?.accountSignLink}</p>
                     <b>JA/Dealing Assistant </b>
                   </pre>
                 </Grid>
@@ -544,13 +553,12 @@ function FormPrint({ data, user }) {
                   </pre>
                 </Grid> */}
                 <Grid item xs={4}>
-                  <pre >
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                  <pre>
+                    <p>{data?.accountSignLink}</p>
                     <b>AR/Deputy Registrar</b>
                   </pre>
                 </Grid>
               </Grid>
-
             </div>
           </div>
         </Container>
@@ -577,7 +585,7 @@ function FormPrint({ data, user }) {
               >
                 <Grid item>
                   <pre style={{ margin: 1 }}>
-                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
+                    <p>{data?.deanSignLink}</p>
                     <b>Associate Dean/Dean </b>
                   </pre>
                 </Grid>

@@ -103,23 +103,29 @@ function Login() {
             console.log(loginuser)
             setUserToken(token);
             setroleToken(role);
-            localStorage.setItem("loginuser", JSON.stringify(loginuser));
+            
             if (role === "0") {
+                localStorage.setItem("loginstudent", JSON.stringify(loginuser));
                 navigate('/studentLogin');
             }
             else if (role === "1") {
+                localStorage.setItem("loginfaculty", JSON.stringify(loginuser));
                 navigate('/facultyLogin');
             }
             else if (role === "2") {
+                localStorage.setItem("loginhod", JSON.stringify(loginuser));
                 navigate('/hodLogin');
             }
             else if (role === "3") {
+                localStorage.setItem("loginresearch", JSON.stringify(loginuser));
                 navigate('/researchLogin');
             }
             else if (role === "4") {
+                localStorage.setItem("loginaccount", JSON.stringify(loginuser));
                 navigate('/accountLogin');
             }
             else if (role === "5") {
+                localStorage.setItem("logindean", JSON.stringify(loginuser));
                 navigate('/deanLogin');
             }
             else {
