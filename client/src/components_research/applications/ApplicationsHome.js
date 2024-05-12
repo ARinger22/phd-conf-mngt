@@ -72,16 +72,28 @@ function ResearchApplication() {
 
     const getStatus = (code) => {
         if (code === "0")
-            return "Pending Faculty Approval";
+          return "Faculty";
         else if (code === "1")
-            return "Pending Hod Section Approval";
+          return "Hod Section";
         else if (code === "2")
-            return "Pending Research Section Approval";
+          return "Research Section";
         else if (code === "3")
-            return "Pending Account Section Approval";
+          return "Account Section";
+        else if (code === "4")
+          return "Dean";
+        else if (code === "-1")
+          return "Faculty Rejected";
+        else if (code === "-2")
+          return "Hod Section Rejected";
+        else if (code === "-3")
+          return "Research Section Rejected";
+        else if (code === "-4")
+          return "Account Section Rejected";
+        else if (code === "-5")
+          return "Dean Rejected";
         else
-            return "Application Approved";
-    }
+          return "Application Approved";
+      }
 
     const getDays = (subDate) => {
         const today = new Date();

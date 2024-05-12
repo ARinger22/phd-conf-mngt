@@ -53,7 +53,7 @@ function Archive() {
   }
 
   const getBasicInfo = async () => {
-    const status = -1;
+    const status = -100;
     try {
       const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/studentApplicationViewArchive`, {
@@ -89,8 +89,16 @@ function Archive() {
       return "Account Section";
     else if (code === "4")
       return "Dean";
-    else if(code === "-1")
-      return "Application Rejected";
+    else if (code === "-1")
+      return "Faculty Rejected";
+    else if (code === "-2")
+      return "Hod Section Rejected";
+    else if (code === "-3")
+      return "Research Section Rejected";
+    else if (code === "-4")
+      return "Account Section Rejected";
+    else if (code === "-5")
+      return "Dean Rejected";
     else
       return "Application Approved";
   }
