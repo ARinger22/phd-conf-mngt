@@ -8,6 +8,7 @@ import tanuj from './images/tanuj.jpg';
 import arnav from './images/arnav.jpeg';
 import arpit from './images/arpit.jpeg';
 import vanshika from './images/vanshika.jpeg';
+import simran from './images/simran.jpeg'
 import './Team.css';
 import { Link } from 'react-router-dom';
 import Footer from '../../components_student/Side/Footer';
@@ -94,7 +95,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={adish}
+                src={simran}
                 alt="Simran Kaur"
                 loading="lazy"
                 width="640"
