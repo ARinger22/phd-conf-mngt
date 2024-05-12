@@ -223,17 +223,10 @@ router.post('/viewFacultyApplications', async (req, res) => {
 
         const data2 = [];
         for (let i = 0; i < appData.length; i++) {
-            try {
             const facultyAppDataSett = await AppDataSett.find({ parentId: data[i]._id }).sort({ "updatedAt": -1 });
             data2.push(...facultyAppDataSett);
-            }
-            catch {
-                continue;
-            }
-
         }
         const data3 = {data : data, data2 : data2};
-        console.log("DATAA3: ", data3)
         return res.status(200).json(data3);
     } catch (error) {
         console.log(error);

@@ -27,28 +27,18 @@ function Home(props) {
 
     const getStatus = (code) => {
         if (code === "0")
-          return "Faculty";
+            return "Pending Faculty Approval";
         else if (code === "1")
-          return "Hod Section";
+            return "Pending Hod Section Approval";
         else if (code === "2")
-          return "Research Section";
+            return "Pending Research Section Approval";
         else if (code === "3")
-          return "Account Section";
+            return "Pending Account Section Approval";
         else if (code === "4")
-          return "Dean";
-        else if (code === "-1")
-          return "Faculty Rejected";
-        else if (code === "-2")
-          return "Hod Section Rejected";
-        else if (code === "-3")
-          return "Research Section Rejected";
-        else if (code === "-4")
-          return "Account Section Rejected";
-        else if (code === "-5")
-          return "Dean Rejected";
+            return "Pending Dean Approval";
         else
-          return "Application Approved";
-      }
+            return "Application Approved";
+    }
 
     const getDays = (subDate) => {
         const today = new Date();
@@ -88,7 +78,6 @@ function Home(props) {
 
     const getBasicInfo = async (req, res) => {
         try {
-            const status = "0";
             const token = getUserToken();
             const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
                 method: "POST",
@@ -96,7 +85,6 @@ function Home(props) {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({ status: status })
             });
             const data = await resp.json();
             console.log("data");
@@ -204,10 +192,14 @@ function Home(props) {
                                                             </div>
                                                         </div>
                                                     </section>
+
                                                 </div>
+
                                                 <br />
+
                                             </>
                                         }
+
                                     </div>
                                 </Container>
                             }

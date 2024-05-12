@@ -44,7 +44,6 @@ router.post('/login', async (req, res) => {
         console.log(error);
         return res.status(422).json({ error: "Invalid Credientials." });
     }
-    console.log("Message: " + mssg);
     if (mssg == "otp") {
         loginOtp = Math.random();
         loginOtp = loginOtp * 1000000;
@@ -56,7 +55,6 @@ router.post('/login', async (req, res) => {
         }
         else{
             try {
-                console.log("Sending OTP");
                 let info = await transporter.sendMail({
                     from: process.env.NODEMAILER_EMAIL,
                     to: email,

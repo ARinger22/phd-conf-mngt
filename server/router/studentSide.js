@@ -112,29 +112,29 @@ router.post('/studentSettlementSubmit', async (req, res) => {
 
     try {
         // searching for student folder
-        searchDriveFolder(entryNo).then((parentID) => {
-            console.log("Parent Id: " + parentID);
-            // creating application folder inside student folder
-            var applicationFolderName = travels[0].deptdate + "-" + travels[0].depttime + "__" + travels[0].arrivaldate + "-" + travels[0].arrivaltime;
-            const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
-                console.log("Application Folder Id: " + result);
+            searchDriveFolder(entryNo).then((parentID) => {
+                console.log("Parent Id: " + parentID);
+                // creating application folder inside student folder
+                var applicationFolderName = travels[0].deptdate + "-" + travels[0].depttime + "__" + travels[0].arrivaldate + "-" + travels[0].arrivaltime; 
+                const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
+                    console.log("Application Folder Id: " + result);
 
-                uploadPdf("signature.pdf", signature.tempFilePath, result).then((abstractFileId) => {
-                    console.log("signature File Id: " + abstractFileId);
-
-
-                    uploadPdf("enclosure1.pdf", enclosure1.tempFilePath, result)
-                        .then((brochureFileId) => {
-                            console.log("enclosure1 File Id: " + brochureFileId);
+                    uploadPdf("signature.pdf", signature.tempFilePath, result).then((abstractFileId) => {
+                        console.log("signature File Id: " + abstractFileId);
 
 
-                            uploadPdf("enclosure2.pdf", enclosure2.tempFilePath, result)
-                                .then((acceptanceFileId) => {
-                                    console.log("enclosure2 File Id: " + acceptanceFileId);
+                        uploadPdf("enclosure1.pdf", enclosure1.tempFilePath, result)
+                            .then((brochureFileId) => {
+                                console.log("enclosure1 File Id: " + brochureFileId);
 
-                                    uploadPdf("enclosure3.pdf", enclosure3.tempFilePath, result)
-                                        .then((acceptanceFileId) => {
-                                            console.log("enclosure3 File Id: " + acceptanceFileId);
+
+                                uploadPdf("enclosure2.pdf", enclosure2.tempFilePath, result)
+                                    .then((acceptanceFileId) => {
+                                        console.log("enclosure2 File Id: " + acceptanceFileId);
+                                        
+                                        uploadPdf("enclosure3.pdf", enclosure3.tempFilePath, result)
+                                            .then((acceptanceFileId) => {
+                                                console.log("enclosure3 File Id: " + acceptanceFileId);
 
                                             // saving data to mongo
                                             const data = new AppDataSett(
@@ -150,21 +150,26 @@ router.post('/studentSettlementSubmit', async (req, res) => {
                                                     console.log(error);
                                                     return res.status(422).json({ message: "Can't submit application. Try Again.." })
                                                 });
-
+                                        
                                         }).catch((error) => {
                                             console.log(error);
                                             return res.status(422).json({ message: "Can't submit application. Try Again.." })
                                         });
 
-                                }).catch((error) => {
-                                    console.log(error);
-                                    return res.status(422).json({ message: "Can't submit application. Try Again.." })
-                                });
+                                    }).catch((error) => {
+                                        console.log(error);
+                                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                    });
 
-                        }).catch((error) => {
-                            console.log(error);
-                            return res.status(422).json({ message: "Can't submit application. Try Again.." })
-                        });
+                            }).catch((error) => {
+                                console.log(error);
+                                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                            });
+
+                    }).catch((error) => {
+                        console.log(error);
+                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                    });
 
                 }).catch((error) => {
                     console.log(error);
@@ -175,17 +180,12 @@ router.post('/studentSettlementSubmit', async (req, res) => {
                 console.log(error);
                 return res.status(422).json({ message: "Can't submit application. Try Again.." })
             });
-
-        }).catch((error) => {
+        } catch (error) {
             console.log(error);
             return res.status(422).json({ message: "Can't submit application. Try Again.." })
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(422).json({ message: "Can't submit application. Try Again.." })
-    }
+        }
 
-});
+    });
 
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
@@ -201,7 +201,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         coaa, coaba, cocba,
         studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
 
-    var { signature, copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
+    var {signature, copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
 
     finances = JSON.parse(finances);
     try {
@@ -243,7 +243,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                                                     advances, finances,
                                                     coaa, coaba, cocba,
                                                     numberOfDays,
-                                                    studentLeaveStarts, studentLeaveEnds, signatureFileId,
+                                                    studentLeaveStarts, studentLeaveEnds,signatureFileId,
                                                     abstractFileId, brochureFileId, acceptanceFileId
                                                 });
                                             data.save()
@@ -358,38 +358,38 @@ router.post('/studentApplicationSubmitAbroad', async (req, res) => {
                                                                     .then((signatureFileId) => {
                                                                         console.log("signature File Id: " + signatureFileId);
 
-                                                                        const data = new AppDataAbroad(
-                                                                            {
-                                                                                email, entryNo, mobileNo,
-                                                                                status, type,
-                                                                                bankAccountNo, ifscCode,
-                                                                                nameOfConference, venueOfConference,
-                                                                                nameOfSociety, societyRecognized, reasonToAttend,
-                                                                                paperInConference, fundingSources,
-                                                                                purposeOfVisit, justification, sponsorship,
-                                                                                financialSupport, advances,
-                                                                                conferenceStarts, conferenceEnds,
-                                                                                studentLeaveStarts, studentLeaveEnds,
-                                                                                finances, flightDetails, signatureFileId,
-                                                                                invitationLetterAdditionalFileId, letterOfInvitationFileId,
-                                                                                conferenceBrochureFileId, copyOfAbstractFileId,
-                                                                                accomodationCostFileId, acceptanceOfPaperFileId
-                                                                            });
+                                                                    const data = new AppDataAbroad(
+                                                                    {
+                                                                        email, entryNo, mobileNo,
+                                                                        status, type,
+                                                                        bankAccountNo, ifscCode,
+                                                                        nameOfConference, venueOfConference,
+                                                                        nameOfSociety, societyRecognized, reasonToAttend,
+                                                                        paperInConference, fundingSources,
+                                                                        purposeOfVisit, justification, sponsorship,
+                                                                        financialSupport, advances,
+                                                                        conferenceStarts, conferenceEnds,
+                                                                        studentLeaveStarts, studentLeaveEnds,
+                                                                        finances, flightDetails,signatureFileId,
+                                                                        invitationLetterAdditionalFileId, letterOfInvitationFileId,
+                                                                        conferenceBrochureFileId, copyOfAbstractFileId,
+                                                                        accomodationCostFileId, acceptanceOfPaperFileId
+                                                                    });
 
-                                                                        data.save()
-                                                                            .then((result) => {
-                                                                                console.log("Application Submitted..");
-                                                                                return res.status(200).json({ message: "Application Submitted.." });
-
-                                                                            }).catch((error) => {
-                                                                                console.log(error);
-                                                                                return res.status(422).json({ message: "Can't submit application. Try Again.." })
-                                                                            });
+                                                                    data.save()
+                                                                    .then((result) => {
+                                                                        console.log("Application Submitted..");
+                                                                        return res.status(200).json({ message: "Application Submitted.." });
 
                                                                     }).catch((error) => {
                                                                         console.log(error);
                                                                         return res.status(422).json({ message: "Can't submit application. Try Again.." })
                                                                     });
+                                                                
+                                                                }).catch((error) => {
+                                                                    console.log(error);
+                                                                    return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                                                });
 
                                                             }).catch((error) => {
                                                                 console.log(error);
@@ -455,32 +455,10 @@ router.post('/studentApplicationView', async (req, res) => {
     //setting email from decode
     const email = decode.email;
     var status = req.body.status;
-    console.log("Statuss: " + status);
     try {
         // const data = await AppData.find({ email: email, status: status});
         // sorting acc to latest updated..
-        if (status == 0) {
-            if (email == "kharbandarnav@gmail.com") {
-                const data1 = await AppData.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
-                const data2 = await AppDataSett.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
-
-
-                const allData = await AppData.find().sort({ "updatedAt": -1 });
-                const data3 = { data: data1, data2: data2, allData: allData };
-                return res.status(200).json(data3);
-
-            }
-            else {
-                const data1 = await AppData.find({ status: status, isarchived: 0, email: email }).sort({ "updatedAt": -1 });
-                const data2 = await AppDataSett.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
-
-
-                const allData = await AppData.find().sort({ "updatedAt": -1 });
-                const data3 = { data: data1, data2: data2, allData: allData };
-                return res.status(200).json(data3);
-            }
-        }
-        else if (status >= 1) {
+        if(status >= 0){ 
             const data1 = await AppData.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
             const data2 = await AppDataSett.find({ status: status, isarchived: 0 }).sort({ "updatedAt": -1 });
 
@@ -489,19 +467,17 @@ router.post('/studentApplicationView', async (req, res) => {
             const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
-        else if (status == -100) {
+        else if(status == -1){
             const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
             const parentIds = data1.map(entry => entry._id.toString());
-            console.log("HERER")
             const data2 = await AppDataSett.aggregate([
                 {
-                    $match: { parentId: { $in: parentIds }, isarchived: { $eq: false }, status: { $ne: -1 } }
+                    $match: { parentId: { $in: parentIds }, isarchived: {$eq: false}, status: { $ne: -1 }} 
                 },
                 {
-                    $sort: { "updatedAt": -1 }
+                    $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
-            console.log("HERER2")
             const data4 = await AppData.find({ email: email, isarchived: 0, status: { $ne: -1 } }).sort({ "updatedAt": -1 });
             const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data4, data2: data2, allData: allData };
@@ -536,44 +512,41 @@ router.post('/studentApplicationViewArchive', async (req, res) => {
     const email = decode.email;
     const status = req.body.status;
     try {
-        if (status >= 0) {
+        if(status >= 0){ 
             const data1 = await AppData.find({
                 $or: [
-                    { status: { $gt: status } },
+                  { status: { $gt: status } },
                 ]
-            }).sort({ "updatedAt": -1 });
+              }).sort({ "updatedAt": -1 });
             const data2 = await AppDataSett.find({
                 $or: [
-                    { status: { $gt: status } },
+                  { status: { $gt: status } },
                 ]
-            }).sort({ "updatedAt": -1 });
+              }).sort({ "updatedAt": -1 });
             const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data1, data2: data2, allData: allData };
             return res.status(200).json(data3);
         }
-        else if (status == -100) {
+        else if(status == -1){
             const data1 = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
             const parentIds = data1.map(entry => entry._id.toString());
             const data2 = await AppDataSett.aggregate([
                 {
-                    $match: {
-                        parentId: { $in: parentIds },
-                        $or: [
-                            { isarchived: true },
-                            { status: { $eq: -1 } },
-                        ]
-                    }
+                    $match: { parentId: { $in: parentIds },
+                    $or: [
+                        { isarchived: true },   
+                        { status: { $eq : -1 } },
+                      ] } 
                 },
                 {
-                    $sort: { "updatedAt": -1 }
+                    $sort: { "updatedAt": -1 } 
                 }
             ]).exec();
-            const data4 = await AppData.find({
-                email: email,
+            const data4 = await AppData.find({ email: email, 
                 $or: [
                     { isarchived: true },
                     { status: status }
-                ]
+                ] 
             }).sort({ "updatedAt": -1 });
             const allData = await AppData.find().sort({ "updatedAt": -1 });
             const data3 = { data: data4, data2: data2, allData: allData };
@@ -620,7 +593,7 @@ router.post('/withdrawApplication', async (req, res) => {
     }
 
     const id = req.body.id;
-    console.log("Id: " + id);
+    console.log("Id: " + id); 
 
     // change isarchived to true
     try {

@@ -53,10 +53,9 @@ function Application() {
   }
 
   const getBasicInfo = async () => {
-    const status = -100;
+    const status = -1;
     try {
       const token = getUserToken();
-      console.log("resp")
       const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
         method: "POST",
         headers: {
@@ -66,7 +65,6 @@ function Application() {
         body: JSON.stringify({ status: status })
       });
       const data = await resp.json();
-      console.log(data);
       setApps(data.data);
       setApps2(data.data2);
       setallData(data.allData);
@@ -91,16 +89,6 @@ function Application() {
       return "Account Section";
     else if (code === "4")
       return "Dean";
-    else if (code === "-1")
-      return "Faculty Rejected";
-    else if (code === "-2")
-      return "Hod Section Rejected";
-    else if (code === "-3")
-      return "Research Section Rejected";
-    else if (code === "-4")
-      return "Account Section Rejected";
-    else if (code === "-5")
-      return "Dean Rejected";
     else
       return "Application Approved";
   }

@@ -23,7 +23,7 @@ export default function InputData(props) {
   const [options, setOptions] = useState([]);
 
   const getBasicInfo = async (req, res) => {
-    const status = -100;
+    const status = -1;
     try {
       const token = getUserToken();
       const resp = await fetch(`${BASE_URL}/studentApplicationView`, {

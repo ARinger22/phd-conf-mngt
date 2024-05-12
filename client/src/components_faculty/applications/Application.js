@@ -79,25 +79,15 @@ function Application() {
 
   const getStatus = (code) => {
     if (code === "0")
-      return "Faculty";
+      return "Pending Faculty Approval";
     else if (code === "1")
-      return "Hod Section";
+      return "Pending Hod Section Approval";
     else if (code === "2")
-      return "Research Section";
+      return "Pending Research Section Approval";
     else if (code === "3")
-      return "Account Section";
+      return "Pending Account Section Approval";
     else if (code === "4")
-      return "Dean";
-    else if (code === "-1")
-      return "Faculty Rejected";
-    else if (code === "-2")
-      return "Hod Section Rejected";
-    else if (code === "-3")
-      return "Research Section Rejected";
-    else if (code === "-4")
-      return "Account Section Rejected";
-    else if (code === "-5")
-      return "Dean Rejected";
+      return "Pending Dean Approval";
     else
       return "Application Approved";
   }
